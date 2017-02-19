@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy 2 elements to &apos;org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.zeroorderhold&apos;&#x0A;- Original project: &apos;org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.saturation&apos;&#x0A;- Destination element: &apos;org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.zeroorderhold&apos;&#x0A;- Original elements:&#x0A;     libs&#x0A;     META-INF" description="Copy folders" destination="=org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.zeroorderhold" element1="libs" element2="META-INF" files="0" flags="589830" folders="2" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1487426980568" units="0" version="1.0"/>
+</session>

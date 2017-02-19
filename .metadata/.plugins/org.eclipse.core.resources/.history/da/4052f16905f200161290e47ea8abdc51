@@ -1,0 +1,25 @@
+package org.fmaes.simulinktotimedautomata.gui;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JTextArea;
+
+public class ConsoleContextMenu extends JPopupMenu {
+  JMenuItem saveOutput;
+  JTextArea console;
+  public ConsoleContextMenu(JTextArea _console) {
+    
+    saveOutput = new JMenuItem("Save output");    
+    saveOutput.addActionListener(new ActionListener() {      
+      @Override
+      public void actionPerformed(ActionEvent e) {
+        // TODO Auto-generated method stub
+        System.out.println("You have clicked save");
+      }
+    });    
+    this.add(saveOutput);
+  }
+}

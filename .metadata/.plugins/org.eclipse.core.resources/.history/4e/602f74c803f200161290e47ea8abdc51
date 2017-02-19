@@ -1,0 +1,13 @@
+package org.fmaes.simulinktotimedautomata.gui;
+
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+
+public class ConsoleContextMenu extends JPopupMenu {
+  JMenuItem saveOutput;
+
+  public ConsoleContextMenu() {
+    saveOutput = new JMenuItem("Save output");
+    this.add(saveOutput);
+  }
+}

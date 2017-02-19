@@ -1,0 +1,11 @@
+1482061220339	Encapsulate field 'wrappedSimulinkBlock'
+1482061225847	Encapsulate field 'predecessors'
+1482072081727	Infer generic type arguments
+1482072591373	Rename type 'OurMapImplementation'
+1482236195486	Rename method 'getParameterByName'
+1482236209912	Rename method 'setParameterByName'
+1482238437735	Rename method 'getId'
+1482242334745	Rename resource 'functions'
+1482308324290	Rename resource 'app.config'
+1482583987585	Rename method 'getNativeBlock'
+1482585975478	Delete element

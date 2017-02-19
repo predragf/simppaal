@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;fw&apos; in &apos;org.fmaes.j2uppaal.datastructures.uppaalstructures.UppaalDocument.saveToFile(...)&apos; to &apos;fileWriter&apos;&#x0A;- Original project: &apos;org.fmaes.j2uppaal&apos;&#x0A;- Original element: &apos;org.fmaes.j2uppaal.datastructures.uppaalstructures.UppaalDocument.saveToFile(String).fw&apos;&#x0A;- Renamed element: &apos;fw&apos;&#x0A;- Update references to refactored element" description="Rename local variable &apos;fw&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src&lt;org.fmaes.j2uppaal.datastructures.uppaalstructures{UppaalDocument.java[UppaalDocument~saveToFile~QString;@fw!4919!4947!4938!4939!Qjava.io.FileWriter;!0!false" name="fileWriter" references="true" stamp="1484738705430" version="1.0"/>
+</session>

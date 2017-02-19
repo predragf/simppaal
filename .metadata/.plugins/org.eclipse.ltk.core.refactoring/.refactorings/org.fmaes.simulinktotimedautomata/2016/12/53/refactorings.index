@@ -1,0 +1,14 @@
+1482684284220	Rename method 'getInheritanceTree'
+1482684300963	Rename method 'setInheritanceTree'
+1482701612937	Rename method 'openSimulinkModelFromFullPath'
+1482701624900	Rename method 'openSimulinkModelByName'
+1482762511229	Delete element
+1482762518161	Delete element
+1482845021295	Rename resource 'input.txt'
+1482845341600	Rename field 'ID'
+1482845356698	Rename field 'ParentID'
+1482845367060	Rename field 'ParentId'
+1482845375879	Rename field 'Id'
+1482845383969	Rename field 'SortedNumber'
+1482926228322	Encapsulate field 'registryEntryId'
+1482937755718	Encapsulate field 'sortedOrderNumber'

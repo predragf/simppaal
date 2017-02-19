@@ -1,0 +1,30 @@
+package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.logic;
+
+import org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface;
+import org.fmaes.simulinktotimedautomata.types.wrappers.Predecessor;
+import org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper;
+
+public class LogicOperator implements BlockRoutineGeneratorInterface {
+
+  @Override
+  public String generateBlockRoutine(SimulinkBlockWrapper blockForParsing) {
+    String operatorType = blockForParsing.getDeclaredParameter("Operator");
+    // TODO Auto-generated method stub
+
+    if (operator.toLowerCase().equals("and")) {
+      for (Predecessor predecessor : blockForParsing.predecessors) {
+        
+      }
+
+    }
+    if (operator.toLowerCase().equals("or")) {
+
+    }
+    if (operator.toLowerCase().equals("not")) {
+
+    }
+
+    return null;
+  }
+
+}

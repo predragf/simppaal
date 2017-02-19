@@ -1,0 +1,34 @@
+package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition;
+
+import org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface;
+import org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper;
+
+public class RateTransition implements BlockRoutineGeneratorInterface {
+
+  @Override
+  public String generateBlockRoutine(SimulinkBlockWrapper blockForParsing) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String generateSignalDeclaration(SimulinkBlockWrapper blockForParsing) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  private int determineOperationType(SimulinkBlockWrapper blockForParsing) {
+    int operationType = OperationTypesEnum.ERROR;
+    boolean deterministic, dataIntegrity;
+    String deterministicParam = blockForParsing.getDeclaredParameter("Deterministic");
+    String dataIntegrityParam = blockForParsing.getDeclaredParameter("Integrity");
+    deterministic =
+        deterministicParam == null || !deterministicParam.trim().toLowerCase().equals("off");
+    dataIntegrity =
+        dataIntegrityParam == null || !dataIntegrityParam.trim().toLowerCase().equals("off");
+
+
+    return operationType;
+  }
+
+}

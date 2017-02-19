@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE nta PUBLIC '-//Uppaal Team//DTD Flat System 1.1//EN' 'http://www.it.uu.se/research/group/darts/uppaal/flat-1_2.dtd'>
+<nta>
+	<declaration>// Place global declarations here.
+clock gtime, t;
+int OFFSET;
+
+int para[10];</declaration>
+	<template>
+		<name x="5" y="5">Continuous</name>
+		<declaration>clock t;
+
+int sn = #sn#;
+double IAT = #IAT#;
+
+
+void initialize(){
+    t = 0;
+}
+
+void blockRoutine(){
+
+}</declaration>
+		<location id="id0" x="93" y="-17">
+			<name x="110" y="-25">Operate</name>
+			<label kind="exponentialrate" x="110" y="0">1000</label>
+		</location>
+		<location id="id1" x="-85" y="-17">
+			<name x="-95" y="-51">Offset</name>
+			<label kind="invariant" x="-153" y="8">t &lt;= para[OFFSET]</label>
+		</location>
+		<location id="id2" x="-255" y="-17">
+			<name x="-280" y="-51">Start</name>
+			<label kind="invariant" x="-297" y="8">gtime &lt;= sn*IAT</label>
+		</location>
+		<init ref="id2"/>
+		<transition>
+			<source ref="id0"/>
+			<target ref="id0"/>
+			<label kind="assignment" x="93" y="-93">blockRoutine()</label>
+			<nail x="93" y="-76"/>
+			<nail x="187" y="-76"/>
+			<nail x="187" y="51"/>
+			<nail x="93" y="51"/>
+		</transition>
+		<transition>
+			<source ref="id1"/>
+			<target ref="id0"/>
+			<label kind="guard" x="-42" y="-51">t &gt;= para[OFFSET]</label>
+			<label kind="assignment" x="-25" y="-8">blockRoutine()</label>
+		</transition>
+		<transition>
+			<source ref="id2"/>
+			<target ref="id1"/>
+			<label kind="guard" x="-238" y="-76">gtime &gt;= sn*IAT</label>
+			<label kind="assignment" x="-195" y="-17">initialize()</label>
+		</transition>
+	</template>
+	<template>
+		<name>Discrete</name>
+		<declaration>
+clock t;
+double ts = #ts#;
+int sn = #sn#;
+double IAT = #IAT#;
+
+void initialize(){
+    t = 0;
+}
+
+void blockRoutine(){
+}</declaration>
+		<location id="id3" x="102" y="-17">
+			<name x="119" y="-25">Operate</name>
+			<label kind="invariant" x="111" y="-76">t &gt;= ts</label>
+		</location>
+		<location id="id4" x="-85" y="-17">
+			<name x="-95" y="-51">Offset</name>
+			<label kind="invariant" x="-153" y="8">t &lt;= para[OFFSET]</label>
+		</location>
+		<location id="id5" x="-238" y="-17">
+			<name x="-263" y="-51">Start</name>
+			<label kind="invariant" x="-280" y="8">gtime &lt;= sn*IAT</label>
+		</location>
+		<init ref="id5"/>
+		<transition>
+			<source ref="id3"/>
+			<target ref="id3"/>
+			<label kind="guard" x="119" y="34">t &gt;= ts</label>
+			<label kind="assignment" x="102" y="-93">blockRoutine()</label>
+			<nail x="102" y="-76"/>
+			<nail x="196" y="-76"/>
+			<nail x="196" y="51"/>
+			<nail x="102" y="51"/>
+		</transition>
+		<transition>
+			<source ref="id4"/>
+			<target ref="id3"/>
+			<label kind="guard" x="-42" y="-51">t &gt;= para[OFFSET]</label>
+			<label kind="assignment" x="-17" y="-8">blockRoutine(),
+t = 0</label>
+		</transition>
+		<transition>
+			<source ref="id5"/>
+			<target ref="id4"/>
+			<label kind="guard" x="-221" y="-51">gtime &gt;= sn*IAT</label>
+			<label kind="assignment" x="-195" y="-17">initialize()</label>
+		</transition>
+	</template>
+	<system>// Place template instantiations here.
+d = Discrete();
+// List one or more processes to be composed into a system.
+system d;
+    </system>
+	<queries>
+	</queries>
+</nta>

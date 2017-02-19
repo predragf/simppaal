@@ -1,0 +1,14 @@
+package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition;
+
+public class OperationTypesEnum {
+  
+  public static int DB_Buff = 1;
+  
+  public static int Buff = 2;
+  
+  public static int Copy = 3;
+
+  public static int ZOH = 4;
+  
+  public static int OneOver∫Z = 5;
+}

@@ -1,0 +1,26 @@
+package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.product;
+
+import org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface;
+import org.fmaes.simulinktotimedautomata.types.wrappers.Predecessor;
+import org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper;
+
+public class Product implements BlockRoutineGeneratorInterface {
+
+  @Override
+  public String generateBlockRoutine(SimulinkBlockWrapper blockForParsing) {
+    // TODO Auto-generated method stub
+    String bRoutine = "void blockRoutine(){#expression#;}";
+    String expression = String.format("%s = ", blockForParsing.getSignalName());
+    int counter = 0;
+    for (Predecessor predecessor : blockForParsing.predecessors) {
+      if (counter == 0) {
+        expression += predecessor.getSimulinkBlock().getSignalName();
+      } else {
+        expression += " * " + predecessor.getSimulinkBlock().getSignalName();
+      }
+    }
+    bRoutine = bRoutine.replace("#expression#", expression);
+    return bRoutine;
+  }
+
+}

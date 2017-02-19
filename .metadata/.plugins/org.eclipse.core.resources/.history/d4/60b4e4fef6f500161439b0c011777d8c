@@ -1,0 +1,45 @@
+package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition;
+
+import org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface;
+import org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper;
+
+public class RateTransition implements BlockRoutineGeneratorInterface {
+
+  @Override
+  public String generateBlockRoutine(SimulinkBlockWrapper blockForParsing) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  @Override
+  public String generateSignalDeclaration(SimulinkBlockWrapper blockForParsing) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  private int determineOperationType(SimulinkBlockWrapper blockForParsing) {
+    int operationType = OperationTypesEnum.ERROR;
+    boolean deterministic, dataIntegrity;
+    String deterministicParam = blockForParsing.getDeclaredParameter("Deterministic");
+    String dataIntegrityParam = blockForParsing.getDeclaredParameter("Integrity");
+    deterministic =
+        deterministicParam != null && deterministicParam.trim().toLowerCase().equals("on");
+    dataIntegrity =
+        dataIntegrityParam != null && !dataIntegrityParam.trim().toLowerCase().equals("on");
+    
+    String outPts = blockForParsing.getDeclaredParameter("OutPortSampleTime");
+    //OutPortSampleTimeOpt - type of sampling the outport
+    // if OutPortSampleTimeOpt "Multiple of input port sample time" then OutPortSampleTimeMultiple has the number
+    //OutPortSampleTime if the outport is sampled individually
+    // if OutPortSampleTimeOpt "Inherit" then the sample time is inherited (but from where)????
+    
+    //what is the inport sample time? my assumption is that it is from the predecessor block
+    String inPts = 
+    
+    
+
+
+    return operationType;
+  }
+
+}

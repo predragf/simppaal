@@ -1,0 +1,9 @@
+simulink to uppaal
+	uppaal file manipulation done
+	predecessors v0.1. done 
+		missing:
+			goto-from
+			referenced model going out (I think)
+	blockRoutine()
+		problem: How to make the routine such that it will not depend on the number of input parameters???
+			for simple functions such as add/subtract etc. shall be fine but for other it will not be that easy)

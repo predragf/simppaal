@@ -1,0 +1,7 @@
+package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.positive;
+
+import org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface;
+
+public class Positive implements BlockRoutineGeneratorInterface {
+
+}

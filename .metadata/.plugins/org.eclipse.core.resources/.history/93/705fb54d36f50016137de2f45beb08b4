@@ -1,0 +1,26 @@
+package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.minmax;
+
+import org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface;
+import org.fmaes.simulinktotimedautomata.types.wrappers.Predecessor;
+import org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper;
+
+public class MinMax implements BlockRoutineGeneratorInterface {
+
+  @Override
+  public String generateBlockRoutine(SimulinkBlockWrapper blockForParsing) {
+
+    String blockR = "void blockRoutine(){#routineBody#;}";
+    String outSignal = blockForParsing.getSignalName();
+    int index = 0;
+    /* you should read the correct one */
+    Boolean min = false;
+    for (Predecessor prdcsr : blockForParsing.predecessors) {
+      String currentPrdcr = prdcsr.getSimulinkBlock().getSignalName();
+      String condition = String.format("if(#condition#){%s = %s}", outSignal, currentPrdcr);
+    }
+
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+}

@@ -1,0 +1,5 @@
+package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.positive;
+
+public class Positive {
+
+}

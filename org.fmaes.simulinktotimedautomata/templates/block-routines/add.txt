@@ -1,0 +1,8 @@
+double add(double input[], int size){
+    int index = 0;
+    double result = 0.0;
+    for(index = 0; index < size; index++){
+        result = result + input[index];
+    }
+    return result;
+}
