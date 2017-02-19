@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Delete resource &apos;org.conqat.lib.simulink&apos;" deleteContents="false" description="Delete resource &apos;org.conqat.lib.simulink&apos;" element1="/org.conqat.lib.simulink" flags="7" id="org.eclipse.ltk.core.refactoring.delete.resources" resources="1" stamp="1487541943161"/>
+</session>
