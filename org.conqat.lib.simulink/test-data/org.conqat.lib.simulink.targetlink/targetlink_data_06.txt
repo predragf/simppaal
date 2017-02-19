@@ -1,1 +1,0 @@
-struct('scalingpropagation',{{[' x '];[' y '];[' z '];[' a '];[' b '];[' c '];[' d '];[' e '];[' f ']}})
