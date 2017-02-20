@@ -487,11 +487,14 @@ public class SimulinkBlockWrapper {
   public String getSignalDeclaration() {
     String signalDeclaration = String.format("double %s;", getSignalName());
     /*
-     * String outDataTypeStr = this.getDeclaredParameter("OutDataTypeStr"); if
-     * (Util.stringNullOrEmpty(outDataTypeStr)) { outDataTypeStr = "double"; } if
-     * (outDataTypeStr.equals("boolean")) { signalDeclaration = String.format("bool %s;",
-     * getSignalName()); }
-     */
+    String outDataTypeStr = this.getDeclaredParameter("OutDataTypeStr");
+    if (Util.stringNullOrEmpty(outDataTypeStr)) {
+      outDataTypeStr = "double";
+    }
+    if (outDataTypeStr.equals("boolean")) {
+      signalDeclaration = String.format("bool %s;", getSignalName());
+    }
+    */
     return signalDeclaration;
   }
 

@@ -53,15 +53,7 @@ public class LogicOperator implements BlockRoutineGeneratorInterface {
         expression = String.format("%s == 0.0", first.getSimulinkBlock().getSignalName());
       }
     }
-    String routine = String.format("void blockRoutine(){\n bool intermediateValue = %s;\n"
-        + "if(intermediateValue){\n"
-        + "%s = 1.0;\n"
-        + "}"
-        + "else{\n"
-        + "%s = 0.0;\n"
-        + "}\n"
-        + "}\n", expression, outSignal, outSignal);
-    return routine;
+    return String.format("void blockRoutine(){%s = %s;}", outSignal, expression);
   }
 
   @Override
