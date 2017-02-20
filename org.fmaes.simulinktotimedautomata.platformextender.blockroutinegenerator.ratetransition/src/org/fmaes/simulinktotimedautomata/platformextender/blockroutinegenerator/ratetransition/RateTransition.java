@@ -60,12 +60,6 @@ public class RateTransition implements BlockRoutineGeneratorInterface {
     PortData inportData = findInportData(blockForParsing);
     PortData outportData = findOutportData(blockForParsing);
     
-    System.out.println(dataIntegrity);
-    System.out.println(deterministic);
-    System.out.println(inportData.ts);
-    System.out.println(inportData.offset);
-    System.out.println(outportData.ts);
-    System.out.println(outportData.offset);
     String outPortSampleTimeOpt = blockForParsing.getDeclaredParameter("OutPortSampleTimeOpt");
 
     if (outPortSampleTimeOpt.trim().equals("Multiple of input port sample time")) {

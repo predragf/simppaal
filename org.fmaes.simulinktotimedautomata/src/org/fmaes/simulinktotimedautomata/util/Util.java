@@ -214,7 +214,22 @@ public class Util {
     return entry.replace(String.format("#%s#", globalId), "");
   }
 
+  public static Boolean isDouble(String input) {
+    Pattern doublePattern = Pattern.compile("\\d+\\.\\d+");
+    return input != null && Pattern.matches(doublePattern.pattern(), input);
+  }
+
+  public static Boolean isInteger(String input) {
+    Pattern integerPattern = Pattern.compile("\\d+");
+    return input != null && Pattern.matches(integerPattern.pattern(), input);
+  }
+
   public static Boolean isNumber(String input) {
-    return input != null && input.matches("^[0-9]+");
+    return input != null && (isInteger(input) || isDouble(input));
+  }
+
+  public static Boolean isBoolean(String input){
+    input = input.toLowerCase();
+    return input != null && (input.equals("true") || input.equals("false"));
   }
 }

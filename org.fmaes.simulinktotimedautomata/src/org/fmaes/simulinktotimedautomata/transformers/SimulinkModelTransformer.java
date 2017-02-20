@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.DoubleToLongFunction;
 
 import org.fmaes.j2uppaal.builders.UppaalDocumentBuilder;
 import org.fmaes.j2uppaal.datastructures.uppaalstructures.UppaalAutomaton;
@@ -39,7 +40,7 @@ public class SimulinkModelTransformer {
     Path simulinkModelPath = Paths.get(transformationDirectory, simulinkModelNameWithExtension);
     Path sListPath = Paths.get(transformationDirectory, sListNameWithExtension);
     SortedOrderList sList = SListParser.GetSortedOrderList(simulinkModelName, sListPath.toString());
-    //sList.sort();
+    // sList.sort();
     /*
      * for (SortedOrderEntry sortedOrderEntry : sList) {
      * 
@@ -124,8 +125,24 @@ public class SimulinkModelTransformer {
         constantBlocks.size());
     for (SimulinkBlockWrapper constantBlock : constantBlocks) {
       if (constantBlock.exists()) {
-        constantString += String.format("const double %s = %s; \n", constantBlock.getSignalName(),
-            constantBlock.getParameter("Value"));
+        String constValue = constantBlock.getParameter("Value");
+        if (Util.isNumber(constValue) || Util.isBoolean(constValue)) {
+          if (Util.isBoolean(constValue)) {
+            if (constValue.toLowerCase().equals("true")) {
+              constValue = "1.0";
+            } else {
+              constValue = "1.0";
+            }
+          }
+          if (!Util.isDouble(constValue)) {
+            constValue += ".0";
+          }
+          constantString +=
+              String.format("const double %s = %s; \n", constantBlock.getSignalName(), constValue);
+        } else {
+          constantString +=
+              String.format("double %s = %s; \n", constantBlock.getSignalName(), constValue);
+        }
       }
     }
     constantString += "//Constants end";

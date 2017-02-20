@@ -24,12 +24,20 @@ public class Main {
     Double dvatri = 2.3;
     Double dva = 2.0;
     
-    System.out.println(dva % dvatri == 0.0);
     
-    dvatri = 4.0;
+    System.out.println(Util.isDouble("2.0"));
+    System.out.println(Util.isDouble("2."));
+    System.out.println(Util.isDouble(".0"));
+    System.out.println(Util.isDouble("2222.7"));
+    System.out.println(Util.isDouble("2222"));
+    System.out.println(Util.isDouble(""));
     
-    System.out.println(dvatri % dva == 0.0);
-    
+    System.out.println(Util.isInteger("2.0"));
+    System.out.println(Util.isInteger("2."));
+    System.out.println(Util.isInteger(".0"));
+    System.out.println(Util.isInteger("2222.7"));
+    System.out.println(Util.isInteger("2222"));
+    System.out.println(Util.isInteger(""));
 
     SimulinkModelWrapper rootModel =
         SimulinkModelBuilder.loadWrappedSimulinkModelByName(simulinkModelName);
