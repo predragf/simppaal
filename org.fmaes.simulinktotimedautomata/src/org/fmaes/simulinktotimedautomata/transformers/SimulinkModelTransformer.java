@@ -39,7 +39,7 @@ public class SimulinkModelTransformer {
     Path simulinkModelPath = Paths.get(transformationDirectory, simulinkModelNameWithExtension);
     Path sListPath = Paths.get(transformationDirectory, sListNameWithExtension);
     SortedOrderList sList = SListParser.GetSortedOrderList(simulinkModelName, sListPath.toString());
-    sList.sort();
+    //sList.sort();
     /*
      * for (SortedOrderEntry sortedOrderEntry : sList) {
      * 

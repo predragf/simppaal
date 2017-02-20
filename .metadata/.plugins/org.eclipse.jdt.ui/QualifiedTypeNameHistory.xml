@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.transformers.SimulinkBlockTransformerInput"/>
-<fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.uppaalstructures.UppaalAutomaton"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.transformers.SimulinkAtomicBlockTransformer"/>
 <fullyQualifiedTypeName name="java.util.Comparator"/>
-<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.sorder.SortedOrderList"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.uppaalstrcutures.interfaces.SerializableInterface"/>
@@ -54,10 +51,13 @@
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.gui.SaveAction"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkLineWrapper"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface"/>
-<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition.OperationTypesEnum"/>
-<fullyQualifiedTypeName name="java.util.Iterator"/>
-<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.Predecessor"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.enums.SimulinkBlockTypesEnum"/>
 <fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition.PortData"/>
+<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper"/>
+<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.Neighbour"/>
+<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition.OperationTypesEnum"/>
+<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.sorder.SortedOrderList"/>
 </qualifiedTypeNameHistroy>

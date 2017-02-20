@@ -1,7 +1,0 @@
-package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition;
-
-import org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface;
-
-public class RateTransition implements BlockRoutineGeneratorInterface {
-
-}

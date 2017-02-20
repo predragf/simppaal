@@ -22,7 +22,7 @@ public class SortedOrderList extends ArrayList<SortedOrderEntry> {
   }
 
   public int getHighestChildExecutionOrder(String blockId) {
-    this.sort();
+    // this.sort();
     int blockExecutionOrder = 0;
     for (int index = 0; index < this.size(); index++) {
       SortedOrderEntry sListEntry = this.get(index);

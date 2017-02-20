@@ -1,5 +1,7 @@
 package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition;
 
+import static org.hamcrest.Matchers.stringContainsInOrder;
+
 import org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface;
 import org.fmaes.simulinktotimedautomata.types.wrappers.Neighbour;
 import org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper;
@@ -11,7 +13,7 @@ public class RateTransition implements BlockRoutineGeneratorInterface {
     // TODO Auto-generated method stub
     String broutine = "void blockRoutine(){//I am from plugin\n}";
     int rtOperationType = determineOperationType(blockForParsing);
-    //rtOperationType = OperationTypesEnum.UNITDELAY;
+    // rtOperationType = OperationTypesEnum.UNITDELAY;
 
     if (rtOperationType == OperationTypesEnum.ERROR) {
       return "void blockRoutine(){//I am from plugin (ERRTYPE)\n}";
@@ -51,13 +53,19 @@ public class RateTransition implements BlockRoutineGeneratorInterface {
     String deterministicParam = blockForParsing.getDeclaredParameter("Deterministic");
     String dataIntegrityParam = blockForParsing.getDeclaredParameter("Integrity");
     deterministic =
-        deterministicParam != null && deterministicParam.trim().toLowerCase().equals("on");
+        !(deterministicParam != null  && deterministicParam.trim().toLowerCase().equals("off"));
     dataIntegrity =
-        dataIntegrityParam != null && dataIntegrityParam.trim().toLowerCase().equals("on");
+        !(dataIntegrityParam != null && dataIntegrityParam.trim().toLowerCase().equals("off"));
 
     PortData inportData = findInportData(blockForParsing);
     PortData outportData = findOutportData(blockForParsing);
-
+    
+    System.out.println(dataIntegrity);
+    System.out.println(deterministic);
+    System.out.println(inportData.ts);
+    System.out.println(inportData.offset);
+    System.out.println(outportData.ts);
+    System.out.println(outportData.offset);
     String outPortSampleTimeOpt = blockForParsing.getDeclaredParameter("OutPortSampleTimeOpt");
 
     if (outPortSampleTimeOpt.trim().equals("Multiple of input port sample time")) {
@@ -183,11 +191,15 @@ public class RateTransition implements BlockRoutineGeneratorInterface {
     if (predecessor.getSimulinkBlock().exists()) {
       String ts = predecessor.getSimulinkBlock().getSampleTime();
       String offset = predecessor.getSimulinkBlock().getDeclaredParameter("Offset");
-      try {
-        inportSampleTime = Double.parseDouble(ts);
-      } catch (Exception e) {
-        // TODO: handle exception
-        inportSampleTime = -1;
+      if (ts == null || ts.equals("") || ts.toLowerCase().equals("inf")) {
+        inportSampleTime = Double.MAX_VALUE;
+      } else {
+        try {
+          inportSampleTime = Double.parseDouble(ts);
+        } catch (Exception e) {
+          // TODO: handle exception
+          inportSampleTime = -1;
+        }
       }
 
       try {
@@ -205,16 +217,23 @@ public class RateTransition implements BlockRoutineGeneratorInterface {
   private PortData findOutportData(SimulinkBlockWrapper rt) {
     double outPortSampleTime = -1;
     double outportoffset = 0;
+    int continuousPosition = -1;
+    int index = 0;
 
     for (Neighbour successor : rt.getSuccessors()) {
       double currentSucTs = -1;
       if (successor.getSimulinkBlock().exists()) {
         String ts = successor.getSimulinkBlock().getSampleTime();
-        try {
-          outPortSampleTime = Double.parseDouble(ts);
-        } catch (Exception e) {
-          // TODO: handle exception
-          currentSucTs = -1;
+        if (ts == null || ts.equals("") || ts.toLowerCase().equals("inf")) {
+          currentSucTs = Double.MAX_VALUE;
+          continuousPosition = index;
+        } else {
+          try {
+            outPortSampleTime = Double.parseDouble(ts);
+          } catch (Exception e) {
+            // TODO: handle exception
+            currentSucTs = -1;
+          }
         }
         if ((outPortSampleTime == -1 && currentSucTs != -1)
             || (outPortSampleTime != -1 && currentSucTs < outPortSampleTime)) {
@@ -227,6 +246,18 @@ public class RateTransition implements BlockRoutineGeneratorInterface {
             outportoffset = 0;
           }
         }
+      }
+      index++;
+    }
+    if (continuousPosition != -1 && outPortSampleTime == -1) {
+      outPortSampleTime = Double.MAX_VALUE;
+      Neighbour lastCont = rt.getSuccessorAtPosition(continuousPosition);
+      String offsetStr = lastCont.getSimulinkBlock().getDeclaredParameter("Offset");
+      try {
+        outportoffset = Double.parseDouble(offsetStr);
+      } catch (Exception e) {
+        // TODO: handle exception
+        outportoffset = 0;
       }
     }
     return new PortData(outPortSampleTime, outportoffset);

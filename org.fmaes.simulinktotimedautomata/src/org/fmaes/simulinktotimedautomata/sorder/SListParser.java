@@ -125,6 +125,7 @@ public class SListParser {
     globalParrent.id = modelName;
     result = GetElementChildren(allElements, globalParrent);
     result = Sort(result, allElements);
+    result.sort();
     return result;
 
   }
