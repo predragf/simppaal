@@ -119,25 +119,25 @@
 		<item value="false" key="JarPackageWizardPage.EXPORT_OUTPUT_FOLDER"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/SIMPPAAL_lib/simulinktotimedautomata.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/relationaloperator.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/logic.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/logical operator.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/unaryminus.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/ratetransition.jar"/>
 			<item value="/Users/pfj01/Desktop/BlockRoutineGenerator.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/switch.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/sum.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/saturate.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/relationaloperator.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/product.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/minmax.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/logic.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/gain.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/abs.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/simulinktotimedautomata.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/SIMPPAAL_lib/j2uppaal.jar"/>
 			<item value="/Users/pfj01/Desktop/j2uppaal.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/simulinktotimedautomata.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/logical operator.jar"/>
 			<item value="/Users/pfj01/Desktop/simulinktotimedautomata.jar"/>
 			<item value="/Users/pfj01/Desktop/abs.jar"/>
-			<item value="/Users/pfj01/Desktop/sum.jar"/>
 		</list>
 	</section>
 	<section name="JavaElementSearchActions">
