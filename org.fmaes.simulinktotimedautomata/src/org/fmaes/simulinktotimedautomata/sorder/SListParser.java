@@ -118,6 +118,9 @@ public class SListParser {
   }
 
   public static SortedOrderList GetSortedOrderList(String modelName, String sListLocationPath) {
+    if (modelName.endsWith(".mdl")) {
+      modelName = modelName.substring(0, modelName.lastIndexOf('.'));
+    }
     SortedOrderList result = new SortedOrderList();
     List<SortedOrderEntry> allElements = OpenAndProcessSList(sListLocationPath);
     /* SOrderEntry with "" for ID is considered to be root */

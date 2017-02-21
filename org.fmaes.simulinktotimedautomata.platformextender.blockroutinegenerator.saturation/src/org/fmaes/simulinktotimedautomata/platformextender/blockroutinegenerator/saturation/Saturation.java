@@ -11,8 +11,8 @@ public class Saturation implements BlockRoutineGeneratorInterface {
   @Override
   public String generateBlockRoutine(SimulinkBlockWrapper blockForParsing) {
     // TODO Auto-generated method stub
-    String bRoutine = "void blockRoutine(){ \n" + "const double input = #input#;\n" + "double output;\n"
-        + "const double upperRange = #upperRange#;\n" + "const double lowerRange = #lowerRange#;\n"
+    String bRoutine = "void blockRoutine(){ \n" + "double input = #input#;\n" + "double output;\n"
+        + "double upperRange = #upperRange#;\n" + "double lowerRange = #lowerRange#;\n"
         + "double rndMth = #rndMth#;\n" + "if(input >= upperRange) {\n" + "output = upperRange;\n"
         + "}\n" + "if(input <= lowerRange) {\n" + "output = lowerRange;\n" + "}\n"
         + "if(rndMth == 0) {\n" + "output = roundFloor(output);\n" + "}\n" + "if(rndMth == 1) {\n"

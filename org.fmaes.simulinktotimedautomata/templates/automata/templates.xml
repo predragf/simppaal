@@ -44,10 +44,15 @@ double IAT = #IAT#;
 double sn = #sn#;
 double OFFSET = #OFFSET#;
 clock t;
+
+#blockRoutine#
+
+#customInit#
+
 void initialize(){
 t = 0;
+customInit();
 }
-#blockRoutine#
 </declaration>
 		<location id="id2" x="102" y="-17">
 			<name x="119" y="-25">Operate</name>

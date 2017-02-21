@@ -57,6 +57,7 @@ public class Main {
 
     if (rootModel.exists()) {
       String exampleFrom ="brake_acc_nodiv/Vehicle_Body_Wheels/half"; //"brake_acc_nodiv/RT8";// "brake_acc_nodiv/Vehicle_Body_Wheels/half";
+      
       SimulinkBlockWrapper exampleFromBlock = rootModel.getBlockById(exampleFrom);
       if (exampleFromBlock.exists()) {
         Collection<Neighbour> successors = rootModel.findSuccessors(exampleFromBlock);

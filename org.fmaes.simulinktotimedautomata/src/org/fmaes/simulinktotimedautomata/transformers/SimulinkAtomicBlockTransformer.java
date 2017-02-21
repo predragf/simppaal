@@ -48,12 +48,9 @@ public class SimulinkAtomicBlockTransformer {
     if (!Util.stringNullOrEmpty(ts)) {
       _declaration = _declaration.replace("#ts#", ts);
     }
-    String blockRoutine = "void blockRoutine(){}";
-    BlockRoutineGeneratorInterface blockRoutineGenerator =
-        BlockRoutineGeneratorPluginManager.loadPluginByName(simulinkBlock.getType().toLowerCase());
-    if (blockRoutineGenerator != null) {
-      blockRoutine = blockRoutineGenerator.generateBlockRoutine(simulinkBlock);
-    }
+    String blockRoutine = generateBlockRoutine(simulinkBlock);
+    String customInitRoutine = generateInitRoutine(simulinkBlock);
+
     String offset = simulinkBlock.getDeclaredParameter("offset");
     if (Util.stringNullOrEmpty(offset)) {
       offset = "0";
@@ -63,6 +60,7 @@ public class SimulinkAtomicBlockTransformer {
     /* make this to be in the configuration */
     _declaration = _declaration.replace("#IAT#", "0.0001");
     _declaration = _declaration.replace("#OFFSET#", offset);
+    _declaration = _declaration.replace("#customInit#", customInitRoutine);
     _declaration = _declaration.replace("#blockRoutine#", blockRoutine);
     automaton.setDeclaration(_declaration);
     automaton.setName(simulinkBlock.getNameForSTA());
@@ -115,6 +113,42 @@ public class SimulinkAtomicBlockTransformer {
     for (SimulinkBlockWrapper constantBlock : constantBlocks) {
     }
     return result;
+  }
+
+  public static String generateBlockRoutine(SimulinkBlockWrapper simulinkBlock) {
+    String basicTemplate = "void blockRoutine(){}";
+    String bRoutine = null;
+    BlockRoutineGeneratorInterface blockRoutineGenerator =
+        BlockRoutineGeneratorPluginManager.loadPluginByName(simulinkBlock.getType().toLowerCase());
+    if (blockRoutineGenerator != null) {
+      try {
+        bRoutine = blockRoutineGenerator.generateBlockRoutine(simulinkBlock);
+      } catch (Exception ex) {
+        bRoutine = null;
+      }
+    }
+    if (Util.stringNullOrEmpty(bRoutine)) {
+      bRoutine = basicTemplate;
+    }
+    return bRoutine;
+  }
+
+  public static String generateInitRoutine(SimulinkBlockWrapper simulinkBlock) {
+    String basicTemplate = "void customInit(){}";
+    String bRoutine = null;
+    BlockRoutineGeneratorInterface blockRoutineGenerator =
+        BlockRoutineGeneratorPluginManager.loadPluginByName(simulinkBlock.getType().toLowerCase());
+    if (blockRoutineGenerator != null) {
+      try {
+        bRoutine = blockRoutineGenerator.generateInitRoutine(simulinkBlock);
+      } catch (Exception ex) {
+        bRoutine = null;
+      }
+    }
+    if (Util.stringNullOrEmpty(bRoutine)) {
+      bRoutine = basicTemplate;
+    }
+    return bRoutine;
   }
 
 }

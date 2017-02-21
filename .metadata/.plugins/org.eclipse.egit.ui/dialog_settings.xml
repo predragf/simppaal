@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<list key="CommitDialog.authorValues">
+		<item value="Predragf &lt;predragku@gmail.com&gt;"/>
+	</list>
+	<list key="CommitDialog.committerValues">
+		<item value="Predragf &lt;predragku@gmail.com&gt;"/>
+	</list>
+	<section name="org.eclipse.egit.ui.internal.pull.PullResultDialog.dialogBounds">
+		<item value="1129" key="DIALOG_X_ORIGIN"/>
+		<item value="558" key="DIALOG_Y_ORIGIN"/>
+	</section>
 	<section name="GitCommitMessageComponent">
 		<list key="/Users/pfj01/Documents/workspaces/simulinktotimedautomata/.git">
-			<item value="false"/>
-			<item value="Predragf &lt;predragku@gmail.com&gt;"/>
-			<item value="UnaryMinus plugin initial commit."/>
-			<item value="Predragf &lt;predragku@gmail.com&gt;"/>
-			<item value="2b07b754a3dd1d804fb573f4e7c176da9b4e6aab"/>
+			<item value="empty"/>
 		</list>
 	</section>
 	<section name="org.eclipse.egit.ui.internal.staging.StagingView">
-		<item value="200,200" key="STAGING_SASH_FORM_WEIGHT"/>
+		<item value="500,500" key="STAGING_SASH_FORM_WEIGHT"/>
 		<item value="false" key="sortItemState"/>
-		<item value="200,200" key="HORIZONTAL_SASH_FORM_WEIGHT"/>
+		<item value="500,500" key="HORIZONTAL_SASH_FORM_WEIGHT"/>
 	</section>
 </section>
