@@ -22,7 +22,6 @@ public class UnaryMinus implements BlockRoutineGeneratorInterface {
   @Override
   public String generateBlockRoutine(SimulinkBlockWrapper blockForParsing) {
     // TODO Auto-generated method stub
-    /*simple check*/
     String blockRoutine = "void blockRoutine(){%s = -1.0 * %s;}";
     String outSignalName = blockForParsing.getSignalName();
     String inSignalName = "";
