@@ -123,7 +123,6 @@ public class SimulinkBlockWrapper {
     if (nonComputationalTypes.length == 0) {
       nonComputationalTypes = defaultConfiguration;
     }
-    // {"mux"};
     for (String nonComputationalType : nonComputationalTypes) {
       if (Util.matchStringsIgnoreCase(nonComputationalType, getType())) {
         isComputational = false;
@@ -300,34 +299,11 @@ public class SimulinkBlockWrapper {
     return simulinkBlock.getParameterNames();
   }
 
-  private Boolean isComputationalBlock() {
-    /* TODO: the list of computational blocks to be completed. */
-    String currentBlockType = simulinkBlock.getType().toLowerCase();
-    String[] nonComputationalBlocks =
-        new String[] {"demux", "mux", "goto", "from", "inport", "outport"};
-    Boolean isComputationalBlock = true;
-    for (String nonComputationalBlockType : nonComputationalBlocks) {
-      if (currentBlockType.equals(nonComputationalBlockType)) {
-        isComputationalBlock = false;
-        break;
-      }
-    }
-    return isComputationalBlock;
-  }
-
   public Collection<SimulinkLineWrapper> getIncomingLinesByPortIndex(String index) {
     Collection<SimulinkLineWrapper> wrappedIncomingLines = new ArrayList<SimulinkLineWrapper>();
     SimulinkLineWrapper wrappedLine = null;
     SimulinkBlock blockToExtractLinesFrom = this.simulinkBlock;
     if (isRootOfALibrary()) {
-      // SimulinkModelWrapper currentModel = getSimulinkModelWrapped();
-      // SerializableHashTable inheritanceRegister = currentModel.getInheritanceRegistry();
-      // String parentId = inheritanceRegister.get(this.getIdInLocalContext());
-      // String parentModelName = parentId.split("/")[0];
-      // SerializableHashTable triggeringReg = currentModel.getTriggeringRegistry();
-      // SimulinkModelWrapper parentModel = SimulinkModelBuilder
-      // .loadWrappedSimulinkModelByName(parentModelName);//(parentModelName, inheritanceRegister,
-      // triggeringReg);
       SimulinkModelWrapper parentModel = SimulinkModelBuilder.buildParentSimulinkModel(this);
       SimulinkBlockWrapper subSystemInParentContext =
           parentModel.getBlockById(getIdInGlobalContext());
