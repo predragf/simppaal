@@ -61,7 +61,11 @@ public class SimulinkModelTransformer {
     for (SortedOrderEntry sortedOrderEntry : sList) {
       index++;
       simulinkBlock = rootSimulinkModel.getBlockById(sortedOrderEntry.id);
-      if (simulinkBlock.exists() && !simulinkBlock.getType().toLowerCase().contains("scope")) {
+      if (simulinkBlock.exists()) {
+        if (!simulinkBlock.isComputational()) {
+          System.out.println("I am skiping block " + simulinkBlock.getIdInGlobalContext());
+          continue;
+        }
         simulinkBlock.executionOrderNumber = index;
         System.out
             .println(String.format("Parsing block: %s", simulinkBlock.getIdInGlobalContext()));

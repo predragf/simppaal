@@ -21,71 +21,82 @@ public class SimulinkLineParser {
     Collection<Neighbour> predecessors = new ArrayList<Neighbour>();
     SimulinkBlockWrapper lineSourceBlock = lineForParsing.getSourceBlock();
     SimulinkPortBaseWrapper lineSourcePort = lineForParsing.getSourcePort();
+    String lineSourceBlockType = lineSourceBlock.getType();
+    String lineSourceBlockGlobalId = lineSourceBlock.getIdInGlobalContext();
     Collection<SimulinkLineWrapper> linesForParsing = new ArrayList<SimulinkLineWrapper>();
-    if (lineSourceBlock.isAtomic() && lineSourceBlock.isComputational()
-        && !Util.matchStringsIgnoreCase(lineSourceBlock.getType(),
-            SimulinkBlockTypesEnum.INPORT.toString())) {
-      Neighbour predecessor = new Neighbour();
-      predecessor.setSimulinkBlock(lineSourceBlock);
-      predecessors.add(predecessor);
-    } else if (!lineSourceBlock.isComputational()
-        && lineSourceBlock.getType().toLowerCase().equals("mux")) {
-      Collection<SimulinkLineWrapper> muxlines;
-      if (Util.isNumber(lastDemuxPort)) {
-        muxlines = lineSourceBlock.getIncomingLinesByPortIndex(lastDemuxPort);
-      } else {
-        muxlines = lineSourceBlock.getIncomingLines();
+    /* if the block is atomic */
+    if (lineSourceBlock.isAtomic()) {
+      /* if it is computational (add it as a predecessor) */
+      if (lineSourceBlock.isComputational()) {
+        Neighbour predecessor = new Neighbour();
+        predecessor.setSimulinkBlock(lineSourceBlock);
+        predecessors.add(predecessor);
       }
-      predecessors.addAll(parseLines(muxlines, ""));
-    } else if (!lineSourceBlock.isComputational()
-        && lineSourceBlock.getType().toLowerCase().equals("demux")) {
-      String demuxPort = lineSourcePort.getPortIndex();
-      predecessors.addAll(parseLines(lineSourceBlock.getIncomingLines(), demuxPort));
-    } else if (Util.matchStringsIgnoreCase("from", lineSourceBlock.getType())) {
-      SimulinkBlockWrapper matchingGoto = mapFromToGoto(lineSourceBlock);
-      if (matchingGoto.exists()) {
-        linesForParsing.addAll(matchingGoto.getIncomingLines());
+      /* if it is not computational, check the type and determine what to do */
+      else {
+        if (Util.matchStringsIgnoreCase("mux", lineSourceBlockType)) {
+          Collection<SimulinkLineWrapper> muxlines;
+          if (Util.isNumber(lastDemuxPort)) {
+            muxlines = lineSourceBlock.getIncomingLinesByPortIndex(lastDemuxPort);
+          } else {
+            muxlines = lineSourceBlock.getIncomingLines();
+          }
+          predecessors.addAll(parseLines(muxlines, ""));
+        }
+
+        else if (Util.matchStringsIgnoreCase("demux", lineSourceBlockType)) {
+          String demuxPort = lineSourcePort.getPortIndex();
+          predecessors.addAll(parseLines(lineSourceBlock.getIncomingLines(), demuxPort));
+        }
+
+        else if (Util.matchStringsIgnoreCase("from", lineSourceBlockType)) {
+          SimulinkBlockWrapper matchingGoto = mapFromToGoto(lineSourceBlock);
+          if (matchingGoto.exists()) {
+            linesForParsing.addAll(matchingGoto.getIncomingLines());
+          }
+        } else if (Util.matchStringsIgnoreCase("inport", lineSourceBlockType)) {
+          SimulinkBlockWrapper compositeParentBlock = lineSourceBlock.getParentSimulinkBlock();
+          String portIndex =
+              lineSourceBlock.getDeclaredParameter(SimulinkDeclaredParametersEnum.PORT.toString());
+          portIndex = Util.convertToPortIndex(portIndex);
+          /*
+           * Dirty fix for inports on root model. if there are no input lines from the inport, then
+           * just add the port
+           */
+          Collection<SimulinkLineWrapper> inportLines =
+              compositeParentBlock.getIncomingLinesByPortIndex(portIndex);
+          linesForParsing.addAll(inportLines);
+          if (inportLines.size() == 0) {
+            Neighbour pred = new Neighbour();
+            pred.setSimulinkBlock(lineSourceBlock);
+            pred.setToPort(lineSourcePort);
+            predecessors.add(pred);
+          }
+        } else {
+          linesForParsing.addAll(lineSourceBlock.getIncomingLines());
+        }
       }
-    } else if (Util.matchStringsIgnoreCase("goto", lineSourceBlock.getType())) {
-      linesForParsing.addAll(lineSourceBlock.getIncomingLines());
-    } else if (lineSourceBlock.isAtomic() && !lineSourceBlock.isComputational()
-        && !Util.matchStringsIgnoreCase(lineSourceBlock.getType(),
-            SimulinkBlockTypesEnum.INPORT.toString())) {
-      linesForParsing.addAll(lineSourceBlock.getIncomingLines());
-    } else if (lineSourceBlock.isAtomic() && lineSourceBlock.isComputational()
-        && Util.matchStringsIgnoreCase(lineSourceBlock.getType(),
-            SimulinkBlockTypesEnum.INPORT.toString())) {
-      SimulinkBlockWrapper compositeParentBlock = lineSourceBlock.getParentSimulinkBlock();
-      String portIndex =
-          lineSourceBlock.getDeclaredParameter(SimulinkDeclaredParametersEnum.PORT.toString());
-      portIndex = Util.convertToPortIndex(portIndex);
-      /*
-       * Dirty fix for inports on root model. if there are no input lines from the inport, then just
-       * add the port
-       */
-      Collection<SimulinkLineWrapper> inportLines =
-          compositeParentBlock.getIncomingLinesByPortIndex(portIndex);
-      linesForParsing.addAll(inportLines);
-      if (inportLines.size() == 0) {
+
+    }
+    /* if the block is composite (subsystem, reference, etc.) */
+    else {
+
+      if (lineSourceBlock.getType().toLowerCase().equals("reference")
+          && !Util.matchStringsIgnoreCase(lineSourceBlock.getDeclaredParameter("SourceType"),
+              "subsystem")) {
+        /* This case is masked block */
         Neighbour pred = new Neighbour();
         pred.setSimulinkBlock(lineSourceBlock);
-        pred.setToPort(lineSourcePort);
+        pred.setToPort(lineForParsing.getDestinationPort());
         predecessors.add(pred);
+      } else if (lineSourceBlock.isSubsystem() || lineSourceBlock.isLibrary()) {
+        String sourcePortIndex = lineSourcePort.getPortIndex();
+        sourcePortIndex = Util.convertToPortIndex(sourcePortIndex);
+        String _portType = SimulinkBlockTypesEnum.OUTPORT.toString().toLowerCase();
+        SimulinkBlockWrapper internalPortBlock =
+            lineSourceBlock.getInternalPortBlockByIndex(_portType, sourcePortIndex);
+        linesForParsing.addAll(internalPortBlock.getIncomingLines());
       }
-    } else if (lineSourceBlock.getType().toLowerCase().equals("reference") && !Util
-        .matchStringsIgnoreCase(lineSourceBlock.getDeclaredParameter("SourceType"), "subsystem")) {
-      /* This case is masked block */
-      Neighbour pred = new Neighbour();
-      pred.setSimulinkBlock(lineSourceBlock);
-      pred.setToPort(lineForParsing.getDestinationPort());
-      predecessors.add(pred);
-    } else if (lineSourceBlock.isSubsystem() || lineSourceBlock.isLibrary()) {
-      String sourcePortIndex = lineSourcePort.getPortIndex();
-      sourcePortIndex = Util.convertToPortIndex(sourcePortIndex);
-      String _portType = SimulinkBlockTypesEnum.OUTPORT.toString().toLowerCase();
-      SimulinkBlockWrapper internalPortBlock =
-          lineSourceBlock.getInternalPortBlockByIndex(_portType, sourcePortIndex);
-      linesForParsing.addAll(internalPortBlock.getIncomingLines());
     }
     predecessors.addAll(SimulinkLineParser.parseLines(linesForParsing, lastDemuxPort));
     return predecessors;

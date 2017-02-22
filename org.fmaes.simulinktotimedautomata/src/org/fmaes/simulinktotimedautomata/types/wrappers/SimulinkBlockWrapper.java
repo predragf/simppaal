@@ -11,6 +11,7 @@ import org.conqat.lib.simulink.model.SimulinkInPort;
 import org.conqat.lib.simulink.model.SimulinkLine;
 import org.conqat.lib.simulink.model.SimulinkPortBase;
 import org.fmaes.simulinktotimedautomata.builders.SimulinkModelBuilder;
+import org.fmaes.simulinktotimedautomata.configuration.ApplicationConfiguration;
 import org.fmaes.simulinktotimedautomata.types.enums.SimulinkBlockTypesEnum;
 import org.fmaes.simulinktotimedautomata.types.enums.SimulinkDeclaredParametersEnum;
 import org.fmaes.simulinktotimedautomata.types.enums.SimulinkParametersEnum;
@@ -111,9 +112,18 @@ public class SimulinkBlockWrapper {
     /*
      * demux is a standard non-computational block since it has only one output
      */
-
+    ApplicationConfiguration appConfig = ApplicationConfiguration.loadConfiguration();
+    String nonComputationalTypesFromConfig = appConfig.getProperty("nonComputationalBlocks");
+    String[] defaultConfiguration = {"demux", "mux", "goto", "from", "inport", "outport"};
+    String[] nonComputationalTypes = {};
     Boolean isComputational = true;
-    String[] nonComputationalTypes = {"mux", "demux", "goto", "from"};// {"mux"};
+    if (!Util.stringNullOrEmpty(nonComputationalTypesFromConfig)) {
+      nonComputationalTypes = nonComputationalTypesFromConfig.split(";");
+    }
+    if (nonComputationalTypes.length == 0) {
+      nonComputationalTypes = defaultConfiguration;
+    }
+    // {"mux"};
     for (String nonComputationalType : nonComputationalTypes) {
       if (Util.matchStringsIgnoreCase(nonComputationalType, getType())) {
         isComputational = false;
@@ -240,7 +250,6 @@ public class SimulinkBlockWrapper {
     return resultBlock;
   }
 
-
   public Collection<SimulinkBlockWrapper> getSubBlocks() {
     Collection<SimulinkBlockWrapper> subBlocks = new ArrayList<>();
     if (isLibrary()) {
@@ -291,7 +300,7 @@ public class SimulinkBlockWrapper {
     return simulinkBlock.getParameterNames();
   }
 
-  public Boolean isComputationalBlock() {
+  private Boolean isComputationalBlock() {
     /* TODO: the list of computational blocks to be completed. */
     String currentBlockType = simulinkBlock.getType().toLowerCase();
     String[] nonComputationalBlocks =
