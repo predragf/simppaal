@@ -128,7 +128,7 @@ public class SimulinkAtomicBlockTransformer {
         bRoutine = null;
       }
     } else {
-      System.out.println("Plugin for %s not found");
+      System.out.println(String.format("Plugin for %s not found", blockType));
     }
     if (Util.stringNullOrEmpty(bRoutine)) {
       bRoutine = basicTemplate;
