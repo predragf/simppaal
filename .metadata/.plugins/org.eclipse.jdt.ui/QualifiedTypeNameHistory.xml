@@ -31,7 +31,6 @@
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.platformextender.BlockRoutineGeneratorPluginManager"/>
 <fullyQualifiedTypeName name="org.conqat.lib.simulink.model.SimulinkInPort"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.sorder.SortedOrderEntry"/>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="java.lang.Character"/>
 <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.Iterator"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkPortBaseWrapper"/>
@@ -60,4 +59,5 @@
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.Neighbour"/>
 <fullyQualifiedTypeName name="java.util.function.DoubleToLongFunction"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
 </qualifiedTypeNameHistroy>
