@@ -11,12 +11,6 @@ public class Saturation implements BlockRoutineGeneratorInterface {
   @Override
   public String generateBlockRoutine(SimulinkBlockWrapper blockForParsing) {
     // TODO Auto-generated method stub
-    String roundCeil = "double roundCeil(double input){\n" + "double i = 0.0;\n"
-        + "while(input - i > 0.0){\n" + "i = i + 1.0;\n" + "}\n" + "return i;\n" + "}\n";
-
-    String roundFloor = "double roundFloor(double input){\n" + "double i = 0.0;\n"
-        + "while(input - i > 1.0){\n" + "i = i + 1.0;\n" + "}\n" + "return i;\n" + "}\n";
-
     String bRoutine = "void blockRoutine(){ \n" + "double input = #input#;\n" + "double output;\n"
         + "double upperRange = #upperRange#;\n" + "double lowerRange = #lowerRange#;\n"
         + "double rndMth = #rndMth#;\n" + "if(input >= upperRange) {\n" + "output = upperRange;\n"
@@ -47,7 +41,7 @@ public class Saturation implements BlockRoutineGeneratorInterface {
         .replaceAll("#outsignal#", blockForParsing.getSignalName())
         .replaceAll("#upperRange#", upperLimit).replaceAll("#rndMth#", rndMeth)
         .replaceAll("#lowerRange#", lowerLimit);
-    return String.format("%s\n%s\n%s", roundCeil, roundFloor, bRoutine);
+    return bRoutine;
   }
 
   @Override
