@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.rounding;
+
+/**
+ * @author pfj01
+ *
+ */
+public class Rounding {
+
+}
