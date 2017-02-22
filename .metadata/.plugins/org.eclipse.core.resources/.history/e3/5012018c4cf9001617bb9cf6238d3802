@@ -17,7 +17,7 @@ public class Abs implements BlockRoutineGeneratorInterface {
     if (p != null) {
       inSignal = p.getSimulinkBlock().getSignalName();
     }
-    return "void blockRoutine(){\n #out# = #in#;\n if(#out# < 0){\n #out# = #out# * -1.0; \n}\n }"
+    return "void blockRoutine(){\n #out# = #in#;\n if(#out# < 0){\n #out# = #out# * -1; \n}\n }"
         .replace("#out#", outSignal).replaceAll("#in#", inSignal);
   }
 
