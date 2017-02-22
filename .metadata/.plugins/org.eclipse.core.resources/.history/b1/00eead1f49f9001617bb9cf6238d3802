@@ -71,6 +71,7 @@ public class BlockRoutineGeneratorPluginManager {
       if (blockRoutineGeneratorIterator.hasNext()) {
         matchingPlugin = blockRoutineGeneratorIterator.next();
       }
+
     } catch (Exception e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

@@ -118,17 +118,14 @@ public class SimulinkAtomicBlockTransformer {
   public static String generateBlockRoutine(SimulinkBlockWrapper simulinkBlock) {
     String basicTemplate = "void blockRoutine(){}";
     String bRoutine = null;
-    String blockType = simulinkBlock.getType().toLowerCase();
     BlockRoutineGeneratorInterface blockRoutineGenerator =
-        BlockRoutineGeneratorPluginManager.loadPluginByName(blockType);
+        BlockRoutineGeneratorPluginManager.loadPluginByName(simulinkBlock.getType().toLowerCase());
     if (blockRoutineGenerator != null) {
       try {
         bRoutine = blockRoutineGenerator.generateBlockRoutine(simulinkBlock);
       } catch (Exception ex) {
         bRoutine = null;
       }
-    } else {
-      System.out.println("Plugin for %s not found");
     }
     if (Util.stringNullOrEmpty(bRoutine)) {
       bRoutine = basicTemplate;
