@@ -1,1 +1,0 @@
-struct('maxnumvals',{inf,inf})
