@@ -64,4 +64,13 @@ public class RelationalOperator implements BlockRoutineGeneratorInterface {
     return null;
   }
 
+  /* (non-Javadoc)
+   * @see org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface#generateDafnyVerificationRoutine(org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper)
+   */
+  @Override
+  public String generateDafnyVerificationRoutine(SimulinkBlockWrapper blockForParsing) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

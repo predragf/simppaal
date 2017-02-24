@@ -39,4 +39,18 @@ public class Abs implements BlockRoutineGeneratorInterface {
     return null;
   }
 
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface#
+   * generateDafnyVerificationRoutine(org.fmaes.simulinktotimedautomata.types.wrappers.
+   * SimulinkBlockWrapper)
+   */
+  @Override
+  public String generateDafnyVerificationRoutine(SimulinkBlockWrapper blockForParsing) {
+    // TODO Auto-generated method stub
+    /* Assumes that always has one input */
+    return "method absR(input: real) returns (out: real) ensures out >= 0.0 { if (input < 0.0) {return -1.0 * input;} return input; }";
+  }
+
 }

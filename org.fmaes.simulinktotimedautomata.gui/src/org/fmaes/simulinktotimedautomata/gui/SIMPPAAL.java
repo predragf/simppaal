@@ -85,7 +85,7 @@ public class SIMPPAAL {
     lblSelectSimulinkModel.setBounds(35, 26, 191, 16);
     frame.getContentPane().add(lblSelectSimulinkModel);
 
-    
+
 
     JButton btnBrowseModelFolder = new JButton("Browse");
     btnBrowseModelFolder.addActionListener(new ActionListener() {
@@ -198,6 +198,9 @@ public class SIMPPAAL {
     btnStartTransformation = new JButton("Start");
     btnStartTransformation.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
+        if (!validate()) {
+          return;
+        }
         txtConsole.setText("");
         JTextAreaOutputStream out = new JTextAreaOutputStream(txtConsole);
         PrintStream ps = new PrintStream(out);
@@ -288,5 +291,23 @@ public class SIMPPAAL {
     txtConsole.setText(emptyString);
     lastUsedBrowseLocation = ".";
     btnStartTransformation.setEnabled(false);
+  }
+
+  private Boolean validate() {
+    Boolean isValid = true;
+    if (txtSlistPath.getText() == null || !txtSlistPath.getText().endsWith(".txt")) {
+      isValid = false;
+      txtSlistPath.setText("");
+    }
+    if (txtSimulinkModelFolder.getText() == null
+        || !txtSimulinkModelFolder.getText().endsWith(".mdl")) {
+      isValid = false;
+      txtSimulinkModelFolder.setText("");
+    }
+    if (txtTAFile.getText() == null || !txtTAFile.getText().endsWith(".xml")) {
+      isValid = false;
+      txtTAFile.setText("");
+    }
+    return isValid;
   }
 }

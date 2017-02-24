@@ -63,4 +63,13 @@ public class Gain implements BlockRoutineGeneratorInterface {
     return "";
   }
 
+  /* (non-Javadoc)
+   * @see org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface#generateDafnyVerificationRoutine(org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper)
+   */
+  @Override
+  public String generateDafnyVerificationRoutine(SimulinkBlockWrapper blockForParsing) {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
 }

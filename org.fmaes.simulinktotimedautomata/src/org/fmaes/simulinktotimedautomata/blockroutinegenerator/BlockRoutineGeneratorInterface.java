@@ -11,5 +11,7 @@ public interface BlockRoutineGeneratorInterface {
   public String generateInitRoutine(SimulinkBlockWrapper blockForParsing);
 
   public String generateDeclaration(SimulinkBlockWrapper blockForParsing);
+
+  public String generateDafnyVerificationRoutine(SimulinkBlockWrapper blockForParsing);
 }
 

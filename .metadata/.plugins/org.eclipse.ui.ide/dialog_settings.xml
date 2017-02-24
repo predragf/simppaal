@@ -12,11 +12,15 @@
 	<section name="ExternalProjectImportWizard">
 		<item value="true" key="WizardProjectsImportPage.STORE_NESTED_PROJECTS"/>
 		<item value="true" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
-		<item value="true" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
+		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="/Users/pfj01/Google Drive/simppaal_plugins/simppaal/org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.rounding"/>
+			<item value="/Users/pfj01/Google Drive/simppaal_plugins/simppaal/org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.integrator"/>
+			<item value="/Users/pfj01/Google Drive/simppaal_plugins/simppaal/org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.derivative"/>
 			<item value=""/>
 		</list>
 		<list key="WizardProjectsImportPage.STORE_ARCHIVES">
+			<item value=""/>
 			<item value="/Users/pfj01/Google Drive/j2uppaal.zip"/>
 			<item value="/Users/pfj01/Desktop/simulink-source-2015.2.zip"/>
 			<item value="/Users/pfj01/Google Drive/s2ta.zip"/>

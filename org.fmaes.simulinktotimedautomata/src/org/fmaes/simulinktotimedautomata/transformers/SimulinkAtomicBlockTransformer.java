@@ -50,6 +50,8 @@ public class SimulinkAtomicBlockTransformer {
     }
     String blockRoutine = generateBlockRoutine(simulinkBlock);
     String customInitRoutine = generateInitRoutine(simulinkBlock);
+    String customDafnyRoutine = generateDafnyVerificationObjective(simulinkBlock);
+    saveDafnyVerificationObjective(simulinkBlock, customDafnyRoutine);
 
     String offset = simulinkBlock.getDeclaredParameter("offset");
     if (Util.stringNullOrEmpty(offset)) {
@@ -129,6 +131,8 @@ public class SimulinkAtomicBlockTransformer {
       }
     } else {
       System.out.println(String.format("Plugin for %s not found", blockType));
+      System.out.println(String.format("Block routine for %s not generated",
+          simulinkBlock.getIdInGlobalContext()));
     }
     if (Util.stringNullOrEmpty(bRoutine)) {
       bRoutine = basicTemplate;
@@ -154,4 +158,26 @@ public class SimulinkAtomicBlockTransformer {
     return bRoutine;
   }
 
+  private static void saveDafnyVerificationObjective(SimulinkBlockWrapper sBlock,
+      String verificationObjective) {
+    String savePath = "./plugins/blockRoutine/Dafny/";
+    String fullFileName = String.format("%s%s.txt", savePath, sBlock.getNameForSTA());
+    Util.saveFileAsTxt(fullFileName, verificationObjective);
+  }
+
+  private static String generateDafnyVerificationObjective(SimulinkBlockWrapper sBlock) {
+
+    String bRoutine = "";
+    BlockRoutineGeneratorInterface blockRoutineGenerator =
+        BlockRoutineGeneratorPluginManager.loadPluginByName(sBlock.getType().toLowerCase());
+    if (blockRoutineGenerator != null) {
+      try {
+        bRoutine = blockRoutineGenerator.generateDafnyVerificationRoutine(sBlock);
+      } catch (Exception ex) {
+        bRoutine = null;
+      }
+    }
+    return bRoutine;
+
+  }
 }

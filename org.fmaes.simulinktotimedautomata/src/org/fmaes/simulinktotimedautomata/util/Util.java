@@ -1,7 +1,10 @@
 package org.fmaes.simulinktotimedautomata.util;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -228,8 +231,20 @@ public class Util {
     return input != null && (isInteger(input) || isDouble(input));
   }
 
-  public static Boolean isBoolean(String input){
+  public static Boolean isBoolean(String input) {
     input = input.toLowerCase();
     return input != null && (input.equals("true") || input.equals("false"));
+  }
+
+  public static void saveFileAsTxt(String fileLocation, String fileContents) {
+    if (!fileLocation.endsWith(".txt")) {
+      fileLocation = fileLocation += ".txt";
+    }
+    try (PrintStream out = new PrintStream(new FileOutputStream(fileLocation))) {
+      out.print(fileContents);
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      System.out.println(e.getMessage());
+    }
   }
 }

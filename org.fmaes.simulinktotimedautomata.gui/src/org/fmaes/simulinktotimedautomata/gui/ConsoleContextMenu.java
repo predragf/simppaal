@@ -13,7 +13,6 @@ public class ConsoleContextMenu extends JPopupMenu {
 
   public ConsoleContextMenu(JTextArea _console) {
     console = _console;
-    console.append("text menu was created");
     saveOutput = new JMenuItem("Save output");
     saveOutput.addActionListener(new SaveAction(_console));
     this.add(saveOutput);

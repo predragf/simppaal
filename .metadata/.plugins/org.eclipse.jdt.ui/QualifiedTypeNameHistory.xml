@@ -56,8 +56,8 @@
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition.OperationTypesEnum"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.sorder.SortedOrderList"/>
-<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface"/>
-<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.Neighbour"/>
 <fullyQualifiedTypeName name="java.util.function.DoubleToLongFunction"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
+<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface"/>
+<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.Neighbour"/>
 </qualifiedTypeNameHistroy>
