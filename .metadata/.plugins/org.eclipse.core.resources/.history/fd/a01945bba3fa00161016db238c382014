@@ -13,7 +13,7 @@ public class Saturation implements BlockRoutineGeneratorInterface {
     // TODO Auto-generated method stub
     String roundCeil = "double roundCeil(double input){\n"
         + "double i = 0.0;\n"
-        + "if(input > -1.0 &amp;&amp; input <= 0.0){\n"
+        + "if(input > -1.0 && input <= 0.0){\n"
         + "return 0.0;\n"
         + "}\n"
         + "do {\n"
@@ -24,7 +24,7 @@ public class Saturation implements BlockRoutineGeneratorInterface {
 
     String roundFloor = "double roundFloor(double input){\n"
         + "double i = 0.0;\n"
-        + "if((input >= 0.0 &amp;&amp; input < 1.0)){\n"
+        + "if((input >= 0.0 && input < 1.0)){\n"
         + "return 0.0;\n"
         + "}\n"
         + "do {\n"
