@@ -10,14 +10,12 @@
 <fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.uppaalstructures.UppaalDocument"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.transformers.SimulinkModelTransformer"/>
 <fullyQualifiedTypeName name="java.io.OutputStream"/>
-<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.configuration.ApplicationConfiguration"/>
 <fullyQualifiedTypeName name="java.nio.file.Path"/>
 <fullyQualifiedTypeName name="javax.swing.filechooser.FileNameExtensionFilter"/>
 <fullyQualifiedTypeName name="java.nio.file.Paths"/>
 <fullyQualifiedTypeName name="javax.swing.event.DocumentListener"/>
 <fullyQualifiedTypeName name="java.util.concurrent.Executors"/>
-<fullyQualifiedTypeName name="java.io.PrintStream"/>
 <fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.base.BaseUppaalElement"/>
 <fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="java.io.File"/>
@@ -53,11 +51,13 @@
 <fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="java.util.Iterator"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition.PortData"/>
-<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition.OperationTypesEnum"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.sorder.SortedOrderList"/>
 <fullyQualifiedTypeName name="java.util.function.DoubleToLongFunction"/>
 <fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.Neighbour"/>
+<fullyQualifiedTypeName name="java.io.FileOutputStream"/>
+<fullyQualifiedTypeName name="java.io.PrintStream"/>
+<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper"/>
 </qualifiedTypeNameHistroy>

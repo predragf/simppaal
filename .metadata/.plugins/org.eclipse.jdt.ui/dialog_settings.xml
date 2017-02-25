@@ -41,10 +41,12 @@
 	<section name="FatJarPackageWizard">
 		<item value="/Users/pfj01/Documents/workspaces/simulinktotimedautomata" key="FatJarPackageWizardPage.ANTSCRIPT_LOCATION"/>
 		<item value="SIMPPAAL - org.fmaes.simulinktotimedautomata.gui" key="FatJarPackageWizardPage.LAUNCH_CONFIGURATION_SELECTION_NAME"/>
-		<item value="/Users/pfj01/Desktop/SIMPPAAL/SIMPPAAL.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
+		<item value="/Users/pfj01/Desktop/SIMPPAAL2/SIMPPAAL.jar" key="FatJarPackageWizardPage.DESTINATION_PATH_SELECTION"/>
 		<item value="false" key="FatJarPackageWizardPage.ANTSCRIPT_SAVE"/>
 		<item value="3" key="FatJarPackageWizardPage.LIBRARY_HANDLING"/>
 		<list key="FatJarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/Users/pfj01/Desktop/SIMPPAAL2/SIMPPAAL.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL2/SIMPPAAL2.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/SIMPPAAL.jar"/>
 			<item value="org.fmaes.simulinktotimedautomata.gui/bin/SIMPPAAL.jar"/>
 			<item value="org.fmaes.simulinktotimedautomata/bin/simulinktotimedautomata.jar"/>
@@ -118,26 +120,26 @@
 		<item value="false" key="JarManifestWizardPage.SAVE_MANIFEST"/>
 		<item value="false" key="JarPackageWizardPage.EXPORT_OUTPUT_FOLDER"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/SIMPPAAL_lib/simulinktotimedautomata.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/sign.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/abs.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/saturate.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/rounding.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/integrator.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/derivative.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/SIMPPAAL_lib/simulinktotimedautomata.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/unitdelay.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/relationaloperator.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/logic.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/logical operator.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/unaryminus.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/ratetransition.jar"/>
-			<item value="/Users/pfj01/Desktop/BlockRoutineGenerator.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/switch.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/sum.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/signum.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/sign.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/rounding.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/relationaloperator.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/product.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/minmax.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/logical operator.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/logic.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/integrator.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/gain.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/simulinktotimedautomata.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/derivative.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/abs.jar"/>
+			<item value="/Users/pfj01/Desktop/BlockRoutineGenerator.jar"/>
+			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/ratetransition.jar"/>
 		</list>
 	</section>
 	<section name="JavaElementSearchActions">
