@@ -41,9 +41,8 @@ public class SortedOrderList extends ArrayList<SortedOrderEntry> {
     int index = 1;
     for (SortedOrderEntry entry : this) {
       asString += String.format("%d (%s) %s \n", index, entry.sortedNumber, entry.id);
-      index++;
     }
-
+    index++;
     return asString;
   }
 

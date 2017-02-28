@@ -3,8 +3,6 @@ package org.fmaes.simulinktotimedautomata.sorder;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import org.fmaes.simulinktotimedautomata.util.Util;
-
 public class SortedOrderList extends ArrayList<SortedOrderEntry> {
 
   public void sort() {
@@ -33,22 +31,5 @@ public class SortedOrderList extends ArrayList<SortedOrderEntry> {
       }
     }
     return blockExecutionOrder;
-  }
-
-  private String asString() {
-    this.sort();
-    String asString = "";
-    int index = 1;
-    for (SortedOrderEntry entry : this) {
-      asString += String.format("%d (%s) %s \n", index, entry.sortedNumber, entry.id);
-      index++;
-    }
-
-    return asString;
-  }
-
-  public void Save(String location) {
-    String collectionAsList = this.asString();
-    Util.saveFileAsTxt(location, collectionAsList);
   }
 }

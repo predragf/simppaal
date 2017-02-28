@@ -58,7 +58,6 @@ public class SimulinkModelTransformer {
     UppaalAutomaton automaton;
     int index = 0;
     Collection<SimulinkBlockWrapper> constantBlocks = new ArrayList<SimulinkBlockWrapper>();
-    sList.Save(String.format("%s/executionorder.txt", transformationDirectory));
     for (SortedOrderEntry sortedOrderEntry : sList) {
       index++;
       simulinkBlock = rootSimulinkModel.getBlockById(sortedOrderEntry.id);
