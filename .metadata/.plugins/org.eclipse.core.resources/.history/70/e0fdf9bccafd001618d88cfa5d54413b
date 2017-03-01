@@ -7,7 +7,7 @@ clock gtime;
 	<template>
 		<name x="5" y="5">continuous</name>
 		<declaration>clock t;
-int sn = #sn#;
+double sn = #sn#;
 double IAT = #IAT#;
 double OFFSET = #OFFSET#;
 
@@ -49,7 +49,7 @@ customInit();
 		<name>discrete</name>
 		<declaration>double ts = #ts#;
 double IAT = #IAT#;
-int sn = #sn#;
+double sn = #sn#;
 double OFFSET = #OFFSET#;
 clock t;
 

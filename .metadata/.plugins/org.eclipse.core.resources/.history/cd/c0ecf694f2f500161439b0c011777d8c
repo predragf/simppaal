@@ -1,5 +1,0 @@
-package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition;
-
-public class OperationTypesEnum {
-
-}

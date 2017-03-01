@@ -24,11 +24,9 @@
 <fullyQualifiedTypeName name="java.net.URLClassLoader"/>
 <fullyQualifiedTypeName name="java.net.MalformedURLException"/>
 <fullyQualifiedTypeName name="java.util.List"/>
-<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.util.Util"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.platformextender.BlockRoutineGeneratorPluginManager"/>
 <fullyQualifiedTypeName name="org.conqat.lib.simulink.model.SimulinkInPort"/>
-<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.sorder.SortedOrderEntry"/>
 <fullyQualifiedTypeName name="java.lang.Character"/>
 <fullyQualifiedTypeName name="javax.swing.text.html.HTMLDocument.Iterator"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkPortBaseWrapper"/>
@@ -60,4 +58,6 @@
 <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
 <fullyQualifiedTypeName name="java.io.PrintStream"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper"/>
+<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.sorder.SortedOrderEntry"/>
+<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.util.Util"/>
 </qualifiedTypeNameHistroy>

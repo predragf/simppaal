@@ -1,7 +1,0 @@
-package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.saturation;
-
-import org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface;
-
-public class Saturation implements BlockRoutineGeneratorInterface {
-
-}
