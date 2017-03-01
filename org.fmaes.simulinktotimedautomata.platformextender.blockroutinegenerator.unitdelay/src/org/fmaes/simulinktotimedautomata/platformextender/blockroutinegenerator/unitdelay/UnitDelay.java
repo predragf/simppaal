@@ -22,20 +22,18 @@ public class UnitDelay implements BlockRoutineGeneratorInterface {
   @Override
   public String generateBlockRoutine(SimulinkBlockWrapper blockForParsing) {
     String insig1 = blockForParsing.getPredecessorAtPosition(0).getSimulinkBlock().getSignalName();
-    String insig2 = blockForParsing.getPredecessorAtPosition(1).getSimulinkBlock().getSignalName();
     String outsig1 = blockForParsing.getSuccessorAtPosition(0).getSimulinkBlock().getSignalName();
 
-    String globalDecl = String.format(
-        "" + "double tprev = 0.0;\n" + "double stepsize = 0.1;\n" + "double stateval = %s;\n",
-        insig2);
     String expression =
-        String.format("" + "/* Integrator */" + "void blockRoutine()// to be optimized!!%n" + "{%n"
-            + "if(gtime >= tprev + stepsize)%n" + "{\n" + "%2$s = %1$s+stateval;%n"
-            + "stateval=%2$s; tprev = gtime;%n" + "}%n" + "}%n", insig1, outsig1);
+        String.format("" 
+        + "/* UnitDelay */" 
+        + "void blockRoutine()%n" 
+        + "{%n"
+            + "%2$s = in_prev;%n" 
+            + "in_prev = %1$s;%n" 
+        + "}%n", insig1, outsig1);
 
-    String bRoutine = String.format("%s%s", globalDecl, expression);
-
-    return bRoutine;
+    return expression;
   }
 
   /*
@@ -59,9 +57,10 @@ public class UnitDelay implements BlockRoutineGeneratorInterface {
    */
   @Override
   public String generateInitRoutine(SimulinkBlockWrapper blockForParsing) {
-    // TODO Auto-generated method stub
-    String initRoutine = "void customInit(){tprev = gtime;}\n";
-    return initRoutine;
+    String globalDecl = "double in_prev;\n"
+    String initcond = blockForParsing.getDeclaredParameter("InitialCondition");
+    String initRoutine = String.format("void customInit(){in_prev = %s;}%n", initcond);
+    return String.format("%n%s%n%s", globalDecl, initRoutine);
   }
 
   /*
