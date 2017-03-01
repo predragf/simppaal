@@ -25,11 +25,11 @@ public class Sign implements BlockRoutineGeneratorInterface {
     String input = "";
     String output = "";
     if (blockForParsing.exists()) {
-      output = blockForParsing.getSignalName();
+      input = blockForParsing.getSignalName();
     }
     Neighbour pred = blockForParsing.getPredecessorAtPosition(0);
     if (pred.getSimulinkBlock().exists()) {
-      input = pred.getSimulinkBlock().getSignalName();
+      output = pred.getSimulinkBlock().getSignalName();
     }
     String bRoutine = "void blockRoutine(){\n" + "if(#input# < 0.0){\n" + "#output# = -1.0;\n" + "}"
         + "if(#input# == 0.0){\n" + "#output# = 0.0;\n" + "}\n" + "if(#input# > 0.0){\n"
@@ -74,12 +74,8 @@ public class Sign implements BlockRoutineGeneratorInterface {
     return null;
   }
 
-  /*
-   * (non-Javadoc)
-   * 
-   * @see org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface#
-   * generateDafnyVerificationRoutine(org.fmaes.simulinktotimedautomata.types.wrappers.
-   * SimulinkBlockWrapper)
+  /* (non-Javadoc)
+   * @see org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface#generateDafnyVerificationRoutine(org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper)
    */
   @Override
   public String generateDafnyVerificationRoutine(SimulinkBlockWrapper blockForParsing) {
