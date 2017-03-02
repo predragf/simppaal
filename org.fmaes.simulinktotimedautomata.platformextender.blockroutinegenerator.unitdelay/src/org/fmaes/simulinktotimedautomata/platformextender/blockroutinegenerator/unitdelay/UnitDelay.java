@@ -57,7 +57,7 @@ public class UnitDelay implements BlockRoutineGeneratorInterface {
    */
   @Override
   public String generateInitRoutine(SimulinkBlockWrapper blockForParsing) {
-    String globalDecl = "double in_prev;\n"
+    String globalDecl = "double in_prev;\n";
     String initcond = blockForParsing.getDeclaredParameter("InitialCondition");
     String initRoutine = String.format("void customInit(){in_prev = %s;}%n", initcond);
     return String.format("%n%s%n%s", globalDecl, initRoutine);
