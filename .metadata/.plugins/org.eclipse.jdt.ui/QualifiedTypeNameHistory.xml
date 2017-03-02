@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.Comparator"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="java.util.Collections"/>
 <fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.uppaalstrcutures.interfaces.SerializableInterface"/>
 <fullyQualifiedTypeName name="org.fmaes.j2uppaal.builders.UppaalDocumentBuilder"/>
 <fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.uppaalstrcutures.interfaces.UppaalAutomatonInterface"/>
 <fullyQualifiedTypeName name="javax.swing.JFileChooser"/>
-<fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.uppaalstructures.UppaalDocument"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.transformers.SimulinkModelTransformer"/>
 <fullyQualifiedTypeName name="java.io.OutputStream"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.configuration.ApplicationConfiguration"/>
@@ -52,7 +50,6 @@
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.ratetransition.OperationTypesEnum"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.sorder.SortedOrderList"/>
 <fullyQualifiedTypeName name="java.util.function.DoubleToLongFunction"/>
-<fullyQualifiedTypeName name="java.lang.Exception"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.Neighbour"/>
 <fullyQualifiedTypeName name="java.io.FileOutputStream"/>
@@ -60,4 +57,7 @@
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.sorder.SortedOrderEntry"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.util.Util"/>
+<fullyQualifiedTypeName name="java.net.UnknownHostException"/>
+<fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.uppaalstructures.UppaalDocument"/>
+<fullyQualifiedTypeName name="java.lang.Exception"/>
 </qualifiedTypeNameHistroy>

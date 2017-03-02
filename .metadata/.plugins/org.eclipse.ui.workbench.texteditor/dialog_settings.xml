@@ -8,14 +8,14 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="it.uu.se"/>
+			<item value="it.uu"/>
 			<item value="save"/>
 			<item value="start"/>
 			<item value="system.out"/>
 			<item value="iscompu"/>
 			<item value="computat"/>
 			<item value="const"/>
-			<item value=".sort"/>
-			<item value="sort"/>
 		</list>
 		<list key="replacehistory">
 		</list>

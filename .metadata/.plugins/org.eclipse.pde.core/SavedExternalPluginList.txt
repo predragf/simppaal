@@ -1,4 +1,4 @@
-# List of external plug-in models previously loaded. Timestamp: 1487801277417
+# List of external plug-in models previously loaded. Timestamp: 1488476851693
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/ch.qos.logback.classic_1.0.7.v20121108-1250.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/ch.qos.logback.core_1.0.7.v20121108-1250.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/ch.qos.logback.slf4j_1.0.7.v201505121915.jar
@@ -48,6 +48,17 @@ file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.apache.xerces_2.9.0.
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.apache.xml.resolver_1.2.0.v201005080400.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.apache.xml.serializer_2.7.1.v201005080400.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.apache.xmlrpc_3.0.0.v20100427-1100.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.conqat.ide.architecture_2015.2.0.201502171435.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.conqat.ide.clones_2015.2.0.201502171435.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.conqat.ide.commons_2015.2.0.201502171434.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.conqat.ide.commons.driver_2015.2.0.201502171434.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.conqat.ide.commons.engine_2015.2.0.201502171434.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.conqat.ide.commons.gef_2015.2.0.201502171435.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.conqat.ide.commons.ui_2015.2.0.201502171434.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.conqat.ide.core_2015.2.0.201502171435.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.conqat.ide.editor_2015.2.0.201502171435.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.conqat.ide.examples_2015.2.0.201502171435.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.conqat.ide.findings_2015.2.0.201502171435.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.aether.api_1.0.1.v20141111.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.aether.connector.basic_1.0.1.v20141111.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.aether.impl_1.0.1.v20141111.jar
@@ -520,6 +531,7 @@ file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.wst.xsd.ui_1
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.wst.xsdeditor.doc.user_1.0.800.v201208081537.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.xsd_2.12.0.v20160526-0356.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.xsd.edit_2.8.0.v20160526-0356.jar
+file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.eclipse.zest.layouts_1.1.300.201606061308.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.gradle.toolingapi_2.14.1.v20160831165132.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.hamcrest.core_1.3.0.v201303031735.jar
 file:/Applications/Eclipse.app/Contents/Eclipse/plugins/org.hamcrest.library_1.3.0.v201505072020.jar

@@ -22,18 +22,12 @@ public class UnitDelay implements BlockRoutineGeneratorInterface {
   @Override
   public String generateBlockRoutine(SimulinkBlockWrapper blockForParsing) {
     String insig1 = blockForParsing.getPredecessorAtPosition(0).getSimulinkBlock().getSignalName();
-    String outsig1 = blockForParsing.getSuccessorAtPosition(0).getSimulinkBlock().getSignalName();
+    String outsig1 = blockForParsing.getSignalName();
+    String globalDecl = "double in_prev;\n";
+    String expression = String.format("" + "/* UnitDelay */" + "void blockRoutine()%n" + "{%n"
+        + "%2$s = in_prev;%n" + "in_prev = %1$s;%n" + "}%n", insig1, outsig1);
 
-    String expression =
-        String.format("" 
-        + "/* UnitDelay */" 
-        + "void blockRoutine()%n" 
-        + "{%n"
-            + "%2$s = in_prev;%n" 
-            + "in_prev = %1$s;%n" 
-        + "}%n", insig1, outsig1);
-
-    return expression;
+    return String.format("%s\n%s", globalDecl, expression);
   }
 
   /*
@@ -57,10 +51,13 @@ public class UnitDelay implements BlockRoutineGeneratorInterface {
    */
   @Override
   public String generateInitRoutine(SimulinkBlockWrapper blockForParsing) {
-    String globalDecl = "double in_prev;\n";
+
     String initcond = blockForParsing.getDeclaredParameter("InitialCondition");
+    if (initcond == null || initcond == "") {
+      initcond = "0.0";
+    }
     String initRoutine = String.format("void customInit(){in_prev = %s;}%n", initcond);
-    return String.format("%n%s%n%s", globalDecl, initRoutine);
+    return String.format("%n%s", initRoutine);
   }
 
   /*
@@ -75,8 +72,12 @@ public class UnitDelay implements BlockRoutineGeneratorInterface {
     return null;
   }
 
-  /* (non-Javadoc)
-   * @see org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface#generateDafnyVerificationRoutine(org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper)
+  /*
+   * (non-Javadoc)
+   * 
+   * @see org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface#
+   * generateDafnyVerificationRoutine(org.fmaes.simulinktotimedautomata.types.wrappers.
+   * SimulinkBlockWrapper)
    */
   @Override
   public String generateDafnyVerificationRoutine(SimulinkBlockWrapper blockForParsing) {
