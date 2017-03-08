@@ -1,0 +1,1 @@
+method absR(input: real) returns (out: real) ensures out >= 0.0 { if (input < 0.0) {return -1.0 * input;} return input; }
