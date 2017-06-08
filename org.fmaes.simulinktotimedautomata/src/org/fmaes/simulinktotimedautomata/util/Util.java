@@ -168,7 +168,7 @@ public class Util {
 
   public static SimulinkModelWrapper loadAndWrapReferencedModel2(
       SimulinkBlockWrapper referencedSubSystemBlock) {
-    String libraryFileName = String.format("%s.mdl", referencedSubSystemBlock.getLibraryName());
+    String libraryFileName = String.format("%s.mdl", referencedSubSystemBlock.getReferencedModelName());
     ApplicationConfiguration appConfig = ApplicationConfiguration.loadConfiguration();
     String modelsDirectory = appConfig.getProperty("modelDirectory");
     Path pathToModel = Paths.get(modelsDirectory, libraryFileName);

@@ -88,7 +88,11 @@ public class SimulinkLineParser {
         pred.setSimulinkBlock(lineSourceBlock);
         pred.setToPort(lineForParsing.getDestinationPort());
         predecessors.add(pred);
-      } else if (lineSourceBlock.isSubsystem() || lineSourceBlock.isLibrary()) {
+       } else if (lineSourceBlock.getType().toLowerCase().equals("modelreference")){
+         
+       } 
+      
+      else if (lineSourceBlock.isSubsystem() || lineSourceBlock.isLibrary()) {
         String sourcePortIndex = lineSourcePort.getPortIndex();
         sourcePortIndex = Util.convertToPortIndex(sourcePortIndex);
         String _portType = SimulinkBlockTypesEnum.OUTPORT.toString().toLowerCase();
