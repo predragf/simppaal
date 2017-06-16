@@ -1,0 +1,6 @@
+1497193021190	Rename package 'org.fmaes.simppaal.simulinktotimedautomata.core.types'
+1497512077705	Rename compilation unit 'SimulinkModelHierarcy.java'
+1497539708337	Encapsulate field 'parentNodeId'
+1497539719230	Encapsulate field 'referencedBlockId'
+1497539725387	Encapsulate field 'simulinkModelFileName'
+1497539733811	Encapsulate field 'globalModelId'

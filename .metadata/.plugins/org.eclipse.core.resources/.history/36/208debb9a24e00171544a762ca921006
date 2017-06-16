@@ -1,0 +1,34 @@
+/**
+ * 
+ */
+package org.fmaes.simulinktotimedautomata.types.newwrappers;
+
+import org.conqat.lib.simulink.model.SimulinkBlock;
+import org.conqat.lib.simulink.model.SimulinkModel;
+
+/**
+ * @author pfj01
+ *
+ */
+public class SimulinkBlockWrapper {
+
+  private SimulinkBlock simulinkBlock;
+
+  private SimulinkBlockWrapper referencedParent;
+
+  public String getGlobalId() {
+    String _globalId = "";
+    String _parentId = referencedParent != null ? referencedParent.getGlobalId() : "";
+    String referencedSourceBlock = "";
+    if (simulinkBlock.getModel().isLibrary()) {
+       referencedSourceBlock  = simulinkBlock.getParameter("SourceBlock");
+    }
+    return "";
+  }
+
+  public SimulinkModel getSimulinkModel() {
+    return simulinkBlock.getModel();
+  }
+
+
+}

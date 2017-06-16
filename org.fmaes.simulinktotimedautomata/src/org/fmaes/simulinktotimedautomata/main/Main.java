@@ -19,28 +19,23 @@ public class Main {
 
   public static void main(String[] args) {
     String simulinkModelName = "brake_acc_nodiv.mdl";
-    String slistFileName = "sortedorder";
-    
-    Double dvatri = 2.3;
-    Double dva = 2.0;
-    
-    
-    System.out.println(Util.isDouble("2.0"));
-    System.out.println(Util.isDouble("2."));
-    System.out.println(Util.isDouble(".0"));
-    System.out.println(Util.isDouble("2222.7"));
-    System.out.println(Util.isDouble("2222"));
-    System.out.println(Util.isDouble(""));
-    
-    System.out.println(Util.isInteger("2.0"));
-    System.out.println(Util.isInteger("2."));
-    System.out.println(Util.isInteger(".0"));
-    System.out.println(Util.isInteger("2222.7"));
-    System.out.println(Util.isInteger("2222"));
-    System.out.println(Util.isInteger(""));
 
+    String test = "brake_acc_nodiv/Veh_Speed_Estimator/predrag";
+    System.out.println(test.substring(0, test.lastIndexOf("/")));
+    String slistFileName = "sortedorder";
     SimulinkModelWrapper rootModel =
         SimulinkModelBuilder.loadWrappedSimulinkModelByName(simulinkModelName);
+
+    SimulinkBlockWrapper sbw = rootModel.getBlockById("brake_acc_nodiv/Veh_Speed_Estimator");
+
+    System.out.println(sbw.getParameter("SourceBlock"));
+
+    System.out.println(rootModel.getSimulinkModel().isLibrary());
+
+    SimulinkModelWrapper library =
+        SimulinkModelBuilder.loadWrappedSimulinkModelByName("lib_wheel_nodiv");
+
+    System.out.println(library.getSimulinkModel().isLibrary());
 
     String iAmNumber = "123";
     String iAmEmpty = "";
@@ -56,8 +51,9 @@ public class Main {
     System.out.println(Util.isNumber(iAmNullString));
 
     if (rootModel.exists()) {
-      String exampleFrom ="brake_acc_nodiv/Vehicle_Body_Wheels/half"; //"brake_acc_nodiv/RT8";// "brake_acc_nodiv/Vehicle_Body_Wheels/half";
-      
+      String exampleFrom = "brake_acc_nodiv/Vehicle_Body_Wheels/half"; // "brake_acc_nodiv/RT8";//
+                                                                       // "brake_acc_nodiv/Vehicle_Body_Wheels/half";
+
       SimulinkBlockWrapper exampleFromBlock = rootModel.getBlockById(exampleFrom);
       if (exampleFromBlock.exists()) {
         Collection<Neighbour> successors = rootModel.findSuccessors(exampleFromBlock);

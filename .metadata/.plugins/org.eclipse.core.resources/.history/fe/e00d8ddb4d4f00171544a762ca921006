@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.testing;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class Testing {
+
+  /**
+   * @param args
+   */
+  public static void main(String[] args) {
+    // TODO Auto-generated method stub
+
+  }
+
+}

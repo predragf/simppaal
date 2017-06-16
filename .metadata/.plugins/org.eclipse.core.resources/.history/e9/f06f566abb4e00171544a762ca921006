@@ -1,0 +1,20 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers;
+
+import java.util.Collection;
+
+import org.conqat.lib.simulink.model.SimulinkModel;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class SimulinkModelWrapper {
+  
+  private SimulinkModel simulinkModel;
+  
+  private Collection<SimulinkModelWrapper> referencedModels;
+
+}

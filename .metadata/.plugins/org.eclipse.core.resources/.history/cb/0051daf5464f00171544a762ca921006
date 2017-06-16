@@ -1,0 +1,57 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.conqat.lib.simulink.model.SimulinkBlock;
+import org.conqat.lib.simulink.model.SimulinkModel;
+import org.fmaes.simppaal.simulinktotimedautomata.core.enums.SimulinkBlockTypesEnum;
+import org.fmaes.simppaal.simulinktotimedautomata.utils.DiskUtils;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class SimulinkModelWrapper {
+
+  private SimulinkModel simulinkModel;
+
+  private Collection<SimulinkModelWrapper> referencedModels;
+
+  @SuppressWarnings("unused")
+  private SimulinkModelWrapper() {}
+
+  public SimulinkModelWrapper(SimulinkModel _simulinkModel) {
+    simulinkModel = _simulinkModel;
+    loadReferencedModels();
+  }
+
+  public SimulinkModel getSimulinkModel() {
+    return simulinkModel;
+  }
+
+  public Collection<SimulinkModelWrapper> getReferencedModels() {
+    return referencedModels;
+  }
+
+  private void loadReferencedModels() {
+
+  }
+
+  private Collection<SimulinkBlockWrapper> getRereferecedModelBlocks() {
+    Collection<String> allModels = DiskUtils.getAllModelFileNamesFromDisk("");
+    Collection<SimulinkBlockWrapper> referencedModelBlocks = new ArrayList<SimulinkBlockWrapper>();
+    for (SimulinkBlock simulinkBlock : simulinkModel.getSubBlocks()) {
+      if (simulinkBlock.getType().equals(SimulinkBlockTypesEnum.REFERENCE)) {
+        SimulinkBlockWrapper wrappedBlock = new SimulinkBlockWrapper(simulinkBlock);
+        referencedModelBlocks.add(wrappedBlock);
+      }
+    }
+
+    return null;
+  }
+
+}

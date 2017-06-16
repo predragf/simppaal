@@ -21,6 +21,8 @@ import org.fmaes.simulinktotimedautomata.util.Util;
 public class SimulinkBlockWrapper {
 
   private SimulinkBlock simulinkBlock;
+  
+  private SimulinkBlockWrapper referencedParentBlock;
 
   public int executionOrderNumber;
 
@@ -33,6 +35,15 @@ public class SimulinkBlockWrapper {
 
   public SimulinkBlockWrapper(SimulinkBlock _simulinkBlock) {
     simulinkBlock = _simulinkBlock;
+    referencedParentBlock = null;
+    executionOrderNumber = -1;
+    predecessors = new ArrayList<Neighbour>();
+    successors = new ArrayList<Neighbour>();
+  }
+  
+  public SimulinkBlockWrapper(SimulinkBlock _simulinkBlock, SimulinkBlockWrapper _referencedParent) {
+    simulinkBlock = _simulinkBlock;
+    referencedParentBlock = _referencedParent;
     executionOrderNumber = -1;
     predecessors = new ArrayList<Neighbour>();
     successors = new ArrayList<Neighbour>();

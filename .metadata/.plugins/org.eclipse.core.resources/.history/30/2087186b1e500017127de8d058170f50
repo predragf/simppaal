@@ -1,0 +1,43 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers;
+
+import java.util.Collection;
+
+import org.conqat.lib.simulink.model.SimulinkBlock;
+import org.fmaes.simppaal.simulinktotimedautomata.utils.DiskUtils;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class SimulinkBlockWrapper {
+
+  private SimulinkBlock simulinkBlock;
+
+  /**
+   * @param simulinkBlock
+   */
+  public SimulinkBlockWrapper(SimulinkBlock _simulinkBlock) {
+    simulinkBlock = _simulinkBlock;
+  }
+
+  public String getType() {
+    return simulinkBlock.getType();
+  }
+
+  public String getParameter(String parameterName) {
+    return simulinkBlock.getParameter(parameterName);
+  }
+
+  public void setParameter(String parameterName, String parameterValue) {
+    simulinkBlock.setParameter(parameterName, parameterValue);
+  }
+
+  public boolean isExternalModelReference() {
+    Collection<String> availableModels = DiskUtils.getAllModelFileNamesFromDisk("");
+    return false;
+  }
+
+}

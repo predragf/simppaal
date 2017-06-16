@@ -1,0 +1,113 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.conqat.lib.simulink.model.SimulinkBlock;
+import org.conqat.lib.simulink.model.SimulinkModel;
+import org.fmaes.simppaal.simulinktotimedautomata.core.enums.ParameterNamesEnum;
+import org.fmaes.simppaal.simulinktotimedautomata.core.enums.SimulinkBlockTypesEnum;
+import org.fmaes.simppaal.simulinktotimedautomata.utils.DiskUtils;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class SimulinkModelWrapper {
+
+  private SimulinkModel simulinkModel;
+
+  private SimulinkModelWrapper parentSimulinkModel;
+
+  private Collection<SimulinkModelWrapper> referencedModels;
+
+  @SuppressWarnings("unused")
+  private SimulinkModelWrapper() {}
+
+  /*
+   * This is usually the case for the referenced models as they have parents
+   */
+  public SimulinkModelWrapper(SimulinkModel _simulinkModel,
+      SimulinkModelWrapper _parentSimulinkModel) {
+    simulinkModel = _simulinkModel;
+    parentSimulinkModel = _parentSimulinkModel;
+    referencedModels = new ArrayList();
+  }
+
+  /**
+   * This is usually used for the root model as it does not have any parents
+   * 
+   * @param _simulinkModel
+   */
+  public SimulinkModelWrapper(SimulinkModel _simulinkModel) {
+    this(_simulinkModel, null);
+  }
+
+
+
+  private SimulinkBlock searchInReferencedModels(String blockId) {
+    return null;
+  }
+
+  public SimulinkBlockWrapper getBlockById(String blockId) {
+    SimulinkBlock matchingSimulinkBlock = simulinkModel.getBlock(blockId);
+    if (matchingSimulinkBlock == null) {
+      matchingSimulinkBlock = searchInReferencedModels(blockId);
+    }
+    return new SimulinkBlockWrapper(matchingSimulinkBlock);
+  }
+
+  public SimulinkModel getSimulinkModel() {
+    return simulinkModel;
+  }
+
+  public Collection<SimulinkModelWrapper> getReferencedModels() {
+    return referencedModels;
+  }
+
+  private Collection<SimulinkBlockWrapper> getRereferecedModelBlocks() {
+    Collection<SimulinkBlockWrapper> referencedModelBlocks = new ArrayList<SimulinkBlockWrapper>();
+    for (SimulinkBlock simulinkBlock : simulinkModel.getSubBlocks()) {
+      if (simulinkBlock.getType().equals(SimulinkBlockTypesEnum.REFERENCE)) {
+        SimulinkBlockWrapper wrappedBlock = new SimulinkBlockWrapper(simulinkBlock);
+        referencedModelBlocks.add(wrappedBlock);
+      }
+    }
+    return referencedModelBlocks;
+  }
+
+  private Collection<SimulinkBlockWrapper> getExternalReferencedModelBlocks() {
+    Collection<SimulinkBlockWrapper> externalReferencedModelBlocks =
+        new ArrayList<SimulinkBlockWrapper>();
+    Collection<SimulinkBlockWrapper> referencedModelBlocks = getRereferecedModelBlocks();//
+    for (SimulinkBlockWrapper referencedModelBlock : referencedModelBlocks) {
+      if (referencedModelBlock.isExternalModelReference()) {
+        externalReferencedModelBlocks.add(referencedModelBlock);
+      }
+    }
+    return externalReferencedModelBlocks;
+  }
+
+  public boolean exists() {
+    return simulinkModel != null;
+  }
+
+  public void addParameter(String parameterName, String parameterValue) {
+    simulinkModel.setParameter(parameterName, parameterValue);
+  }
+
+  public String getParameter(String parameterName) {
+    return simulinkModel.getParameter(parameterName);
+  }
+
+  public void setModelDiskLocation(String modelDiskLocation) {
+    simulinkModel.setParameter(ParameterNamesEnum.DISK_LOCATION.toString(), modelDiskLocation);
+  }
+
+  public String getModelDiskLocation() {
+    return getParameter(ParameterNamesEnum.DISK_LOCATION.toString());
+  }
+}

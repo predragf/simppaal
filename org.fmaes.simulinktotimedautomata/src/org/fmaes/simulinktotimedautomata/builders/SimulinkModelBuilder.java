@@ -84,8 +84,8 @@ public class SimulinkModelBuilder {
       return referencedModel;
     }
     /*
-     * this line is important if the referenced model is a library because library must be wrapped
-     * in a subsystem
+     * this line is important if the referenced model is a library because library 
+     * must be wrapped in a subsystem
      */
     SimulinkBlockWrapper referencedModelRoot = null;
     if (referencedSubSystemBlock.isLibrary()) {

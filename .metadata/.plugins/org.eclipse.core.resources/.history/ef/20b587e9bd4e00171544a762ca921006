@@ -1,0 +1,41 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.conqat.lib.simulink.model.SimulinkModel;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class SimulinkModelWrapper {
+
+  private SimulinkModel simulinkModel;
+
+  private Collection<SimulinkModelWrapper> referencedModels;
+
+  @SuppressWarnings("unused")
+  private SimulinkModelWrapper() {}
+
+  public SimulinkModelWrapper(SimulinkModel _simulinkModel) {
+    simulinkModel = _simulinkModel;
+    referencedModels = new ArrayList<SimulinkModelWrapper>();
+  }
+
+  public SimulinkModel getSimulinkModel() {
+    return simulinkModel;
+  }
+
+  public Collection<SimulinkModelWrapper> getReferencedModels() {
+    return referencedModels;
+  }
+
+  public void loadReferencedModels() {
+
+  }
+
+}
