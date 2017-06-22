@@ -18,21 +18,60 @@ public class SimulinkUtils {
   }
 
 
-  public static String eliminateLastEntryOfId(String blockId) {
+  public static String trimSimulinkIdFromBack(String blockId) {
     blockId = preProcessId(blockId);
     int lastIndexOfSlash = blockId.lastIndexOf('/');
-    String oneLevelUp = blockId;
+    String idTrimedFromBack = blockId;
     if (lastIndexOfSlash > 0) {
-      oneLevelUp = blockId.substring(0, lastIndexOfSlash);
+      idTrimedFromBack = blockId.substring(0, lastIndexOfSlash);
     }
-    return oneLevelUp;
+    return idTrimedFromBack;
   }
 
-  public int getNumberOfNestedLevels(String globalId) {
-    String globalIdNoSlashes = globalId.replace("/", "");
-    return globalId.length() - globalIdNoSlashes.length();
+  public static String trimSimulinkIdFromBack(String blockId, int numberOfEntriesToBeTrimmed) {
+    String trimmedId = blockId;
+    while (numberOfEntriesToBeTrimmed > 0) {
+      trimmedId = trimSimulinkIdFromBack(trimmedId);
+      numberOfEntriesToBeTrimmed--;
+    }
+    return trimmedId;
   }
 
+  public static String trimSimulinkIdFromFront(String blockId) {
+    blockId = preProcessId(blockId);
+    int firstIndexOfSlash = blockId.indexOf('/');
+    String idTrimedFromFront = blockId;
+    if (firstIndexOfSlash > 0) {
+      idTrimedFromFront = blockId.substring(firstIndexOfSlash + 1);
+    }
+    return idTrimedFromFront;
+  }
 
+  public static String trimSimulinkIdFromFront(String blockId, int numberOfEntriesToBeTrimmed) {
+    String trimmedId = blockId;
+    while (numberOfEntriesToBeTrimmed > 0) {
+      trimmedId = trimSimulinkIdFromFront(trimmedId);
+      numberOfEntriesToBeTrimmed--;
+    }
+    return trimmedId;
+  }
+
+  public static int getNumberOfLevels(String globalId) {
+    return globalId.split("/").length;
+  }
+
+  public static boolean compareStringsIgnoreCase(String first, String second) {
+    return (first != null && second != null && first.toLowerCase().equals(second.toLowerCase()))
+        ? true : false;
+  }
+
+  public static String stripExtension(String nameWithExtension) {
+    int lastDotPosition = nameWithExtension.lastIndexOf('.');
+    String nameWithouthExtension = nameWithExtension;
+    if (lastDotPosition > 0) {
+      nameWithouthExtension = nameWithExtension.substring(0, lastDotPosition);
+    }
+    return nameWithouthExtension;
+  }
 
 }

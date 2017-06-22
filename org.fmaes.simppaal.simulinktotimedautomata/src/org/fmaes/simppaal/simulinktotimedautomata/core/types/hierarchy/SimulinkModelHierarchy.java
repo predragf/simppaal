@@ -19,7 +19,7 @@ public class SimulinkModelHierarchy {
 
   private Collection<SimulinkModelWrapper> simulinkModelFiles;
   private SimulinkModelLoader modelLoader;
-  private String parentBlockId;
+  private SimulinkModelHierarchy simulinkModelFilesHierarchy;
 
   @SuppressWarnings("unused")
   private SimulinkModelHierarchy() {}
@@ -27,6 +27,7 @@ public class SimulinkModelHierarchy {
   public SimulinkModelHierarchy(ApplicationConfiguration _config, String rootModelFileLocation) {
     SimulinkModelWrapper rootModel = loadSimulinkModelFile(rootModelFileLocation);
     modelLoader = new SimulinkModelLoader(_config);
+    simulinkModelFilesHierarchy = new SimulinkModelHierarchy();
   }
 
   public SimulinkModelHierarchy(ApplicationConfiguration _config,

@@ -6,11 +6,14 @@ package org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.conqat.lib.commons.collections.UnmodifiableCollection;
 import org.conqat.lib.simulink.model.SimulinkBlock;
 import org.conqat.lib.simulink.model.SimulinkModel;
 import org.fmaes.simppaal.simulinktotimedautomata.core.enums.ParameterNamesEnum;
 import org.fmaes.simppaal.simulinktotimedautomata.core.enums.SimulinkBlockTypesEnum;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.hierarchy.ReferencedModelTypeEnum;
 import org.fmaes.simppaal.simulinktotimedautomata.utils.DiskUtils;
+import org.fmaes.simppaal.simulinktotimedautomata.utils.SimulinkUtils;
 
 /**
  * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
@@ -62,11 +65,12 @@ public class SimulinkModelWrapper {
 
   public Collection<SimulinkBlockWrapper> getRereferecedModelBlocks() {
     Collection<SimulinkBlockWrapper> referencedModelBlocks = new ArrayList<SimulinkBlockWrapper>();
-    for (SimulinkBlock simulinkBlock : simulinkModel.getSubBlocks()) {
-      if (simulinkBlock.getType().equals(SimulinkBlockTypesEnum.REFERENCE)) {
+    for (SimulinkBlock simulinkBlock : this.getSubBlocksRecursively()) {
+      if (SimulinkUtils.compareStringsIgnoreCase(simulinkBlock.getType(),
+          SimulinkBlockTypesEnum.REFERENCE.toString())) {
         SimulinkBlockWrapper wrappedBlock = new SimulinkBlockWrapper(simulinkBlock);
         referencedModelBlocks.add(wrappedBlock);
-      }
+      } 
     }
     return referencedModelBlocks;
   }
@@ -97,5 +101,38 @@ public class SimulinkModelWrapper {
 
   public boolean isReferenced() {
     return parentSimulinkModel != null && parentSimulinkModel.exists();
+  }
+
+  public String getModelName() {
+    return simulinkModel.getName();
+  }
+
+  public int getModelType() {
+    return simulinkModel.isLibrary() ? ReferencedModelTypeEnum.LIBRARY
+        : ReferencedModelTypeEnum.MODEL;
+  }
+
+  private Collection<SimulinkBlock> extractSubBlocks(SimulinkBlock subSystem) {
+    Collection<SimulinkBlock> internalBlocks = new ArrayList<>();
+    for (SimulinkBlock simulinkBlock : subSystem.getSubBlocks()) {
+      internalBlocks.add(simulinkBlock);
+      if (SimulinkUtils.compareStringsIgnoreCase(SimulinkBlockTypesEnum.SUBSYSTEM.toString(),
+          simulinkBlock.getType())) {
+        internalBlocks.addAll(extractSubBlocks(simulinkBlock));
+      }
+    }
+    return internalBlocks;
+  }
+
+  public Collection<SimulinkBlock> getSubBlocksRecursively() {
+    Collection<SimulinkBlock> allBlocks = new ArrayList<>();
+    for (SimulinkBlock simulinkBlock : simulinkModel.getSubBlocks()) {
+      allBlocks.add(simulinkBlock);
+      if (SimulinkUtils.compareStringsIgnoreCase(SimulinkBlockTypesEnum.SUBSYSTEM.toString(),
+          simulinkBlock.getType())) {
+        allBlocks.addAll(extractSubBlocks(simulinkBlock));
+      }
+    }
+    return allBlocks;
   }
 }

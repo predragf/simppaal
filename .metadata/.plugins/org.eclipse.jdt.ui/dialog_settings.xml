@@ -139,6 +139,7 @@
 		<item value="false" key="JarManifestWizardPage.SAVE_MANIFEST"/>
 		<item value="false" key="JarPackageWizardPage.EXPORT_OUTPUT_FOLDER"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/Users/pfj01/Desktop/Scania-Demo-Dag-Demo/predragf-simppaal-executable-30e6b278fe0d 2/SIMPPAAL_lib/j2uppaal.jar"/>
 			<item value="org.fmaes.simulinktotimedautomata/libs/j2uppaal/j2uppaal.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/SIMPPAAL_lib/simulinktotimedautomata.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL executable/plugins/blockroutine/Generators/abs.jar"/>
@@ -158,7 +159,6 @@
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/product.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/minmax.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/logical operator.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/logic.jar"/>
 		</list>
 	</section>
 	<section name="JavaElementSearchActions">

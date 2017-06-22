@@ -1,0 +1,26 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers;
+
+import java.util.ArrayList;
+
+import org.conqat.lib.simulink.model.SimulinkModel;
+import org.fmaes.simppaal.simulinktotimedautomata.core.configuration.ApplicationConfiguration;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.hierarchy.HierarchyTree;;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class SimulinkModelWrapper {
+
+  private ArrayList<SimulinkModel> modelFiles;
+  private HierarchyTree modelHierarcy;
+  private ApplicationConfiguration applicationConfiguration;
+
+  public SimulinkModelWrapper(ApplicationConfiguration _appConfig, String rootModelName) {
+    applicationConfiguration = _appConfig;
+  }
+
+}

@@ -4,19 +4,16 @@
 package org.fmaes.simppaal.simulinktotimedautomata.core.loaders;
 
 import java.io.File;
-import java.util.Collection;
 
 import org.conqat.lib.commons.logging.SimpleLogger;
+import org.conqat.lib.simulink.builder.SimulinkModelBuilder;
 import org.conqat.lib.simulink.model.SimulinkModel;
 import org.fmaes.simppaal.simulinktotimedautomata.core.configuration.ApplicationConfiguration;
-import org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers.*;
-import org.conqat.lib.simulink.builder.SimulinkModelBuilder;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers.SimulinkBlockWrapper;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers.SimulinkModelWrapper;
 
 /**
- * @author Predrag Filipovikj (predrag.filipovikj@mdh.se) We provide 2 options for loading
- *         SimulinkModels from disk: i) by extracting the relevant information from the SubSystem
- *         block that is reference to a model and ii) by giving the full path to the SimulinkModel
- *         file to the loader.
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
  */
 public class SimulinkModelLoader {
 
@@ -37,15 +34,38 @@ public class SimulinkModelLoader {
     return loadSimulinkModel(modelDirectory, simulinkModelName);
   }
 
+  public SimulinkModelWrapper loadAndWrapSimulinkModelByName(String simulinkModelName) {
+    SimulinkModel simulinkModel = loadSimulinkModelByName(simulinkModelName);
+    return new SimulinkModelWrapper(simulinkModel);
+  }
+
+
+  public File openFileAssumingExtension(String modelDirectory, String modelName, String extension) {
+    String modelNameWithExtension = modelName.concat(extension);
+    return new File(modelDirectory, modelNameWithExtension);
+  }
+
   public SimulinkModel loadSimulinkModel(String modelDirectory, String modelName) {
-    if (!modelName.endsWith(".mdl")) {
-      modelName = modelName.concat(".mdl");
+    // if the model name
+    File modelFile;
+    if (!modelName.endsWith(".mdl") && !modelName.endsWith(".slx")) {
+      modelFile = openFileAssumingExtension(modelDirectory, modelName, ".mdl");
+      if (!modelFile.exists()) {
+        modelFile = openFileAssumingExtension(modelDirectory, modelName, ".slx");
+      }
+    } else {
+      modelFile = openFileAssumingExtension(modelDirectory, modelName, "");
     }
-    File modelFile = new File(modelDirectory, modelName);
     return loadSimulinkModelFromFile(modelFile);
   }
 
-  public SimulinkModel loadSimulinkModel(SimulinkBlockWrapper externalModelReferenceBlock) {
+  public SimulinkModelWrapper loadAndWrapSimulinkmodel(String modelDirectory, String modelName) {
+    SimulinkModel simulinkModel = loadSimulinkModel(modelDirectory, modelName);
+    return new SimulinkModelWrapper(simulinkModel);
+  }
+
+  public SimulinkModel loadSimulinkModelFromReferencedBlock(
+      SimulinkBlockWrapper externalModelReferenceBlock) {
     String modelDirectory = applicationConfiguration.getProperty("modelDirectory");
     if (modelDirectory == null || modelDirectory.length() < 1) {
       System.out.println("The model directory does not exist in the configuration file.");
@@ -53,6 +73,12 @@ public class SimulinkModelLoader {
     }
     return loadSimulinkModel(modelDirectory,
         externalModelReferenceBlock.getReferencedModelNameWithoutExtension());
+  }
+
+  public SimulinkModelWrapper loadAndWrapSimulinkModelFromReferencedBlock(
+      SimulinkBlockWrapper externalModelReferenceBlock) {
+    SimulinkModel simulinkModel = loadSimulinkModelFromReferencedBlock(externalModelReferenceBlock);
+    return new SimulinkModelWrapper(simulinkModel);
   }
 
   private SimulinkModel loadSimulinkModelFromFile(File modelFile) {

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;simulink&apos; to &apos;models&apos;&#x0A;- Original project: &apos;org.fmaes.simulinktotimedautomata&apos;&#x0A;- Destination element: &apos;models&apos;&#x0A;- Original element: &apos;simulink&apos;" description="Copy folder" element1="models/simulink" files="0" flags="589830" folders="1" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1498052873275" target="/org.fmaes.simppaal.simulinktotimedautomata/models" units="0" version="1.0"/>
+</session>

@@ -6,7 +6,9 @@ package org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers;
 import java.io.File;
 import java.util.Collection;
 
+import org.conqat.lib.simulink.model.ReferencedBlockInfo;
 import org.conqat.lib.simulink.model.SimulinkBlock;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.hierarchy.ReferencedModelTypeEnum;
 import org.fmaes.simppaal.simulinktotimedautomata.utils.DiskUtils;
 
 /**
@@ -41,7 +43,7 @@ public class SimulinkBlockWrapper {
     // The best way would be to check whether the referenced block in the blockreference is in the
     // folder of referenced models
     String modelNameGivenAsReference = getReferencedModelNameWithoutExtension();
-    return !modelNameGivenAsReference.toLowerCase().startsWith("simulink/");
+    return !modelNameGivenAsReference.toLowerCase().startsWith("simulink");
   }
 
   public String getReferencedModelNameWithoutExtension() {
@@ -53,5 +55,9 @@ public class SimulinkBlockWrapper {
       firstSlashIndex = referencedModelName.length() - 1;
     }
     return referencedModelName.substring(0, firstSlashIndex);
+  }
+
+  public String getId() {
+    return simulinkBlock.getId();
   }
 }

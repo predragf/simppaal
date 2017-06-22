@@ -1,0 +1,89 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Dictionary;
+
+import org.conqat.lib.simulink.model.SimulinkModel;
+import org.fmaes.simppaal.simulinktotimedautomata.core.configuration.ApplicationConfiguration;
+import org.fmaes.simppaal.simulinktotimedautomata.core.loaders.SimulinkModelLoader;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.hierarchy.HierarchyNode;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.hierarchy.HierarchyTree;;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class SimulinkSystemModel {
+
+  private Dictionary<String, SimulinkModelWrapper> simulinkModelFiles;
+  private HierarchyTree modelHierarcyTree;
+  private SimulinkModelLoader simulinkModelLoader;
+
+  public SimulinkSystemModel(ApplicationConfiguration _appConfig, String rootModelName) {
+    simulinkModelLoader = new SimulinkModelLoader(_appConfig);
+    loadHierarchy(rootModelName);
+  }
+
+  private void loadHierarchy(String rootModelName) {
+    SimulinkModelWrapper wrappedRootModel = loadSimulinkModel(rootModelName);
+    addEntryToModelsList(wrappedRootModel);
+    HierarchyNode hNode = new HierarchyNode(rootModelName);
+    addToRegisters(hNode, wrappedRootModel);
+    loadReferencedModels(hNode, wrappedRootModel);
+  }
+
+  private void loadReferencedModel(HierarchyNode parentNode,
+      SimulinkBlockWrapper referencedSimulinkBlock) {
+    String modelName = referencedSimulinkBlock.getReferencedModelNameWithoutExtension();
+    SimulinkModelWrapper wrappedSimulinkModel = loadSimulinkModel(modelName);
+    HierarchyNode hNode = new HierarchyNode(referencedSimulinkBlock.getId(), modelName,
+        wrappedSimulinkModel.getModelType(), parentNode);
+    addToRegisters(hNode, wrappedSimulinkModel);
+  }
+
+
+  private void loadReferencedModels(HierarchyNode parentNode,
+      SimulinkModelWrapper wrappedSimulinkModel) {
+    Collection<SimulinkBlockWrapper> externalReferenceBlocks =
+        wrappedSimulinkModel.getExternalReferencedModelBlocks();
+    for (SimulinkBlockWrapper externalReferenceBlock : externalReferenceBlocks) {
+      loadReferencedModel(parentNode, externalReferenceBlock);
+    }
+  }
+
+  private void addEntryToHierarchy(HierarchyNode _node) {
+    modelHierarcyTree.add(_node);
+  }
+
+  private void addEntryToModelsList(SimulinkModelWrapper _wrappedSimulinkModel) {
+    String modelName = _wrappedSimulinkModel.getModelName();
+    // add it only if such entry does not existst in the register
+    if (simulinkModelFiles.get(modelName) == null) {
+      // this is for debugging purposes only
+      System.out.println(modelName + " was added to the simulinkModelFiles.");
+      simulinkModelFiles.put(modelName, _wrappedSimulinkModel);
+    }
+  }
+
+  private SimulinkModelWrapper loadSimulinkModel(String modelName) {
+    // First check in the preloaded files
+    SimulinkModelWrapper wrappedModel = simulinkModelFiles.get(modelName);
+    // if it does not exist in the pre-loaded files, open it from the disk
+    if (wrappedModel == null) {
+      // The printline is for debugging purposes
+      System.out.println("Disk access for loading model " + modelName);
+      wrappedModel = simulinkModelLoader.loadAndWrapSimulinkModelByName(modelName);
+    }
+    return wrappedModel;
+  }
+
+  void addToRegisters(HierarchyNode _hNode, SimulinkModelWrapper wrappedRootModel) {
+    addEntryToHierarchy(_hNode);
+    addEntryToModelsList(wrappedRootModel);
+  }
+
+}

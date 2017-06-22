@@ -3,8 +3,9 @@
  */
 package org.fmaes.simppaal.simulinktotimedautomata.core.types.hierarchy;
 
-import java.lang.reflect.Field;
 import java.util.UUID;
+
+import org.fmaes.simppaal.simulinktotimedautomata.utils.SimulinkUtils;
 
 /**
  * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
@@ -40,6 +41,16 @@ public class HierarchyNode {
     referencedBlockId = _referencedBlockId;
     simulinkModelFileName = _simulinkFileName;
     setReferencedModelType(_referencedModelType);
+    setGlobalModelId(_parentNode, _simulinkFileName, _referencedBlockId, _referencedModelType);
+  }
+
+  public HierarchyNode(String _simulinkFileName) {
+    nodeId = UUID.randomUUID().toString();
+    parentNodeId = "";
+    referencedBlockId = "";
+    simulinkModelFileName = _simulinkFileName;
+    setReferencedModelType(ReferencedModelTypeEnum.MODEL);
+    setGlobalModelId(null, _simulinkFileName, "", ReferencedModelTypeEnum.MODEL);
   }
 
   public String getNodeId() {
@@ -47,7 +58,7 @@ public class HierarchyNode {
   }
 
   public String getParentNodeId() {
-    return parentNodeId;
+    return parentNodeId != null ? parentNodeId : "";
   }
 
   public String getReferencedBlockId() {
@@ -66,10 +77,28 @@ public class HierarchyNode {
     return referencedModelType;
   }
 
-  private void setGlobalModelId(String _parentGlobalId){
-    
+  private String processReferencedBlockId(int _referencedModelType, String _referencedBlockId) {
+    String referencedBlockIdProcessed = _referencedBlockId;
+    if (_referencedModelType == ReferencedModelTypeEnum.LIBRARY) {
+      referencedBlockIdProcessed = SimulinkUtils.trimSimulinkIdFromFront(_referencedBlockId, 2);
+    }
+    if (_referencedModelType == ReferencedModelTypeEnum.MODEL) {
+      referencedBlockIdProcessed = SimulinkUtils.trimSimulinkIdFromFront(_referencedBlockId, 1);
+    }
+    return referencedBlockIdProcessed;
   }
-  
+
+  private void setGlobalModelId(HierarchyNode _parentNode, String _simulinkModelFileName,
+      String _referencedBlockId, int _referencedModelType) {
+    if (_parentNode == null) {
+      globalModelId = SimulinkUtils.stripExtension(_simulinkModelFileName);
+      return;
+    }
+    String referencedBlockIdProcessed =
+        processReferencedBlockId(_referencedModelType, _referencedBlockId);
+    globalModelId = String.format("%s/%s", _parentNode.globalModelId, referencedBlockIdProcessed);
+  }
+
   private void setReferencedModelType(int _referencedModelType) {
     if (_referencedModelType == ReferencedModelTypeEnum.LIBRARY
         || _referencedModelType == ReferencedModelTypeEnum.MODEL) {

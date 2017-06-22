@@ -1,0 +1,40 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.conqat.lib.simulink.model.SimulinkModel;
+import org.fmaes.simppaal.simulinktotimedautomata.core.configuration.ApplicationConfiguration;
+import org.fmaes.simppaal.simulinktotimedautomata.core.loaders.SimulinkModelLoader;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.hierarchy.HierarchyNode;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.hierarchy.HierarchyTree;;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class SimulinkModelWrapper {
+
+  private ArrayList<SimulinkModel> modelFiles;
+  private HierarchyTree modelHierarcy;
+  private SimulinkModelLoader simulinkModelLoader;
+
+  public SimulinkModelWrapper(ApplicationConfiguration _appConfig, String rootModelName) {
+    simulinkModelLoader = new SimulinkModelLoader(_appConfig);
+    loadRootModel(rootModelName);
+  }
+
+  private void loadRootModel(String rootModelName){
+    SimulinkModel rootModel = simulinkModelLoader.loadSimulinkModelByName(rootModelName);
+    HierarchyNode rootNode = new HierarchyNode(rootModelName);   
+    loadReferencedModels(rootNode, )
+  }
+  
+  void loadReferencedModels(HierarchyNode parentNode, Collection<SimulinkBlockWrapper> referencedSimulinkBlocks){
+    
+  }
+
+}
