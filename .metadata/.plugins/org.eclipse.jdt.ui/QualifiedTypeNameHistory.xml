@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="javax.swing.JPopupMenu"/>
-<fullyQualifiedTypeName name="javax.swing.JMenuItem"/>
-<fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.gui.ConsoleContextMenu"/>
-<fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
 <fullyQualifiedTypeName name="javax.swing.AbstractAction"/>
 <fullyQualifiedTypeName name="javax.swing.JTextArea"/>
 <fullyQualifiedTypeName name="org.fmaes.simulinktotimedautomata.gui.SaveAction"/>
@@ -52,12 +48,16 @@
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="org.conqat.lib.commons.collections.UnmodifiableCollection"/>
-<fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers.SimulinkBlockWrapper"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.enums.SimulinkBlockTypesEnum"/>
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.hierarchy.HierarchyTree"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.hierarchy.HierarchyNode"/>
-<fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.utils.SimulinkUtils"/>
+<fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers.SimulinkBlockWrapper"/>
+<fullyQualifiedTypeName name="org.conqat.lib.simulink.model.SimulinkPortBase"/>
+<fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkBlockWrapper"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="org.conqat.lib.simulink.model.SimulinkLine"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.Neighbour"/>
 </qualifiedTypeNameHistroy>

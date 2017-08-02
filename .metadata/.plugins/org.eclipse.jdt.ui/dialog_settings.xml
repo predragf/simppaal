@@ -1,12 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
 	<item value="JavaSE-1.6" key="org.eclipse.jdt.ui.last.selected.execution.enviroment"/>
-	<item value="false" key="TypeHierarchyViewPart.qualifiednames"/>
+	<item value="true" key="Replace"/>
 	<item value="3" key="TypeHierarchyViewPart.orientation"/>
+	<item value="true" key="Comments"/>
 	<item value="false" key="TypeHierarchyViewPart.linkeditors"/>
+	<item value="2" key="TypeHierarchyViewPart.hierarchyview"/>
+	<item value="false" key="TypeHierarchyViewPart.qualifiednames"/>
+	<item value="true" key="Annotations"/>
 	<item value="/Users/pfj01/Documents/workspaces" key="org.eclipse.jdt.ui.lastextjar"/>
 	<item value="/Users/pfj01/Desktop" key="org.eclipse.jdt.ui.codeformatter.loadpath"/>
-	<item value="2" key="TypeHierarchyViewPart.hierarchyview"/>
+	<item value="false" key="InstanceOf"/>
 	<item value="filter_imports;" key="filters_last_used"/>
 	<item value="480,442" key="UserLibraryLoadSaveDialog.size"/>
 	<section name="org.eclipse.ltk.ui.refactoring.settings">
@@ -37,12 +41,13 @@
 	<section name="org.eclipse.jdt.internal.ui.dialogs.OpenTypeSelectionDialog2">
 		<item value="true" key="ShowStatusLine"/>
 		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;History/&gt;" key="History"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;workingSet workingSetName=&quot;&quot;/&gt;" key="WorkingSet"/>
 		<section name="DialogBoundsSettings">
 			<item value="600" key="DIALOG_WIDTH"/>
 			<item value="1|.Helvetica Neue DeskInterface|11.0|0|COCOA|1|.HelveticaNeueDeskInterface-Regular" key="DIALOG_FONT_NAME"/>
 			<item value="500" key="DIALOG_HEIGHT"/>
-			<item value="980" key="DIALOG_X_ORIGIN"/>
-			<item value="351" key="DIALOG_Y_ORIGIN"/>
+			<item value="680" key="DIALOG_X_ORIGIN"/>
+			<item value="228" key="DIALOG_Y_ORIGIN"/>
 		</section>
 	</section>
 	<section name="RefactoringWizard.preview">

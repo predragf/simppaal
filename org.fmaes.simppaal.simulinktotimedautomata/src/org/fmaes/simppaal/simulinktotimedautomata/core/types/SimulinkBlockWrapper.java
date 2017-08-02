@@ -100,18 +100,54 @@ public class SimulinkBlockWrapper {
     return getInLinesByPortIndex(inPort.getIndex());
   }
 
+  private Collection<SimulinkLine> getLinesForParsing(Neighbour _node) {
+    Collection<SimulinkLine> inLines;
 
+    // add the cases for different block types
+
+    if (_node.getIntermediateDestinationPort() != null) {
+      inLines = getInLinesByPortIndex(_node.getIntermediateDestinationPort().getIndex());
+      _node.setIntermediateDestinationPort(null);
+    } else {
+      inLines = getInLines();
+    }
+    return inLines;
+  }
+
+  private Collection<Neighbour> getPredecessorsRecursively(Neighbour _curentNode) {
+    Collection<Neighbour> _predecessors = new ArrayList<>();
+    Collection<SimulinkLine> inLines = getLinesForParsing(_curentNode);
+
+    for (SimulinkLine inLine : inLines) {
+      Neighbour newNeighbour = _curentNode.clone(inLine);
+      _predecessors.addAll(parseNeighbour(newNeighbour));
+    }
+
+    return _predecessors;
+  }
+
+  private Collection<Neighbour> parseNeighbour(Neighbour _neighbour) {
+    Collection<Neighbour> _predecessors = new ArrayList<>();
+    SimulinkBlockWrapper _predecessorBlock = _neighbour.getSourceSimulinkBlock();
+    if (_predecessorBlock.isAtomic() && _predecessorBlock.isComputational()) {
+      _predecessors.add(_neighbour);
+    } else {
+      _predecessors = getPredecessorsRecursively(_neighbour);
+    }
+
+    return _predecessors;
+  }
 
   private Collection<Neighbour> computePredecessors() {
-    // become own neighbour
+    Collection<Neighbour> _predecessors = new ArrayList<>();
 
-    // get adjacent neighbours
+    Collection<SimulinkLine> incomingLines = getInLines();
+    for (SimulinkLine inLine : incomingLines) {
+      Neighbour _currentNeighbour = new Neighbour(inLine);
+      _predecessors.addAll(parseNeighbour(_currentNeighbour));
+    }
 
-    // if neighbour is atomic and computational add to list of predecessors
-
-    // else resume the procedure
-
-    return null;
+    return _predecessors;
   }
 
   public Collection<Neighbour> getPredecessors() {

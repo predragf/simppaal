@@ -55,6 +55,10 @@ public class Neighbour {
     return intermediateDestinationPort;
   }
 
+  public void setIntermediateDestinationPort(SimulinkPortBase _idp) {
+    intermediateDestinationPort = _idp;
+  }
+
   public Neighbour clone(SimulinkLine _inLine) {
     SimulinkPortBase srcPort = _inLine.getSrcPort();
     return new Neighbour(this.getDestinationPort(), this.getIntermediateDestinationPort(), srcPort);
