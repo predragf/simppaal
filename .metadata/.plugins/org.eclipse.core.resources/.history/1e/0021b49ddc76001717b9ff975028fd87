@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.types.interfaces;
+
+
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public interface SimulinkModelWrapperInterface {
+
+}

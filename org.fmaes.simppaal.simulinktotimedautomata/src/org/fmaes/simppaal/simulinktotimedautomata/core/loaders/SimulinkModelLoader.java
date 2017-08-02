@@ -9,8 +9,9 @@ import org.conqat.lib.commons.logging.SimpleLogger;
 import org.conqat.lib.simulink.builder.SimulinkModelBuilder;
 import org.conqat.lib.simulink.model.SimulinkModel;
 import org.fmaes.simppaal.simulinktotimedautomata.core.configuration.ApplicationConfiguration;
-import org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers.SimulinkBlockWrapper;
-import org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers.SimulinkModelWrapper;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkBlockWrapper;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkModelWrapper;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.interfaces.SimulinkModelWrapperInterface;
 
 /**
  * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
@@ -34,7 +35,7 @@ public class SimulinkModelLoader {
     return loadSimulinkModel(modelDirectory, simulinkModelName);
   }
 
-  public SimulinkModelWrapper loadAndWrapSimulinkModelByName(String simulinkModelName) {
+  public SimulinkModelWrapperInterface loadAndWrapSimulinkModelByName(String simulinkModelName) {
     SimulinkModel simulinkModel = loadSimulinkModelByName(simulinkModelName);
     return new SimulinkModelWrapper(simulinkModel);
   }
@@ -59,25 +60,9 @@ public class SimulinkModelLoader {
     return loadSimulinkModelFromFile(modelFile);
   }
 
-  public SimulinkModelWrapper loadAndWrapSimulinkmodel(String modelDirectory, String modelName) {
+  public SimulinkModelWrapperInterface loadAndWrapSimulinkmodel(String modelDirectory,
+      String modelName) {
     SimulinkModel simulinkModel = loadSimulinkModel(modelDirectory, modelName);
-    return new SimulinkModelWrapper(simulinkModel);
-  }
-
-  public SimulinkModel loadSimulinkModelFromReferencedBlock(
-      SimulinkBlockWrapper externalModelReferenceBlock) {
-    String modelDirectory = applicationConfiguration.getProperty("modelDirectory");
-    if (modelDirectory == null || modelDirectory.length() < 1) {
-      System.out.println("The model directory does not exist in the configuration file.");
-      return null;
-    }
-    return loadSimulinkModel(modelDirectory,
-        externalModelReferenceBlock.getReferencedModelNameWithoutExtension());
-  }
-
-  public SimulinkModelWrapper loadAndWrapSimulinkModelFromReferencedBlock(
-      SimulinkBlockWrapper externalModelReferenceBlock) {
-    SimulinkModel simulinkModel = loadSimulinkModelFromReferencedBlock(externalModelReferenceBlock);
     return new SimulinkModelWrapper(simulinkModel);
   }
 

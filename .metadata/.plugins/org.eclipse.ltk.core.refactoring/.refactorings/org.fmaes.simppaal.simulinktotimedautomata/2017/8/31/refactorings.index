@@ -1,1 +1,11 @@
 1501597797801	Delete element
+1501598684634	Delete element
+1501607431506	Extract interface 'SimulinkModelWrapperInterface'
+1501607502682	Move compilation unit
+1501607540499	Extract interface 'SimulinkModelWrapperInterface'
+1501679668400	Rename package 'org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers'
+1501679685145	Delete element
+1501679878748	Encapsulate field 'simulinkBlock'
+1501679894835	Encapsulate field 'destinationPort'
+1501679901526	Encapsulate field 'sourcePort'
+1501679907065	Encapsulate field 'intermediateSourcePort'
