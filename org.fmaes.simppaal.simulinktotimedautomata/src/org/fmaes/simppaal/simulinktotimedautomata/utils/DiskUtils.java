@@ -4,6 +4,9 @@
 package org.fmaes.simppaal.simulinktotimedautomata.utils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -28,7 +31,7 @@ public class DiskUtils {
     }
     return modelFiles;
   }
-  
+
   public static Collection<String> getAllModelFileNamesFromDisk(String location) {
     Collection<String> modelFileNames = new ArrayList<String>();
     Collection<File> modelFiles = getAllModelFilesFromDisk(location);
@@ -38,6 +41,16 @@ public class DiskUtils {
     return modelFileNames;
   }
 
-
+  public static void saveFileAsTxt(String fileLocation, String fileContents) {
+    if (!fileLocation.endsWith(".txt")) {
+      fileLocation = fileLocation += ".txt";
+    }
+    try (PrintStream out = new PrintStream(new FileOutputStream(fileLocation))) {
+      out.print(fileContents);
+    } catch (FileNotFoundException e) {
+      // TODO Auto-generated catch block
+      System.out.println(e.getMessage());
+    }
+  }
 
 }

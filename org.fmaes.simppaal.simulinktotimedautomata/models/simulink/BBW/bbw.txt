@@ -1,0 +1,419 @@
+%----------------------------------------------------------------%
+[TM = 0                      ] simulate(bbw)
+(sldebug @0): >> slist
+
+---- Sorted list for 'bbw' [61 nonvirtual block(s), directFeed=0]
+  0:0    'bbw/RT2' (RateTransition, tid=2,3)
+  0:1    'bbw/RT4' (RateTransition, tid=2,3)
+  0:2    'bbw/RT5' (RateTransition, tid=1,2)
+  0:3    'bbw/RT6' (RateTransition, tid=1,2)
+  0:4    'bbw/RT7' (RateTransition, tid=1,2)
+  0:5    'bbw/RT8' (RateTransition, tid=1,2)
+  0:6    'bbw/Driver_Accelerate/Clock' (Clock, tid=0)
+  0:7    'bbw/Driver_Accelerate/startTime' (S-Function: sfun_tstart, tid=0)
+  0:8    'bbw/Driver_Accelerate/Sum' (Sum, tid=0)
+  0:9    'bbw/Driver_Accelerate/Constant' (Constant, tid=PRM)
+  0:10   'bbw/Driver_Accelerate/Math Function' (Math, tid=0)
+  0:11   'bbw/Driver_Accelerate/Look-Up Table1' (Lookup_n-D, tid=0)
+  0:12   'bbw/HW_Accel_pedal/Pedal_map' (Saturate, tid=0)
+  0:13   'bbw/LDM_Accel_peddal/to_int' (Rounding, tid=1)
+  0:14   'bbw/5ms' (S-Function: fcncallgen, tid=1)
+  0:15   'bbw/Vehicle_Body_Wheels' (SubSystem, tid=1)
+  0:16   'bbw/HW_FREncoder/to_int' (Rounding, tid=1)
+  0:17   'bbw/RT18' (RateTransition, tid=1,2)
+  0:18   'bbw/10ms_3' (S-Function: fcncallgen, tid=2)
+  0:19   'bbw/ABS_FR_Wheel' (SubSystem, tid=2,PRM)
+  0:20   'bbw/ABSTorqFR' (Scope, tid=2)
+  0:21   'bbw/RT' (RateTransition, tid=2,3)
+  0:22   'bbw/HW_RREncoder/to_int' (Rounding, tid=1)
+  0:23   'bbw/RT16' (RateTransition, tid=1,2)
+  0:24   'bbw/10ms_1' (S-Function: fcncallgen, tid=2)
+  0:25   'bbw/ABS_RR_Wheel' (SubSystem, tid=2,PRM)
+  0:26   'bbw/ABSTorqRR' (Scope, tid=2)
+  0:27   'bbw/RT9' (RateTransition, tid=1,3)
+  0:28   'bbw/Scope' (Scope, tid=3)
+  0:29   'bbw/HW_FLEncoder/to_int1' (Rounding, tid=1)
+  0:30   'bbw/RT12' (RateTransition, tid=1,3)
+  0:31   'bbw/Scope1' (Scope, tid=3)
+  0:32   'bbw/TmpRTBAtSpeedInport2' (RateTransition, tid=1,3)
+  0:33   'bbw/Speed' (Scope, tid=1)
+  0:34   'bbw/Driver_Brake/Clock' (Clock, tid=0)
+  0:35   'bbw/Driver_Brake/startTime' (S-Function: sfun_tstart, tid=0)
+  0:36   'bbw/Driver_Brake/Sum' (Sum, tid=0)
+  0:37   'bbw/Driver_Brake/Constant' (Constant, tid=PRM)
+  0:38   'bbw/Driver_Brake/Math Function' (Math, tid=0)
+  0:39   'bbw/Driver_Brake/Look-Up Table1' (Lookup_n-D, tid=0)
+  0:40   'bbw/HW_BrakePedal/Pedal_map' (Saturate, tid=0)
+  0:41   'bbw/RT13' (RateTransition, tid=1,2)
+  0:42   'bbw/LDM_BrakePedal/round_to_int' (Rounding, tid=2)
+  0:43   'bbw/10ms' (S-Function: fcncallgen, tid=2)
+  0:44   'bbw/Brake_Torq_Calculation' (SubSystem, tid=2)
+  0:45   'bbw/RT1' (RateTransition, tid=2,3)
+  0:46   'bbw/HW_RLEncoder/to_int' (Rounding, tid=1)
+  0:47   'bbw/RT17' (RateTransition, tid=1,2)
+  0:48   'bbw/10ms_2' (S-Function: fcncallgen, tid=2)
+  0:49   'bbw/ABS_RL_Wheel' (SubSystem, tid=2,PRM)
+  0:50   'bbw/RT3' (RateTransition, tid=2,3)
+  0:51   'bbw/RT19' (RateTransition, tid=1,2)
+  0:52   'bbw/10ms_4' (S-Function: fcncallgen, tid=2)
+  0:53   'bbw/ABS_FL_Wheel' (SubSystem, tid=2,PRM)
+  0:54   'bbw/RT14' (RateTransition, tid=2,3)
+  0:55   'bbw/RT10' (RateTransition, tid=1,3)
+  0:56   'bbw/RT11' (RateTransition, tid=1,3)
+  0:57   'bbw/20ms' (S-Function: fcncallgen, tid=3)
+  0:58   'bbw/Global Brake Controller' (SubSystem, tid=3)
+  0:59   'bbw/20ms1' (S-Function: fcncallgen, tid=3)
+  0:60   'bbw/Veh_Speed_Estimator' (SubSystem, tid=3)
+
+---- Sorted list for 'bbw/ABS_FL_Wheel/If v>=10 km//h' [10 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+     Data input port #3 direct feedthrough = 1
+
+  1:0    'bbw/ABS_FL_Wheel/If v>=10 km//h/wheSpd (m//s)' (Gain, tid=TRIGGERED)
+  1:1    'bbw/ABS_FL_Wheel/If v>=10 km//h/v (m//s)' (Gain, tid=TRIGGERED)
+  1:2    'bbw/ABS_FL_Wheel/If v>=10 km//h/Subtract' (Sum, tid=TRIGGERED)
+  1:3    'bbw/ABS_FL_Wheel/If v>=10 km//h/positive' (Saturate, tid=TRIGGERED)
+  1:4    'bbw/ABS_FL_Wheel/If v>=10 km//h/times_10' (Gain, tid=TRIGGERED)
+  1:5    'bbw/ABS_FL_Wheel/If v>=10 km//h/slip_abs_on_times_10' (Gain, tid=TRIGGERED)
+  1:6    'bbw/ABS_FL_Wheel/If v>=10 km//h/Relational Operator' (RelationalOperator, tid=TRIGGERED)
+  1:7    'bbw/ABS_FL_Wheel/If v>=10 km//h/slip_rate_large' (Scope, tid=TRIGGERED)
+  1:8    'bbw/ABS_FL_Wheel/If v>=10 km//h/ReleaseBrake' (Constant, tid=PRM)
+  1:9    'bbw/ABS_FL_Wheel/If v>=10 km//h/LockDetect' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/ABS_FL_Wheel' [2 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+     Data input port #3 direct feedthrough = 1
+     Trigger port direct feedthrough       = 1
+
+  2:0    'bbw/ABS_FL_Wheel/If v>=10 km//h' (SubSystem, tid=2,PRM)
+  2:1    'bbw/ABS_FL_Wheel/Threshold_10km//h' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/ABS_FR_Wheel/If v>=10 km//h' [10 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+     Data input port #3 direct feedthrough = 1
+
+  3:0    'bbw/ABS_FR_Wheel/If v>=10 km//h/wheSpd (m//s)' (Gain, tid=TRIGGERED)
+  3:1    'bbw/ABS_FR_Wheel/If v>=10 km//h/v (m//s)' (Gain, tid=TRIGGERED)
+  3:2    'bbw/ABS_FR_Wheel/If v>=10 km//h/Subtract' (Sum, tid=TRIGGERED)
+  3:3    'bbw/ABS_FR_Wheel/If v>=10 km//h/positive' (Saturate, tid=TRIGGERED)
+  3:4    'bbw/ABS_FR_Wheel/If v>=10 km//h/times_10' (Gain, tid=TRIGGERED)
+  3:5    'bbw/ABS_FR_Wheel/If v>=10 km//h/slip_abs_on_times_10' (Gain, tid=TRIGGERED)
+  3:6    'bbw/ABS_FR_Wheel/If v>=10 km//h/Relational Operator' (RelationalOperator, tid=TRIGGERED)
+  3:7    'bbw/ABS_FR_Wheel/If v>=10 km//h/slip_rate_large' (Scope, tid=TRIGGERED)
+  3:8    'bbw/ABS_FR_Wheel/If v>=10 km//h/ReleaseBrake' (Constant, tid=PRM)
+  3:9    'bbw/ABS_FR_Wheel/If v>=10 km//h/LockDetect' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/ABS_FR_Wheel' [2 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+     Data input port #3 direct feedthrough = 1
+     Trigger port direct feedthrough       = 1
+
+  4:0    'bbw/ABS_FR_Wheel/If v>=10 km//h' (SubSystem, tid=2,PRM)
+  4:1    'bbw/ABS_FR_Wheel/Threshold_10km//h' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/ABS_RL_Wheel/If v>=10 km//h' [10 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+     Data input port #3 direct feedthrough = 1
+
+  5:0    'bbw/ABS_RL_Wheel/If v>=10 km//h/wheSpd (m//s)' (Gain, tid=TRIGGERED)
+  5:1    'bbw/ABS_RL_Wheel/If v>=10 km//h/v (m//s)' (Gain, tid=TRIGGERED)
+  5:2    'bbw/ABS_RL_Wheel/If v>=10 km//h/Subtract' (Sum, tid=TRIGGERED)
+  5:3    'bbw/ABS_RL_Wheel/If v>=10 km//h/positive' (Saturate, tid=TRIGGERED)
+  5:4    'bbw/ABS_RL_Wheel/If v>=10 km//h/times_10' (Gain, tid=TRIGGERED)
+  5:5    'bbw/ABS_RL_Wheel/If v>=10 km//h/slip_abs_on_times_10' (Gain, tid=TRIGGERED)
+  5:6    'bbw/ABS_RL_Wheel/If v>=10 km//h/Relational Operator' (RelationalOperator, tid=TRIGGERED)
+  5:7    'bbw/ABS_RL_Wheel/If v>=10 km//h/slip_rate_large' (Scope, tid=TRIGGERED)
+  5:8    'bbw/ABS_RL_Wheel/If v>=10 km//h/ReleaseBrake' (Constant, tid=PRM)
+  5:9    'bbw/ABS_RL_Wheel/If v>=10 km//h/LockDetect' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/ABS_RL_Wheel' [2 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+     Data input port #3 direct feedthrough = 1
+     Trigger port direct feedthrough       = 1
+
+  6:0    'bbw/ABS_RL_Wheel/If v>=10 km//h' (SubSystem, tid=2,PRM)
+  6:1    'bbw/ABS_RL_Wheel/Threshold_10km//h' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/ABS_RR_Wheel/If v>=10 km//h' [10 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+     Data input port #3 direct feedthrough = 1
+
+  7:0    'bbw/ABS_RR_Wheel/If v>=10 km//h/wheSpd (m//s)' (Gain, tid=TRIGGERED)
+  7:1    'bbw/ABS_RR_Wheel/If v>=10 km//h/v (m//s)' (Gain, tid=TRIGGERED)
+  7:2    'bbw/ABS_RR_Wheel/If v>=10 km//h/Subtract' (Sum, tid=TRIGGERED)
+  7:3    'bbw/ABS_RR_Wheel/If v>=10 km//h/positive' (Saturate, tid=TRIGGERED)
+  7:4    'bbw/ABS_RR_Wheel/If v>=10 km//h/times_10' (Gain, tid=TRIGGERED)
+  7:5    'bbw/ABS_RR_Wheel/If v>=10 km//h/slip_abs_on_times_10' (Gain, tid=TRIGGERED)
+  7:6    'bbw/ABS_RR_Wheel/If v>=10 km//h/Relational Operator' (RelationalOperator, tid=TRIGGERED)
+  7:7    'bbw/ABS_RR_Wheel/If v>=10 km//h/slip_rate_large' (Scope, tid=TRIGGERED)
+  7:8    'bbw/ABS_RR_Wheel/If v>=10 km//h/ReleaseBrake' (Constant, tid=PRM)
+  7:9    'bbw/ABS_RR_Wheel/If v>=10 km//h/LockDetect' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/ABS_RR_Wheel' [2 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+     Data input port #3 direct feedthrough = 1
+     Trigger port direct feedthrough       = 1
+
+  8:0    'bbw/ABS_RR_Wheel/If v>=10 km//h' (SubSystem, tid=2,PRM)
+  8:1    'bbw/ABS_RR_Wheel/Threshold_10km//h' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Brake_Torq_Calculation' [1 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Trigger port direct feedthrough       = 1
+
+  9:0    'bbw/Brake_Torq_Calculation/Gain1' (Gain, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Global Brake Controller' [1 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+     Data input port #3 direct feedthrough = 1
+     Data input port #4 direct feedthrough = 1
+     Data input port #5 direct feedthrough = 1
+     Trigger port direct feedthrough       = 1
+
+ 10:0    'bbw/Global Brake Controller/Distribution' (Gain, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Veh_Speed_Estimator' [4 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+     Data input port #3 direct feedthrough = 1
+     Data input port #4 direct feedthrough = 1
+     Trigger port direct feedthrough       = 1
+
+ 11:0    'bbw/Veh_Speed_Estimator/Add' (Sum, tid=TRIGGERED)
+ 11:1    'bbw/Veh_Speed_Estimator/average_rpm' (Gain, tid=TRIGGERED)
+ 11:2    'bbw/Veh_Speed_Estimator/w (grad//s)' (Gain, tid=TRIGGERED)
+ 11:3    'bbw/Veh_Speed_Estimator/v (km//h)' (Gain, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/TmpAtomicSubsysAtRRInport1' [1 nonvirtual block(s), directFeed=0]
+ 12:0    'bbw/Vehicle_Body_Wheels/negative' (Gain, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/TmpAtomicSubsysAtRLInport1' [1 nonvirtual block(s), directFeed=0]
+ 13:0    'bbw/Vehicle_Body_Wheels/negative1' (Gain, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/TmpAtomicSubsysAtFRInport1' [1 nonvirtual block(s), directFeed=0]
+ 14:0    'bbw/Vehicle_Body_Wheels/negative2' (Gain, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/TmpAtomicSubsysAtFLInport1' [1 nonvirtual block(s), directFeed=0]
+ 15:0    'bbw/Vehicle_Body_Wheels/negative3' (Gain, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport3' [1 nonvirtual block(s), directFeed=0]
+ 16:0    'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/C_zero' (Constant, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport1' [1 nonvirtual block(s), directFeed=0]
+ 17:0    'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/Divide' (Product, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitch1Inport1' [3 nonvirtual block(s), directFeed=0]
+ 18:0    'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport1' (SubSystem, tid=TRIGGERED)
+ 18:1    'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport3' (SubSystem, tid=TRIGGERED)
+ 18:2    'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/Switch' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/binary_search_ratio' [1 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+
+ 19:0    'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/binary_search_ratio/ SFunction ' (S-Function: sf_sfun, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/FL_Wheel' [21 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+
+ 20:0    'bbw/Vehicle_Body_Wheels/FL_Wheel/w_radps' (UnitDelay, tid=TRIGGERED)
+ 20:1    'bbw/Vehicle_Body_Wheels/FL_Wheel/Saturation' (Saturate, tid=TRIGGERED)
+ 20:2    'bbw/Vehicle_Body_Wheels/FL_Wheel/whlRadius' (Gain, tid=TRIGGERED)
+ 20:3    'bbw/Vehicle_Body_Wheels/FL_Wheel/v_wr' (Sum, tid=TRIGGERED)
+ 20:4    'bbw/Vehicle_Body_Wheels/FL_Wheel/times100' (Gain, tid=TRIGGERED)
+ 20:5    'bbw/Vehicle_Body_Wheels/FL_Wheel/Abs' (Abs, tid=TRIGGERED)
+ 20:6    'bbw/Vehicle_Body_Wheels/FL_Wheel/max_v_wr' (MinMax, tid=TRIGGERED)
+ 20:7    'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/C_use_div' (Constant, tid=TRIGGERED)
+ 20:8    'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/binary_search_ratio' (SubSystem, tid=TRIGGERED)
+ 20:9    'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitch1Inport1' (SubSystem, tid=TRIGGERED)
+ 20:10   'bbw/Vehicle_Body_Wheels/FL_Wheel/slip_ratio_percentage/Switch1' (Switch, tid=TRIGGERED)
+ 20:11   'bbw/Vehicle_Body_Wheels/FL_Wheel/friction_force_N' (Lookup, tid=TRIGGERED)
+ 20:12   'bbw/Vehicle_Body_Wheels/FL_Wheel/Sign' (Signum, tid=TRIGGERED)
+ 20:13   'bbw/Vehicle_Body_Wheels/FL_Wheel/Product' (Product, tid=TRIGGERED)
+ 20:14   'bbw/Vehicle_Body_Wheels/FL_Wheel/Radius' (Gain, tid=TRIGGERED)
+ 20:15   'bbw/Vehicle_Body_Wheels/FL_Wheel/Subtract' (Sum, tid=TRIGGERED)
+ 20:16   'bbw/Vehicle_Body_Wheels/FL_Wheel/Scope1' (Scope, tid=TRIGGERED)
+ 20:17   'bbw/Vehicle_Body_Wheels/FL_Wheel/Slip Rate' (Scope, tid=TRIGGERED)
+ 20:18   'bbw/Vehicle_Body_Wheels/FL_Wheel/Ts_over_Inertia' (Gain, tid=TRIGGERED)
+ 20:19   'bbw/Vehicle_Body_Wheels/FL_Wheel/Sum' (Sum, tid=TRIGGERED)
+ 20:20   'bbw/Vehicle_Body_Wheels/FL_Wheel/w (rpm)' (Gain, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport3' [1 nonvirtual block(s), directFeed=0]
+ 21:0    'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/C_zero' (Constant, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport1' [1 nonvirtual block(s), directFeed=0]
+ 22:0    'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/Divide' (Product, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitch1Inport1' [3 nonvirtual block(s), directFeed=0]
+ 23:0    'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport1' (SubSystem, tid=TRIGGERED)
+ 23:1    'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport3' (SubSystem, tid=TRIGGERED)
+ 23:2    'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/Switch' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/binary_search_ratio' [1 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+
+ 24:0    'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/binary_search_ratio/ SFunction ' (S-Function: sf_sfun, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/FR_Wheel' [21 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+
+ 25:0    'bbw/Vehicle_Body_Wheels/FR_Wheel/w_radps' (UnitDelay, tid=TRIGGERED)
+ 25:1    'bbw/Vehicle_Body_Wheels/FR_Wheel/Saturation' (Saturate, tid=TRIGGERED)
+ 25:2    'bbw/Vehicle_Body_Wheels/FR_Wheel/whlRadius' (Gain, tid=TRIGGERED)
+ 25:3    'bbw/Vehicle_Body_Wheels/FR_Wheel/v_wr' (Sum, tid=TRIGGERED)
+ 25:4    'bbw/Vehicle_Body_Wheels/FR_Wheel/times100' (Gain, tid=TRIGGERED)
+ 25:5    'bbw/Vehicle_Body_Wheels/FR_Wheel/Abs' (Abs, tid=TRIGGERED)
+ 25:6    'bbw/Vehicle_Body_Wheels/FR_Wheel/max_v_wr' (MinMax, tid=TRIGGERED)
+ 25:7    'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/C_use_div' (Constant, tid=TRIGGERED)
+ 25:8    'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/binary_search_ratio' (SubSystem, tid=TRIGGERED)
+ 25:9    'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitch1Inport1' (SubSystem, tid=TRIGGERED)
+ 25:10   'bbw/Vehicle_Body_Wheels/FR_Wheel/slip_ratio_percentage/Switch1' (Switch, tid=TRIGGERED)
+ 25:11   'bbw/Vehicle_Body_Wheels/FR_Wheel/friction_force_N' (Lookup, tid=TRIGGERED)
+ 25:12   'bbw/Vehicle_Body_Wheels/FR_Wheel/Sign' (Signum, tid=TRIGGERED)
+ 25:13   'bbw/Vehicle_Body_Wheels/FR_Wheel/Product' (Product, tid=TRIGGERED)
+ 25:14   'bbw/Vehicle_Body_Wheels/FR_Wheel/Radius' (Gain, tid=TRIGGERED)
+ 25:15   'bbw/Vehicle_Body_Wheels/FR_Wheel/Subtract' (Sum, tid=TRIGGERED)
+ 25:16   'bbw/Vehicle_Body_Wheels/FR_Wheel/Scope1' (Scope, tid=TRIGGERED)
+ 25:17   'bbw/Vehicle_Body_Wheels/FR_Wheel/Slip Rate' (Scope, tid=TRIGGERED)
+ 25:18   'bbw/Vehicle_Body_Wheels/FR_Wheel/Ts_over_Inertia' (Gain, tid=TRIGGERED)
+ 25:19   'bbw/Vehicle_Body_Wheels/FR_Wheel/Sum' (Sum, tid=TRIGGERED)
+ 25:20   'bbw/Vehicle_Body_Wheels/FR_Wheel/w (rpm)' (Gain, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport3' [1 nonvirtual block(s), directFeed=0]
+ 26:0    'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/C_zero' (Constant, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport1' [1 nonvirtual block(s), directFeed=0]
+ 27:0    'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/Divide' (Product, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitch1Inport1' [3 nonvirtual block(s), directFeed=0]
+ 28:0    'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport1' (SubSystem, tid=TRIGGERED)
+ 28:1    'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport3' (SubSystem, tid=TRIGGERED)
+ 28:2    'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/Switch' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/binary_search_ratio' [1 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+
+ 29:0    'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/binary_search_ratio/ SFunction ' (S-Function: sf_sfun, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/RL_Wheel' [21 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+
+ 30:0    'bbw/Vehicle_Body_Wheels/RL_Wheel/w_radps' (UnitDelay, tid=TRIGGERED)
+ 30:1    'bbw/Vehicle_Body_Wheels/RL_Wheel/Saturation' (Saturate, tid=TRIGGERED)
+ 30:2    'bbw/Vehicle_Body_Wheels/RL_Wheel/whlRadius' (Gain, tid=TRIGGERED)
+ 30:3    'bbw/Vehicle_Body_Wheels/RL_Wheel/v_wr' (Sum, tid=TRIGGERED)
+ 30:4    'bbw/Vehicle_Body_Wheels/RL_Wheel/times100' (Gain, tid=TRIGGERED)
+ 30:5    'bbw/Vehicle_Body_Wheels/RL_Wheel/Abs' (Abs, tid=TRIGGERED)
+ 30:6    'bbw/Vehicle_Body_Wheels/RL_Wheel/max_v_wr' (MinMax, tid=TRIGGERED)
+ 30:7    'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/C_use_div' (Constant, tid=TRIGGERED)
+ 30:8    'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/binary_search_ratio' (SubSystem, tid=TRIGGERED)
+ 30:9    'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitch1Inport1' (SubSystem, tid=TRIGGERED)
+ 30:10   'bbw/Vehicle_Body_Wheels/RL_Wheel/slip_ratio_percentage/Switch1' (Switch, tid=TRIGGERED)
+ 30:11   'bbw/Vehicle_Body_Wheels/RL_Wheel/friction_force_N' (Lookup, tid=TRIGGERED)
+ 30:12   'bbw/Vehicle_Body_Wheels/RL_Wheel/Sign' (Signum, tid=TRIGGERED)
+ 30:13   'bbw/Vehicle_Body_Wheels/RL_Wheel/Product' (Product, tid=TRIGGERED)
+ 30:14   'bbw/Vehicle_Body_Wheels/RL_Wheel/Radius' (Gain, tid=TRIGGERED)
+ 30:15   'bbw/Vehicle_Body_Wheels/RL_Wheel/Subtract' (Sum, tid=TRIGGERED)
+ 30:16   'bbw/Vehicle_Body_Wheels/RL_Wheel/Scope1' (Scope, tid=TRIGGERED)
+ 30:17   'bbw/Vehicle_Body_Wheels/RL_Wheel/Slip Rate' (Scope, tid=TRIGGERED)
+ 30:18   'bbw/Vehicle_Body_Wheels/RL_Wheel/Ts_over_Inertia' (Gain, tid=TRIGGERED)
+ 30:19   'bbw/Vehicle_Body_Wheels/RL_Wheel/Sum' (Sum, tid=TRIGGERED)
+ 30:20   'bbw/Vehicle_Body_Wheels/RL_Wheel/w (rpm)' (Gain, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport3' [1 nonvirtual block(s), directFeed=0]
+ 31:0    'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/C_zero' (Constant, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport1' [1 nonvirtual block(s), directFeed=0]
+ 32:0    'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/Divide' (Product, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitch1Inport1' [3 nonvirtual block(s), directFeed=0]
+ 33:0    'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport1' (SubSystem, tid=TRIGGERED)
+ 33:1    'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitchInport3' (SubSystem, tid=TRIGGERED)
+ 33:2    'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/Switch' (Switch, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/binary_search_ratio' [1 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+
+ 34:0    'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/binary_search_ratio/ SFunction ' (S-Function: sf_sfun, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/RR_Wheel' [21 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+
+ 35:0    'bbw/Vehicle_Body_Wheels/RR_Wheel/w_radps' (UnitDelay, tid=TRIGGERED)
+ 35:1    'bbw/Vehicle_Body_Wheels/RR_Wheel/Saturation' (Saturate, tid=TRIGGERED)
+ 35:2    'bbw/Vehicle_Body_Wheels/RR_Wheel/whlRadius' (Gain, tid=TRIGGERED)
+ 35:3    'bbw/Vehicle_Body_Wheels/RR_Wheel/v_wr' (Sum, tid=TRIGGERED)
+ 35:4    'bbw/Vehicle_Body_Wheels/RR_Wheel/times100' (Gain, tid=TRIGGERED)
+ 35:5    'bbw/Vehicle_Body_Wheels/RR_Wheel/Abs' (Abs, tid=TRIGGERED)
+ 35:6    'bbw/Vehicle_Body_Wheels/RR_Wheel/max_v_wr' (MinMax, tid=TRIGGERED)
+ 35:7    'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/C_use_div' (Constant, tid=TRIGGERED)
+ 35:8    'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/binary_search_ratio' (SubSystem, tid=TRIGGERED)
+ 35:9    'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/TmpAtomicSubsysAtSwitch1Inport1' (SubSystem, tid=TRIGGERED)
+ 35:10   'bbw/Vehicle_Body_Wheels/RR_Wheel/slip_ratio_percentage/Switch1' (Switch, tid=TRIGGERED)
+ 35:11   'bbw/Vehicle_Body_Wheels/RR_Wheel/friction_force_N' (Lookup, tid=TRIGGERED)
+ 35:12   'bbw/Vehicle_Body_Wheels/RR_Wheel/Sign' (Signum, tid=TRIGGERED)
+ 35:13   'bbw/Vehicle_Body_Wheels/RR_Wheel/Product' (Product, tid=TRIGGERED)
+ 35:14   'bbw/Vehicle_Body_Wheels/RR_Wheel/Radius' (Gain, tid=TRIGGERED)
+ 35:15   'bbw/Vehicle_Body_Wheels/RR_Wheel/Subtract' (Sum, tid=TRIGGERED)
+ 35:16   'bbw/Vehicle_Body_Wheels/RR_Wheel/Scope1' (Scope, tid=TRIGGERED)
+ 35:17   'bbw/Vehicle_Body_Wheels/RR_Wheel/Slip Rate' (Scope, tid=TRIGGERED)
+ 35:18   'bbw/Vehicle_Body_Wheels/RR_Wheel/Ts_over_Inertia' (Gain, tid=TRIGGERED)
+ 35:19   'bbw/Vehicle_Body_Wheels/RR_Wheel/Sum' (Sum, tid=TRIGGERED)
+ 35:20   'bbw/Vehicle_Body_Wheels/RR_Wheel/w (rpm)' (Gain, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/Vehicle Model/TmpSynthesizedDirectFeedthroughAtomicSubsystem' [3 nonvirtual block(s), directFeed=0]
+ 36:0    'bbw/Vehicle_Body_Wheels/Vehicle Model/Add' (Sum, tid=TRIGGERED)
+ 36:1    'bbw/Vehicle_Body_Wheels/Vehicle Model/sample_time_over_mass' (Gain, tid=TRIGGERED)
+ 36:2    'bbw/Vehicle_Body_Wheels/Vehicle Model/Sum' (Sum, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels/Vehicle Model' [3 nonvirtual block(s), directFeed=0]
+     Data input port #1 direct feedthrough = 0
+     Data input port #2 direct feedthrough = 0
+     Data input port #3 direct feedthrough = 0
+     Data input port #4 direct feedthrough = 0
+
+ 37:0    'bbw/Vehicle_Body_Wheels/Vehicle Model/TmpSynthesizedDirectFeedthroughAtomicSubsystem' (SubSystem, tid=TRIGGERED)
+ 37:1    'bbw/Vehicle_Body_Wheels/Vehicle Model/Unit Delay' (UnitDelay, tid=TRIGGERED)
+ 37:2    'bbw/Vehicle_Body_Wheels/Vehicle Model/Saturation' (Saturate, tid=TRIGGERED)
+
+---- Sorted list for 'bbw/Vehicle_Body_Wheels' [17 nonvirtual block(s), directFeed=1]
+     Data input port #1 direct feedthrough = 1
+     Data input port #2 direct feedthrough = 1
+     Data input port #3 direct feedthrough = 1
+     Data input port #4 direct feedthrough = 1
+     Data input port #5 direct feedthrough = 1
+     Trigger port direct feedthrough       = 1
+
+ 38:0    'bbw/Vehicle_Body_Wheels/half' (Gain, tid=TRIGGERED)
+ 38:1    'bbw/Vehicle_Body_Wheels/TmpAtomicSubsysAtRRInport1' (SubSystem, tid=TRIGGERED)
+ 38:2    'bbw/Vehicle_Body_Wheels/RR' (Switch, tid=TRIGGERED)
+ 38:3    'bbw/Vehicle_Body_Wheels/Vehicle Model' (SubSystem, tid=TRIGGERED)
+ 38:4    'bbw/Vehicle_Body_Wheels/RR_Wheel' (SubSystem, tid=TRIGGERED)
+ 38:5    'bbw/Vehicle_Body_Wheels/Scope' (Scope, tid=TRIGGERED)
+ 38:6    'bbw/Vehicle_Body_Wheels/TmpAtomicSubsysAtFLInport1' (SubSystem, tid=TRIGGERED)
+ 38:7    'bbw/Vehicle_Body_Wheels/FL' (Switch, tid=TRIGGERED)
+ 38:8    'bbw/Vehicle_Body_Wheels/FL_Wheel' (SubSystem, tid=TRIGGERED)
+ 38:9    'bbw/Vehicle_Body_Wheels/Scope1' (Scope, tid=TRIGGERED)
+ 38:10   'bbw/Vehicle_Body_Wheels/TmpAtomicSubsysAtFRInport1' (SubSystem, tid=TRIGGERED)
+ 38:11   'bbw/Vehicle_Body_Wheels/FR' (Switch, tid=TRIGGERED)
+ 38:12   'bbw/Vehicle_Body_Wheels/FR_Wheel' (SubSystem, tid=TRIGGERED)
+ 38:13   'bbw/Vehicle_Body_Wheels/TmpAtomicSubsysAtRLInport1' (SubSystem, tid=TRIGGERED)
+ 38:14   'bbw/Vehicle_Body_Wheels/RL' (Switch, tid=TRIGGERED)
+ 38:15   'bbw/Vehicle_Body_Wheels/RL_Wheel' (SubSystem, tid=TRIGGERED)
+ 38:16   'bbw/Vehicle_Body_Wheels/v (km//h)' (Gain, tid=TRIGGERED)

@@ -133,22 +133,17 @@ public class SimulinkModelWrapper implements SimulinkModelWrapperInterface {
     return allBlocks;
   }
 
-  public Collection<SimulinkBlockWrapper> getBlockPredecessors(SimulinkBlockWrapper sBlock) {
-    return null;
-  }
+  public Collection<SimulinkBlockWrapper> getSubBlocksRecursivelyByType(String _type) {
+    Collection<SimulinkBlockWrapper> result = new ArrayList<>();
+    String blkType;
 
-  public Collection<SimulinkBlockWrapper> getBlockPredecessors(String blockId) {
-    SimulinkBlockWrapper sBlock = this.getBlockById(blockId);
-    Collection<SimulinkBlockWrapper> predecessors = new ArrayList<>();
-
-    if (sBlock.exists()) {
-      predecessors = getBlockPredecessors(sBlock);
+    for (SimulinkBlock subBlock : getSubBlocksRecursively()) {
+      blkType = subBlock.getType();
+      if (SimulinkUtils.compareStringsIgnoreCase(_type, blkType)) {
+        result.add(new SimulinkBlockWrapper(subBlock));
+      }
     }
 
-    return predecessors;
-  }
-
-  private Collection<SimulinkBlockWrapper> getBlockPredecessorsByPort(SimulinkPortBase sinkPort){
-    return null;
+    return result;
   }
 }

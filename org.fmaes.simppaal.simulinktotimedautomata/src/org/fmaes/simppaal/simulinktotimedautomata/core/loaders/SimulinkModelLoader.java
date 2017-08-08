@@ -35,7 +35,7 @@ public class SimulinkModelLoader {
     return loadSimulinkModel(modelDirectory, simulinkModelName);
   }
 
-  public SimulinkModelWrapperInterface loadAndWrapSimulinkModelByName(String simulinkModelName) {
+  public SimulinkModelWrapper loadAndWrapSimulinkModelByName(String simulinkModelName) {
     SimulinkModel simulinkModel = loadSimulinkModelByName(simulinkModelName);
     return new SimulinkModelWrapper(simulinkModel);
   }

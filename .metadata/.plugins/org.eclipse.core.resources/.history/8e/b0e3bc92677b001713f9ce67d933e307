@@ -1,0 +1,41 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.testing;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import org.conqat.lib.simulink.model.SimulinkBlock;
+import org.fmaes.simppaal.simulinktotimedautomata.core.configuration.ApplicationConfiguration;
+import org.fmaes.simppaal.simulinktotimedautomata.core.loaders.SimulinkModelLoader;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.Neighbour;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkBlockWrapper;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkModelWrapper;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class Testing {
+
+  /**
+   * @param args
+   */
+  @SuppressWarnings("unused")
+  public static void main(String[] args) {
+    ApplicationConfiguration appConfig = ApplicationConfiguration.loadConfiguration();
+    SimulinkModelLoader modelLoader = new SimulinkModelLoader(appConfig);
+    SimulinkModelWrapper bbw = modelLoader.loadAndWrapSimulinkModelByName("bbw.mdl");
+    
+    
+    SimulinkBlockWrapper rt10 = bbw.getBlockById("bbw/RT10");
+    
+    if(rt10.exists()){
+      System.out.println(rt10.getName());
+      Collection<Neighbour> neighbours = rt10.getPredecessors();
+      System.out.println(neighbours.size());
+    }
+  }
+
+}

@@ -3,6 +3,9 @@
  */
 package org.fmaes.simppaal.simulinktotimedautomata.utils;
 
+import org.conqat.lib.simulink.model.SimulinkPortBase;
+import org.conqat.lib.simulink.model.datahandler.LabelLayoutData;
+
 /**
  * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
  *
@@ -17,6 +20,16 @@ public class SimulinkUtils {
     return processedId;
   }
 
+  public static String getNameFromLabel(SimulinkPortBase _port) {
+    String name = "";
+
+    LabelLayoutData lld = _port.obtainLabelData();
+    if (lld != null) {
+      name = lld.getText();
+    }
+
+    return name;
+  }
 
   public static String trimSimulinkIdFromBack(String blockId) {
     blockId = preProcessId(blockId);

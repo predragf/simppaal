@@ -1,0 +1,66 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.testing;
+
+import java.util.ArrayList;
+import java.util.Collection;
+
+import javax.swing.plaf.synth.SynthScrollBarUI;
+
+import org.conqat.lib.simulink.model.SimulinkBlock;
+import org.fmaes.simppaal.simulinktotimedautomata.core.configuration.ApplicationConfiguration;
+import org.fmaes.simppaal.simulinktotimedautomata.core.loaders.SimulinkModelLoader;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.Neighbour;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkBlockWrapper;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkModelWrapper;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class Testing {
+
+  /**
+   * @param args
+   */
+  @SuppressWarnings("unused")
+  public static void main(String[] args) {
+    ApplicationConfiguration appConfig = ApplicationConfiguration.loadConfiguration();
+    SimulinkModelLoader modelLoader = new SimulinkModelLoader(appConfig);
+    SimulinkModelWrapper bbw = modelLoader.loadAndWrapSimulinkModelByName("bbw.mdl");
+
+
+    SimulinkBlockWrapper blk = bbw.getBlockById("bbw/RT10");
+    printN(blk);
+    
+     blk = bbw.getBlockById("bbw/HW_FREncoder/to_int");
+    printN(blk);
+    
+    blk = bbw.getBlockById("bbw/RT3");
+   printN(blk);
+   
+   blk = bbw.getBlockById("bbw/ABS_FR_Wheel/If v>=10 km/h");
+  printN(blk);
+  
+  blk = bbw.getBlockById("bbw/Veh_Speed_Estimator/Add");
+ printN(blk);
+
+
+  }
+
+  private static void printN(SimulinkBlockWrapper bw) {
+
+    if (bw.exists()) {
+      System.out.println(String.format("%s has %d predecessors", bw.getId(), bw.getPredecessors().size()));
+      Collection<Neighbour> neighbours = bw.getPredecessors();
+      for (Neighbour neighbour : neighbours) {
+        System.out.println(neighbour.getSourceSimulinkBlock().getId());
+      }
+    } else {
+      System.out.println(String.format("the specified block was not found"));
+    }
+
+  }
+
+}
