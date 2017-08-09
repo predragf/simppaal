@@ -11,6 +11,7 @@ import org.conqat.lib.simulink.model.SimulinkModel;
 import org.conqat.lib.simulink.model.SimulinkPortBase;
 import org.fmaes.simppaal.simulinktotimedautomata.core.enums.SimulinkBlockTypesEnum;
 import org.fmaes.simppaal.simulinktotimedautomata.core.types.interfaces.SimulinkModelWrapperInterface;
+import org.fmaes.simppaal.simulinktotimedautomata.sorder.SortedOrderList;
 import org.fmaes.simppaal.simulinktotimedautomata.utils.SimulinkUtils;
 
 /**
@@ -20,6 +21,8 @@ import org.fmaes.simppaal.simulinktotimedautomata.utils.SimulinkUtils;
 public class SimulinkModelWrapper implements SimulinkModelWrapperInterface {
 
   private SimulinkModel simulinkModel;
+
+  private SortedOrderList sList;
 
   @SuppressWarnings("unused")
   private SimulinkModelWrapper() {}

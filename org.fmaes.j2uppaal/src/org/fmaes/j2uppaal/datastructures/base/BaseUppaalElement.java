@@ -61,7 +61,10 @@ public class BaseUppaalElement {
 
   public BaseUppaalElement(BaseUppaalElement elementCopy) {
     tagName = elementCopy.tagName;
-    attributes = elementCopy.attributes;
+    attributes = new ArrayList<UppaalAttribute>();
+    for (UppaalAttribute uppaalAttribute : elementCopy.attributes) {
+      attributes.add(uppaalAttribute.clone());
+    }
   }
 
   public UppaalAttribute getAttributeByName(String attributeName) {
@@ -108,5 +111,9 @@ public class BaseUppaalElement {
           String.format("%s =\"%s\" ", uppaalAttribute.name, uppaalAttribute.value);
     }
     return attributeSerialization.trim();
+  }
+
+  public BaseUppaalElement clone() {
+    return new BaseUppaalElement(this);
   }
 }

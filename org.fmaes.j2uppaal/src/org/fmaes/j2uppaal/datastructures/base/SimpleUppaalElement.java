@@ -45,8 +45,13 @@ public class SimpleUppaalElement extends BaseUppaalElement implements Serializab
     // TODO Auto-generated method stub
     String elementTemplate = getTemplate();
     String serializedElement = elementTemplate.replaceAll("#tag#", this.tagName)
-        .replaceAll("#attributes#", serializeAttributes()).replaceAll("#value#", this.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
+        .replaceAll("#attributes#", serializeAttributes())
+        .replaceAll("#value#", this.value.replaceAll("<", "&lt;").replaceAll(">", "&gt;"));
     return serializedElement;
+  }
+
+  public SimpleUppaalElement clone() {
+    return new SimpleUppaalElement(this);
   }
 
 }

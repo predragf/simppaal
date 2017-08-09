@@ -1,0 +1,79 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.transformers;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class AutomatonData {
+
+  private String name;
+
+  private String sampleTime;
+
+  private String blockRoutine;
+
+  private String dafnyProcedure;
+
+  private String declarationStatement;
+
+  public AutomatonData() {
+    name = "";
+    sampleTime = "";
+    blockRoutine = "";
+    dafnyProcedure = "";
+    declarationStatement = "";
+  }
+
+  public AutomatonData(String name, String sTime, String bRoutine, String dafnyProcedure,
+      String declarationStatement) {
+    this.name = name;
+    this.sampleTime = sTime;
+    this.blockRoutine = bRoutine;
+    this.dafnyProcedure = dafnyProcedure;
+    this.declarationStatement = declarationStatement;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public String getSampleTime() {
+    return sampleTime;
+  }
+
+  public void setSampleTime(String sampleTime) {
+    this.sampleTime = sampleTime;
+  }
+
+  public String getBlockRoutine() {
+    return blockRoutine;
+  }
+
+  public void setBlockRoutine(String blockRoutine) {
+    this.blockRoutine = blockRoutine;
+  }
+
+  public String getDafnyProcedure() {
+    return dafnyProcedure;
+  }
+
+  public void setDafnyProcedure(String dafnyProcedure) {
+    this.dafnyProcedure = dafnyProcedure;
+  }
+
+  public String getDeclarationStatement() {
+    return declarationStatement;
+  }
+
+  public void setDeclarationStatement(String declarationStatement) {
+    this.declarationStatement = declarationStatement;
+  }
+
+}

@@ -7,5 +7,6 @@
 	<classpathentry kind="lib" path="libs/conqat/junit.jar"/>
 	<classpathentry kind="lib" path="libs/conqat/mockito-all-1.9.5.jar"/>
 	<classpathentry kind="lib" path="libs/conqat/simulink.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/org.fmaes.j2uppaal"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

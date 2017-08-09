@@ -2,6 +2,8 @@ package org.fmaes.j2uppaal.datastructures.uppaalstrcutures.interfaces;
 
 import java.util.Collection;
 
+import org.fmaes.j2uppaal.datastructures.base.CompositeUppaalElement;
+
 public interface UppaalAutomatonInterface {
 
   public String getName();
@@ -40,11 +42,11 @@ public interface UppaalAutomatonInterface {
   public void setInstanceName(String _instanceName);
 
   public String getInstanceName();
-  
+
   public void setSignalDeclaration(String _signalDec);
-  
+
   public String getSignalDeclaration();
 
-
+  public CompositeUppaalElement clone();
 
 }

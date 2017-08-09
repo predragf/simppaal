@@ -19,6 +19,7 @@ public class UppaalTransition extends CompositeUppaalElement implements UppaalTr
 
   public UppaalTransition(CompositeUppaalElement compositeElement) {
     super(compositeElement);
+    tagName = compositeElement.tagName;
   }
 
   public UppaalTransition(UppaalTransition existingTransition) {
@@ -121,6 +122,12 @@ public class UppaalTransition extends CompositeUppaalElement implements UppaalTr
       allTransitionLabels.add(label);
     }
     return allTransitionLabels;
+  }
+
+  @Override
+  public CompositeUppaalElement clone() {
+    return new UppaalTransition(this);
+
   }
 
 }

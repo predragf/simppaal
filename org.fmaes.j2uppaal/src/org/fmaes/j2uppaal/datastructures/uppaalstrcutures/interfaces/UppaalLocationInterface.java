@@ -2,6 +2,8 @@ package org.fmaes.j2uppaal.datastructures.uppaalstrcutures.interfaces;
 
 import java.util.Collection;
 
+import org.fmaes.j2uppaal.datastructures.base.CompositeUppaalElement;
+
 public interface UppaalLocationInterface {
   
   public String getName();
@@ -26,4 +28,5 @@ public interface UppaalLocationInterface {
   
   public void setCommitted();
 
+  public CompositeUppaalElement clone();
 }

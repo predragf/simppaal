@@ -80,7 +80,11 @@ public class CompositeUppaalElement extends BaseUppaalElement implements Seriali
 
   public CompositeUppaalElement(CompositeUppaalElement copyElement) {
     super(copyElement);
-    childrenUppaalElements = copyElement.childrenUppaalElements;
+
+    childrenUppaalElements = new ArrayList<BaseUppaalElement>();
+    for (BaseUppaalElement elem : copyElement.childrenUppaalElements) {
+      childrenUppaalElements.add(elem.clone());
+    }
   }
 
   public Collection<BaseUppaalElement> getChildrenElementsByName(String name) {
@@ -182,5 +186,9 @@ public class CompositeUppaalElement extends BaseUppaalElement implements Seriali
         .replaceAll("#attributes#", serializeAttributes())
         .replaceAll("#innercontents#", childrenAsXml);
     return elementAsXml;
+  }
+
+  public CompositeUppaalElement clone() {
+    return new CompositeUppaalElement(this);
   }
 }

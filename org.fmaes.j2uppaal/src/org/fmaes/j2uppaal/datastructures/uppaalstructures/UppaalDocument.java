@@ -25,6 +25,11 @@ public class UppaalDocument extends CompositeUppaalElement
     super(xmlRootElement);
   }
 
+  public UppaalDocument(UppaalDocument document) {
+    super(document);
+    tagName = document.tagName;
+  }
+
   @Override
   public String getDeclaration() {
     SimpleUppaalElement simpleChildElementByName =
@@ -156,5 +161,9 @@ public class UppaalDocument extends CompositeUppaalElement
     }
   }
 
+  @Override
+  public CompositeUppaalElement clone() {
+    return new UppaalDocument(this);
+  }
 
 }

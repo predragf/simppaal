@@ -63,6 +63,9 @@ public class SimulinkBlockParser {
 
     if (trigger != null) {
       sTime = trigger.getParameter("SampleTime");
+      if (sTime == null || sTime.equals("")) {
+        sTime = trigger.getDeclaredParameter("SampleTime");
+      }
     }
     return sTime;
   }

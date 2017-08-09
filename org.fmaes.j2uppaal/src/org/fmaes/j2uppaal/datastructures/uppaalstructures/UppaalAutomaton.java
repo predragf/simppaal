@@ -154,10 +154,18 @@ public class UppaalAutomaton extends CompositeUppaalElement
 
   public UppaalAutomaton(CompositeUppaalElement compositeUppaalElement) {
     super(compositeUppaalElement);
+    tagName = UppaalDocumentElementNamesEnum.AUTOMATON.toString().toLowerCase();
+    signalName = "";
+    instanceName = "";
+    signalDeclaration = "";
   }
 
-  public UppaalAutomaton(UppaalAutomaton existinAutomaton) {
-    super(existinAutomaton);
+  public UppaalAutomaton(UppaalAutomaton existingAutomaton) {
+    super(existingAutomaton);
+    tagName = existingAutomaton.tagName;
+    signalName = existingAutomaton.signalDeclaration;
+    instanceName = existingAutomaton.instanceName;
+    signalDeclaration = existingAutomaton.signalDeclaration;
   }
 
   @Override
@@ -250,5 +258,10 @@ public class UppaalAutomaton extends CompositeUppaalElement
 
   public String getSignalDeclaration() {
     return signalDeclaration;
+  }
+
+  @Override
+  public CompositeUppaalElement clone() {
+    return new UppaalAutomaton(this);
   }
 }

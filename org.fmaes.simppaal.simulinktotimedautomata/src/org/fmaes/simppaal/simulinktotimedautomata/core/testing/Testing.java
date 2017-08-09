@@ -5,8 +5,15 @@ package org.fmaes.simppaal.simulinktotimedautomata.core.testing;
 
 import java.util.Collection;
 
+import org.conqat.lib.simulink.model.SimulinkBlock;
+import org.conqat.lib.simulink.model.SimulinkModel;
+import org.conqat.lib.simulink.model.SimulinkObject;
+import org.fmaes.j2uppaal.datastructures.uppaalstrcutures.interfaces.UppaalAutomatonInterface;
+import org.fmaes.j2uppaal.datastructures.uppaalstructures.UppaalAutomaton;
+import org.fmaes.j2uppaal.datastructures.uppaalstructures.UppaalDocument;
 import org.fmaes.simppaal.simulinktotimedautomata.core.configuration.ApplicationConfiguration;
 import org.fmaes.simppaal.simulinktotimedautomata.core.loaders.SimulinkModelLoader;
+import org.fmaes.simppaal.simulinktotimedautomata.core.transformers.SimulinkModelTransformer;
 import org.fmaes.simppaal.simulinktotimedautomata.core.types.Neighbour;
 import org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkBlockWrapper;
 import org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkModelWrapper;
@@ -28,32 +35,33 @@ public class Testing {
 
   @SuppressWarnings("unused")
   public static void main(String[] args) {
-    ApplicationConfiguration appConfig = ApplicationConfiguration.loadConfiguration();
-    SimulinkModelLoader modelLoader = new SimulinkModelLoader(appConfig);
-    SimulinkModelWrapper bbw = modelLoader.loadAndWrapSimulinkModelByName("bbw.mdl");
 
     long startTime = System.currentTimeMillis();
+
+    ApplicationConfiguration appConfig = ApplicationConfiguration.loadConfiguration();
+    SimulinkModelTransformer smt = new SimulinkModelTransformer(appConfig);
+    SimulinkModelLoader modelLoader = new SimulinkModelLoader(appConfig);
+    SimulinkModelWrapper bbw = modelLoader.loadAndWrapSimulinkModelByName("bbw.mdl");
     SortedOrderList sList = SListParser.GetSortedOrderList("bbw", "./models/simulink/BBW/bbw.txt");
-    SimulinkBlockWrapper blk;
-    notFound = 0;
-    int counter = 1;
-    for (SortedOrderEntry sortedOrderEntry : sList) {
-      blk = bbw.getBlockById(sortedOrderEntry.id);
-      blk.setExecutionOrderNumber(counter);
-      printN(blk, sortedOrderEntry.id);
-      counter++;
+    System.out.println(sList.asString());
+    UppaalDocument uppaalModel = (UppaalDocument) smt.generateUppaalModel(bbw, sList);
+    System.out.println(uppaalModel.getAllAutomata().size());
+    for (UppaalAutomatonInterface ua : uppaalModel.getAllAutomata()) {
+      System.out.println(ua.getName());
     }
+    uppaalModel.saveToFile("/Users/pfj01/Desktop/model.xml");
     long endTime = System.currentTimeMillis();
     long elapsedTime = (endTime - startTime) / 1000;
     System.out.println(String.format("The model parsing took %s seconds", elapsedTime));
-    System.out.println(String.format("%d block were not found", notFound));
+    System.out.println("pause");
   }
 
   private static void printN(SimulinkBlockWrapper bw, String id) {
 
     if (bw.exists()) {
-      System.out.println(
-          String.format("%s (%d) has %d predecessors", bw.getId(), bw.getExecutionOrderNumber(), bw.getPredecessors().size()));
+      System.out.println(String.format("%s (%d) has %d predecessors", bw.getId(),
+          bw.getExecutionOrderNumber(), bw.getPredecessors().size()));
+      System.out.println(String.format("Sample time is: %s", bw.getSampleTime()));
       Collection<Neighbour> neighbours = bw.getPredecessors();
       neighbours = bw.getPredecessors();
       for (Neighbour neighbour : neighbours) {

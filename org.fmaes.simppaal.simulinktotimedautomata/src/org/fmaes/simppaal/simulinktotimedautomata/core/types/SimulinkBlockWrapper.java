@@ -23,8 +23,6 @@ public class SimulinkBlockWrapper {
 
   private Collection<Neighbour> predecessors;
 
-  private String sampleTime;
-
   private int executionOrderNumber;
 
   private final String[] compositeBlockTypes =
@@ -53,6 +51,10 @@ public class SimulinkBlockWrapper {
     simulinkBlock.setParameter(parameterName, parameterValue);
   }
 
+  public Collection<String> getDeclaredParameters() {
+    return simulinkBlock.getDeclaredParameterNames();
+  }
+
   public String getId() {
     return simulinkBlock.getId();
   }
@@ -66,6 +68,18 @@ public class SimulinkBlockWrapper {
     }
 
     return blockName;
+  }
+
+  public String getNameNoWhiteSpaces() {
+    String originalName = getName();
+    /*
+     * in uppaal nothing should start with number. this is for such blocks, so we put underscore at
+     * the beginning
+     */
+    if (originalName.length() > 0 && Character.isDigit(originalName.charAt(0))) {
+      originalName = "_" + originalName;
+    }
+    return originalName.replaceAll("[^a-zA-Z\\d:]", "_").toLowerCase().trim();
   }
 
   public boolean exists() {
@@ -318,16 +332,43 @@ public class SimulinkBlockWrapper {
     return executionOrderNumber;
   }
 
-
   public void setExecutionOrderNumber(int executionOrderNumber) {
     this.executionOrderNumber = executionOrderNumber;
   }
 
-  public String getSampleTime() {
-    return sampleTime;
+  private String getSampleTimeFromTrigger(Collection<SimulinkPortBase> triggeredPorts) {
+    String sTime = "";
+
+    for (SimulinkPortBase triggeredPort : triggeredPorts) {
+      sTime = SimulinkBlockParser.extractSampleTime(triggeredPort);
+    }
+
+    return sTime;
   }
 
-  public void setSampleTime(String sampleTime) {
-    this.sampleTime = sampleTime;
+  private String determineSampleTime() {
+    String sTime = getParameter("SampleTime");
+
+    if (sTime == null || sTime.equals("") || sTime.equals("-1")) {
+      Collection<SimulinkPortBase> triggeredPorts = getTriggeredPorts();
+      if (triggeredPorts.size() < 1) {
+        SimulinkBlockWrapper parent = getParent();
+        if (parent.exists()) {
+          sTime = parent.getSampleTime();
+        }
+      } else {
+        sTime = getSampleTimeFromTrigger(triggeredPorts);
+      }
+    }
+
+    return sTime;
+  }
+
+  public String getSampleTime() {
+    return determineSampleTime();
+  }
+
+  public SimulinkBlock getBaseBlock() {
+    return simulinkBlock;
   }
 }

@@ -1,0 +1,12 @@
+/**
+ * 
+ */
+package org.fmaes.simppaal.simulinktotimedautomata.core.transformers;
+
+/**
+ * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
+ *
+ */
+public class AutomatonPopulationData {
+
+}

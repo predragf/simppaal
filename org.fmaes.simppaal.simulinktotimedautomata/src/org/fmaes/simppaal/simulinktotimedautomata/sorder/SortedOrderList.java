@@ -5,10 +5,16 @@ import java.util.Collections;
 
 import org.fmaes.simppaal.simulinktotimedautomata.utils.DiskUtils;
 
+@SuppressWarnings("serial")
 public class SortedOrderList extends ArrayList<SortedOrderEntry> {
 
   public void sort() {
     Collections.sort(this);
+    int entryNumber = 1;
+    for (SortedOrderEntry entry : this) {
+      entry.executionOrderNumber = entryNumber;
+      entryNumber++;
+    }
   }
 
   public int getBlockExecutionOrderById(String blockId) {
@@ -35,7 +41,7 @@ public class SortedOrderList extends ArrayList<SortedOrderEntry> {
     return blockExecutionOrder;
   }
 
-  private String asString() {
+  public String asString() {
     this.sort();
     String asString = "";
     int index = 1;

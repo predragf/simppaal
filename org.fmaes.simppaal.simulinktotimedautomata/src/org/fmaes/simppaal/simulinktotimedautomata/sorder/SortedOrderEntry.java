@@ -4,6 +4,7 @@ public class SortedOrderEntry implements Comparable<SortedOrderEntry> {
   public String id;
   public String parentId;
   public String sortedNumber;
+  public int executionOrderNumber;
 
   public SortedOrderEntry() {
     id = parentId = sortedNumber = "";
@@ -38,4 +39,7 @@ public class SortedOrderEntry implements Comparable<SortedOrderEntry> {
     return retValue;
   }
 
+  public int getExecutionOrderIdAsInt() {
+    return executionOrderNumber;
+  }
 }
