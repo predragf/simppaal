@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.wrappers.SimulinkSystemModel"/>
-<fullyQualifiedTypeName name="java.util.Dictionary"/>
 <fullyQualifiedTypeName name="java.util.Map"/>
 <fullyQualifiedTypeName name="java.util.Arrays"/>
 <fullyQualifiedTypeName name="org.conqat.lib.commons.collections.UnmodifiableCollection"/>
@@ -31,9 +29,7 @@
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.configuration.ApplicationConfiguration"/>
 <fullyQualifiedTypeName name="java.lang.SuppressWarnings"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineGeneratorPluginManager"/>
-<fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineGeneratorInterface"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.transformers.SimulinkBlockTransformer"/>
-<fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="org.fmaes.j2uppaal.builders.UppaalDocumentBuilder"/>
 <fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.uppaalstrcutures.interfaces.UppaalDocumentInterface"/>
 <fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.uppaalstrcutures.interfaces.UppaalLocationInterface"/>
@@ -48,8 +44,6 @@
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.transformers.AutomatonData"/>
 <fullyQualifiedTypeName name="org.conqat.lib.simulink.model.SimulinkModel"/>
 <fullyQualifiedTypeName name="java.sql.Array"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="java.util.Collection"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkModelWrapper"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.sorder.SortedOrderList"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.sorder.SListParser"/>
@@ -58,6 +52,12 @@
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.sorder.SortedOrderEntry"/>
 <fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.uppaalstructures.UppaalAutomaton"/>
 <fullyQualifiedTypeName name="org.fmaes.j2uppaal.datastructures.uppaalstrcutures.interfaces.UppaalAutomatonInterface"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="java.util.Iterator"/>
+<fullyQualifiedTypeName name="java.net.URI"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.Neighbour"/>
+<fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineGeneratorInterface"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkBlockWrapper"/>
 </qualifiedTypeNameHistroy>

@@ -8,14 +8,14 @@
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="logic"/>
+			<item value="28"/>
+			<item value="loadPl§"/>
+			<item value="loadPl"/>
+			<item value="signal"/>
 			<item value="T_veh"/>
 			<item value="85"/>
 			<item value="(29)"/>
-			<item value="rt"/>
-			<item value="rt13"/>
-			<item value="slip_abs_on_times_10"/>
-			<item value="_over_inertia"/>
-			<item value="whlRadius"/>
 		</list>
 		<list key="replacehistory">
 		</list>

@@ -38,6 +38,12 @@
 	<section name="OptionalMessageDialog.hide.">
 		<item value="true" key="org.eclipse.jdt.ui.typecomment.deprecated"/>
 	</section>
+	<section name="org.eclipse.jdt.internal.ui.typehierarchy.QuickHierarchy">
+		<item value="true" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_USE_PERSISTED_SIZE"/>
+		<item value="380" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_HEIGHT"/>
+		<item value="400" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_WIDTH"/>
+		<item value="false" key="org.eclipse.jdt.internal.ui.typehierarchy.HierarchyInformationControlDIALOG_USE_PERSISTED_LOCATION"/>
+	</section>
 	<section name="org.eclipse.jdt.internal.ui.dialogs.OpenTypeSelectionDialog2">
 		<item value="true" key="ShowStatusLine"/>
 		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0A;&lt;History/&gt;" key="History"/>
@@ -144,6 +150,14 @@
 		<item value="false" key="JarManifestWizardPage.SAVE_MANIFEST"/>
 		<item value="false" key="JarPackageWizardPage.EXPORT_OUTPUT_FOLDER"/>
 		<list key="JarPackageWizardPage.DESTINATION_NAMES_ID">
+			<item value="/Users/pfj01/Desktop/logic.jar"/>
+			<item value="/Users/pfj01/Desktop/integrator.jar"/>
+			<item value="/Users/pfj01/Desktop/BlockRoutineGenerator.jar"/>
+			<item value="org.fmaes.simppaal.simulinktotimedautomata/plugins/gain.jar"/>
+			<item value="/Users/pfj01/Documents/workspaces/simulinktotimedautomata/org.fmaes.simppaal.simulinktotimedautomata/gain.jar"/>
+			<item value="/Users/pfj01/Desktop/gain.jar"/>
+			<item value="/Users/pfj01/Desktop/derivative.jar"/>
+			<item value="/Users/pfj01/Desktop/abs.jar"/>
 			<item value="/Users/pfj01/Desktop/Scania-Demo-Dag-Demo/predragf-simppaal-executable-30e6b278fe0d 2/SIMPPAAL_lib/j2uppaal.jar"/>
 			<item value="org.fmaes.simulinktotimedautomata/libs/j2uppaal/j2uppaal.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/SIMPPAAL_lib/simulinktotimedautomata.jar"/>
@@ -156,14 +170,6 @@
 			<item value="/Users/pfj01/Desktop/j2uppaal.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/signum.jar"/>
 			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/sign.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/rounding.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/unaryminus.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/switch.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/sum.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/relationaloperator.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/product.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/minmax.jar"/>
-			<item value="/Users/pfj01/Desktop/SIMPPAAL/plugins/blockRoutine/Generators/logical operator.jar"/>
 		</list>
 	</section>
 	<section name="JavaElementSearchActions">

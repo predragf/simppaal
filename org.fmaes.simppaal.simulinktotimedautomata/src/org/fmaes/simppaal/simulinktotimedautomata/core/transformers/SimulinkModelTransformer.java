@@ -20,6 +20,7 @@ import org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineG
 import org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineGeneratorPluginManager;
 import org.fmaes.simppaal.simulinktotimedautomata.sorder.SortedOrderEntry;
 import org.fmaes.simppaal.simulinktotimedautomata.sorder.SortedOrderList;
+import org.fmaes.simppaal.simulinktotimedautomata.utils.SimulinkUtils;
 
 /**
  * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
@@ -277,6 +278,11 @@ public class SimulinkModelTransformer {
     Collection<SimulinkBlockWrapper> blocksForTransformation =
         generateBlocksForTransformation(sModel, sList);
     for (SimulinkBlockWrapper sBlock : blocksForTransformation) {
+      if (SimulinkUtils.compareStringsIgnoreCase(sBlock.getType(), "constant")) {
+        documentDeclaration = documentDeclaration.replaceAll("//signalsDeclaration",
+            transformConstant(sBlock));
+        continue;
+      }
       aData = generateAutomatonData(sBlock);
       automaton = (UppaalAutomaton) instantiateAutomaton(sBlock, aData);
       uppaalModel.addAutomaton(automaton);
@@ -293,5 +299,10 @@ public class SimulinkModelTransformer {
     uppaalModel.setSystem(systemDeclaration);
 
     return uppaalModel;
+  }
+
+  private String transformConstant(SimulinkBlockWrapper constantBlock) {
+    String constValue = constantBlock.getParameter("Value");
+    return String.format("const double %s = %s;\n//signalsDeclaration", constantBlock.getSignalName(), constValue);
   }
 }
