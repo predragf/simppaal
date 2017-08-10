@@ -2,16 +2,17 @@ package org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator
 
 import java.util.Iterator;
 
-import org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface;
-import org.fmaes.simulinktotimedautomata.types.wrappers.Neighbour;
-import org.fmaes.simulinktotimedautomata.types.wrappers.SimulinkBlockWrapper;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.Neighbour;
+import org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkBlockWrapper;
+import org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineGeneratorInterface;
+
 
 public class LogicOperator implements BlockRoutineGeneratorInterface {
 
   @Override
   public String generateBlockRoutine(SimulinkBlockWrapper blockForParsing) {
     String outSignal = blockForParsing.getSignalName();
-    String operatorType = blockForParsing.getDeclaredParameter("Operator");
+    String operatorType = blockForParsing.getParameter("Operator");
     if (operatorType == null || operatorType.trim().equals("")) {
       operatorType = "and";
     }
@@ -20,28 +21,28 @@ public class LogicOperator implements BlockRoutineGeneratorInterface {
     int counter = 0;
     if (operatorType.toLowerCase().equals("and")) {
       for (Neighbour predecessor : blockForParsing.getPredecessors()) {
-        if (!predecessor.getSimulinkBlock().exists()) {
+        if (!predecessor.getSourceSimulinkBlock().exists()) {
           continue;
         }
         if (counter == 0) {
-          expression += String.format("%s == 1.0", predecessor.getSimulinkBlock().getSignalName());
+          expression += String.format("%s == 1.0", predecessor.getSourceSimulinkBlock().getSignalName());
         } else {
           expression += String.format(" &amp;&amp; %s == 1.0",
-              predecessor.getSimulinkBlock().getSignalName());
+              predecessor.getSourceSimulinkBlock().getSignalName());
         }
         counter++;
       }
     }
     if (operatorType.toLowerCase().equals("or")) {
       for (Neighbour predecessor : blockForParsing.getPredecessors()) {
-        if (!predecessor.getSimulinkBlock().exists()) {
+        if (!predecessor.getSourceSimulinkBlock().exists()) {
           continue;
         }
         if (counter == 0) {
-          expression += String.format("%s == 1.0", predecessor.getSimulinkBlock().getSignalName());
+          expression += String.format("%s == 1.0", predecessor.getSourceSimulinkBlock().getSignalName());
         } else {
           expression +=
-              String.format(" || %s == 1.0", predecessor.getSimulinkBlock().getSignalName());
+              String.format(" || %s == 1.0", predecessor.getSourceSimulinkBlock().getSignalName());
         }
         counter++;
       }
@@ -50,7 +51,7 @@ public class LogicOperator implements BlockRoutineGeneratorInterface {
       Iterator iter = blockForParsing.getPredecessors().iterator();
       if (iter.hasNext()) {
         Neighbour first = (Neighbour) iter.next();
-        expression = String.format("%s == 0.0", first.getSimulinkBlock().getSignalName());
+        expression = String.format("%s == 0.0", first.getSourceSimulinkBlock().getSignalName());
       }
     }
     String routine = String.format("void blockRoutine(){\n bool intermediateValue = %s;\n"

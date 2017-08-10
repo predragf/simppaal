@@ -371,4 +371,14 @@ public class SimulinkBlockWrapper {
   public SimulinkBlock getBaseBlock() {
     return simulinkBlock;
   }
+
+  public String getSignalName() {
+    return String.format("%s_%d_signal", getNameNoWhiteSpaces(), getExecutionOrderNumber());
+  }
+
+  public ArrayList<Neighbour> getPredecessorsAsList() {
+    ArrayList<Neighbour> _predecessors = new ArrayList<Neighbour>();
+    _predecessors.addAll(getPredecessors());
+    return _predecessors;
+  }
 }

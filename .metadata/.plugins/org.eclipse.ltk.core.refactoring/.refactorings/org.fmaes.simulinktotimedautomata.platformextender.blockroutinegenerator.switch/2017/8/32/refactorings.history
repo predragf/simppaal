@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;org.fmaes.simulinktotimedautomata.platformextender.blockroutinegenerator.switch/META-INF/services/org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface&apos; to &apos;org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineGeneratorInterface&apos;" description="Rename resource &apos;org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="META-INF/services/org.fmaes.simulinktotimedautomata.blockroutinegenerator.BlockRoutineGeneratorInterface" name="org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineGeneratorInterface" stamp="1502368593355" updateReferences="true"/>
+</session>

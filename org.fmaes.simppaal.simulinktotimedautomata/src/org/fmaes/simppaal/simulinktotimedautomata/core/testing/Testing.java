@@ -43,12 +43,9 @@ public class Testing {
     SimulinkModelLoader modelLoader = new SimulinkModelLoader(appConfig);
     SimulinkModelWrapper bbw = modelLoader.loadAndWrapSimulinkModelByName("bbw.mdl");
     SortedOrderList sList = SListParser.GetSortedOrderList("bbw", "./models/simulink/BBW/bbw.txt");
-    System.out.println(sList.asString());
     UppaalDocument uppaalModel = (UppaalDocument) smt.generateUppaalModel(bbw, sList);
     System.out.println(uppaalModel.getAllAutomata().size());
-    for (UppaalAutomatonInterface ua : uppaalModel.getAllAutomata()) {
-      System.out.println(ua.getName());
-    }
+    
     uppaalModel.saveToFile("/Users/pfj01/Desktop/model.xml");
     long endTime = System.currentTimeMillis();
     long elapsedTime = (endTime - startTime) / 1000;

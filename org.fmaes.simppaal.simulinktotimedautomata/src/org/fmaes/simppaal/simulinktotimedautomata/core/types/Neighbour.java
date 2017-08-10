@@ -21,26 +21,34 @@ public class Neighbour {
 
   private SimulinkPortBase intermediateDestinationPort;
 
+  private SimulinkBlockWrapper sourceBlock;
+
+  private SimulinkBlockWrapper destinationBlock;
+
   public Neighbour(SimulinkPortBase _destinationPort, SimulinkPortBase _intermediateDestinationPort,
       SimulinkPortBase _sourcePort) {
     destinationPort = _destinationPort;
     intermediateDestinationPort = _intermediateDestinationPort;
     sourcePort = _sourcePort;
+    sourceBlock = new SimulinkBlockWrapper(_sourcePort.getBlock());
+    destinationBlock = new SimulinkBlockWrapper(_destinationPort.getBlock());
   }
 
   public Neighbour(SimulinkLine simulinkLine) {
     destinationPort = simulinkLine.getDstPort();
     sourcePort = simulinkLine.getSrcPort();
+    sourceBlock = new SimulinkBlockWrapper(sourcePort.getBlock());
+    destinationBlock = new SimulinkBlockWrapper(destinationPort.getBlock());
     intermediateDestinationPort = null;
 
   }
 
   public SimulinkBlockWrapper getSourceSimulinkBlock() {
-    return new SimulinkBlockWrapper(sourcePort.getBlock());
+    return sourceBlock;
   }
 
   public SimulinkBlockWrapper getDestinationSimulinkBlock() {
-    return new SimulinkBlockWrapper(destinationPort.getBlock());
+    return destinationBlock;
   }
 
   public SimulinkPortBase getDestinationPort() {

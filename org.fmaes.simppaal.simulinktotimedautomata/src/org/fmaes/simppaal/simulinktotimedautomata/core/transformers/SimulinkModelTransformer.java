@@ -71,7 +71,8 @@ public class SimulinkModelTransformer {
   }
 
   private BlockRoutineGeneratorInterface findBlockGenerator(String blockType) {
-    return plugins.get(blockType);
+    BlockRoutineGeneratorInterface bgi = plugins.get(blockType.toLowerCase());
+    return bgi;
   }
 
   private UppaalAutomatonInterface loadAutomatonTemplate(String sTime) {
@@ -101,7 +102,8 @@ public class SimulinkModelTransformer {
   private String generateBlockRoutine(SimulinkBlockWrapper sBlock,
       BlockRoutineGeneratorInterface generator) throws NullPointerException {
     String bRoutine = generator.generateBlockRoutine(sBlock);
-    return bRoutine != null ? bRoutine : generateDefaultBlockRoutine(sBlock);
+    return (bRoutine != null && bRoutine.equals("")) ? bRoutine
+        : generateDefaultBlockRoutine(sBlock);
   }
 
   private String generateDefaultInitialization(SimulinkBlockWrapper sBlock) {
@@ -111,7 +113,8 @@ public class SimulinkModelTransformer {
   private String generateBlockInitialization(SimulinkBlockWrapper sBlock,
       BlockRoutineGeneratorInterface generator) throws NullPointerException {
     String customInit = generator.generateInitRoutine(sBlock);
-    return customInit != null ? customInit : generateDefaultInitialization(sBlock);
+    return (customInit != null && !customInit.equals("")) ? customInit
+        : generateDefaultInitialization(sBlock);
   }
 
   private String generateDefaultDafnyProcedure(SimulinkBlockWrapper sBlock) {
@@ -121,7 +124,8 @@ public class SimulinkModelTransformer {
   private String generateDafnyProcedure(SimulinkBlockWrapper sBlock,
       BlockRoutineGeneratorInterface generator) throws NullPointerException {
     String dafnyProcedure = generator.generateDafnyVerificationRoutine(sBlock);
-    return dafnyProcedure != null ? dafnyProcedure : generateDefaultDafnyProcedure(sBlock);
+    return (dafnyProcedure != null && !dafnyProcedure.equals("")) ? dafnyProcedure
+        : generateDefaultDafnyProcedure(sBlock);
   }
 
   private String generateAutomatonName(SimulinkBlockWrapper sBlock) {
@@ -135,18 +139,20 @@ public class SimulinkModelTransformer {
   private String generateDeclrationStatement(SimulinkBlockWrapper sBlock,
       BlockRoutineGeneratorInterface generator) throws NullPointerException {
     String declaration = generator.generateDeclaration(sBlock);
-    return declaration != null ? declaration : generateDefaultDeclrationStatement(sBlock);
+    return (declaration != null && !declaration.equals("")) ? declaration
+        : generateDefaultDeclrationStatement(sBlock);
   }
 
   private String generateDefaultSignalDeclaration(SimulinkBlockWrapper sBlock) {
-    return String.format("double %s_%d_signal", sBlock.getNameNoWhiteSpaces(),
-        sBlock.getExecutionOrderNumber());
+    return String.format("double %s", sBlock.getSignalName());
   }
 
   private String generateSignalDeclaration(SimulinkBlockWrapper sBlock,
       BlockRoutineGeneratorInterface generator) throws NullPointerException {
     String signalDeclaration = generator.generateSignalDeclaration(sBlock);
-    return signalDeclaration != null ? signalDeclaration : generateDefaultSignalDeclaration(sBlock);
+    signalDeclaration = (signalDeclaration != null && !signalDeclaration.equals(""))
+        ? signalDeclaration : generateDefaultSignalDeclaration(sBlock);
+    return signalDeclaration.replaceAll(";", "");
   }
 
   private String getOffset(SimulinkBlockWrapper sBlock) {
@@ -201,6 +207,14 @@ public class SimulinkModelTransformer {
 
   private UppaalAutomatonInterface instantiateAutomaton(SimulinkBlockWrapper sBlock,
       AutomatonData aData) {
+    if (sBlock.getExecutionOrderNumber() == 29) {
+      for (Neighbour n : sBlock.getPredecessors()) {
+        System.out.println(String.format("%d %s", sBlock.getExecutionOrderNumber(),
+            n.getSourceSimulinkBlock().getSignalName()));
+      }
+
+
+    }
     String sampleTime = sBlock.getSampleTime();
     String executionOrderNumber = String.format("%d", sBlock.getExecutionOrderNumber());
     UppaalAutomaton blockAutomatonInstance = (UppaalAutomaton) loadAutomatonTemplate(sampleTime);
@@ -243,9 +257,7 @@ public class SimulinkModelTransformer {
       if (blockForTransformation.exists() && blockForTransformation.isComputational()) {
         blockForTransformation.setExecutionOrderNumber(sEntry.getExecutionOrderIdAsInt());
         assignExecutionOrderOfPredecessors(blockForTransformation, sList);
-        System.out
-            .println(String.format("%d %s %d", blockForTransformation.getExecutionOrderNumber(),
-                blockForTransformation.getId(), blockForTransformation.getPredecessors().size()));
+        System.out.println(blockForTransformation.getType());
         blocksForTransformation.add(blockForTransformation);
       }
     }
