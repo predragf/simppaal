@@ -278,6 +278,8 @@ public class SimulinkModelTransformer {
     Collection<SimulinkBlockWrapper> blocksForTransformation =
         generateBlocksForTransformation(sModel, sList);
     for (SimulinkBlockWrapper sBlock : blocksForTransformation) {
+      ArrayList<Neighbour> dependencyChain = sBlock.generateDependencyChain();
+      System.out.println(String.format("%s:%d", sBlock.getId(), dependencyChain.size()));
       if (SimulinkUtils.compareStringsIgnoreCase(sBlock.getType(), "constant")) {
         documentDeclaration =
             documentDeclaration.replaceAll("//signalsDeclaration", transformConstant(sBlock));
