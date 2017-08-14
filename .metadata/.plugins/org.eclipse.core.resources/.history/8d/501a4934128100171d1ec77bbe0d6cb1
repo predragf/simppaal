@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import org.conqat.lib.simulink.model.SimulinkBlock;
+import org.conqat.lib.simulink.model.SimulinkInPort;
 import org.conqat.lib.simulink.model.SimulinkLine;
 import org.conqat.lib.simulink.model.SimulinkPortBase;
 import org.conqat.lib.simulink.model.datahandler.LabelLayoutData;
@@ -22,11 +23,13 @@ public class SimulinkBlockWrapper {
 
   private Collection<Neighbour> predecessors;
 
+  private int executionOrderNumber;
+
   private final String[] compositeBlockTypes =
       {"subsystem", "reference", "modelreference", "model"};
 
-  private final String[] nonComputationalBlockTypes =
-      {"mux", "demux", "goto", "from", "inport", "outport", "function-call generator"};
+  private final String[] nonComputationalBlockTypes = {"mux", "demux", "goto", "from", "inport",
+      "outport", "function-call generator", "ratetransition"};
 
   /**
    * @param simulinkBlock
@@ -48,6 +51,10 @@ public class SimulinkBlockWrapper {
     simulinkBlock.setParameter(parameterName, parameterValue);
   }
 
+  public Collection<String> getDeclaredParameters() {
+    return simulinkBlock.getDeclaredParameterNames();
+  }
+
   public String getId() {
     return simulinkBlock.getId();
   }
@@ -61,6 +68,18 @@ public class SimulinkBlockWrapper {
     }
 
     return blockName;
+  }
+
+  public String getNameNoWhiteSpaces() {
+    String originalName = getName();
+    /*
+     * in uppaal nothing should start with number. this is for such blocks, so we put underscore at
+     * the beginning
+     */
+    if (originalName.length() > 0 && Character.isDigit(originalName.charAt(0))) {
+      originalName = "_" + originalName;
+    }
+    return originalName.replaceAll("[^a-zA-Z\\d:]", "_").toLowerCase().trim();
   }
 
   public boolean exists() {
@@ -93,6 +112,14 @@ public class SimulinkBlockWrapper {
     return isComputational;
   }
 
+  public SimulinkBlockWrapper getParent() {
+    SimulinkBlock parent = null;
+    if (simulinkBlock != null) {
+      parent = simulinkBlock.getParent();
+    }
+    return new SimulinkBlockWrapper(parent);
+  }
+
   public Collection<SimulinkPortBase> getInPorts() {
     Collection<SimulinkPortBase> inports = new ArrayList<>();
 
@@ -107,6 +134,21 @@ public class SimulinkBlockWrapper {
     outports.addAll(simulinkBlock.getOutPorts());
 
     return outports;
+  }
+
+  public Collection<SimulinkPortBase> getTriggeredPorts() {
+    Collection<SimulinkPortBase> triggeredPorts = new ArrayList<>();
+
+    for (SimulinkPortBase simulinkPortBase : getInPorts()) {
+      if (simulinkPortBase instanceof SimulinkInPort) {
+        SimulinkInPort inPort = (SimulinkInPort) simulinkPortBase;
+        if (inPort.isTriggerPort()) {
+          triggeredPorts.add(inPort);
+        }
+      }
+    }
+
+    return triggeredPorts;
   }
 
   public Collection<SimulinkLine> getInLines() {
@@ -142,23 +184,61 @@ public class SimulinkBlockWrapper {
   }
 
   private Collection<SimulinkLine> getInportLinesForParsing(Neighbour node) {
-    return null;
+    SimulinkBlockWrapper inportBlock = node.getSourceSimulinkBlock();
+    SimulinkBlockWrapper subSystem = inportBlock.getParent();
+    SimulinkPortBase inPortForParsing = SimulinkBlockParser.mapToInputPort(inportBlock);
+
+    Collection<SimulinkLine> inlines = new ArrayList<>();
+
+    if (subSystem.exists()) {
+      inlines = subSystem.getInLinesByPortIndex(inPortForParsing.getIndex());
+    }
+
+    return inlines;
   }
 
   private Collection<SimulinkLine> getMuxLinesForParsing(Neighbour node) {
-    return null;
+    Collection<SimulinkLine> inlines = new ArrayList<>();
+
+    SimulinkPortBase lastDemuxPort = node.getIntermediateDestinationPort();
+    if (lastDemuxPort != null) {
+      SimulinkBlockWrapper mux = node.getSourceSimulinkBlock();
+      inlines = mux.getInLinesByPortIndex(lastDemuxPort.getIndex());
+      node.setIntermediateDestinationPort(null);
+    }
+
+    return inlines;
   }
 
   private Collection<SimulinkLine> getDeMuxLinesForParsing(Neighbour node) {
-    return null;
+    SimulinkBlockWrapper demux = node.getSourceSimulinkBlock();
+    Collection<SimulinkLine> inlines = new ArrayList<>();
+
+    if (demux.exists()) {
+      if (node.getIntermediateDestinationPort() != null) {
+        inlines = demux.getInLinesByPortIndex(node.getSourcePort().getIndex());
+      } else {
+        inlines = demux.getInLines();
+      }
+    }
+
+    return inlines;
   }
 
   private Collection<SimulinkLine> getFromLinesForParsing(Neighbour node) {
-    return null;
-  }
+    SimulinkModelWrapper model = new SimulinkModelWrapper(simulinkBlock.getModel());
+    Collection<SimulinkLine> lines = new ArrayList<SimulinkLine>();
+    String gotoTag = this.getParameter("GotoTag");
 
-  private Collection<SimulinkLine> getGenericLinesForParsing(Neighbour node) {
-    return null;
+    for (SimulinkBlockWrapper gBlock : model.getSubBlocksRecursivelyByType("goto")) {
+      if (gBlock.exists()
+          && SimulinkUtils.compareStringsIgnoreCase(gotoTag, gBlock.getParameter("GotoTag"))) {
+        lines = gBlock.getInLines();
+        break;
+      }
+    }
+
+    return lines;
   }
 
   private Collection<SimulinkLine> getLinesForParsing(Neighbour _node) {
@@ -166,7 +246,7 @@ public class SimulinkBlockWrapper {
     SimulinkBlockWrapper blk = _node.getSourceSimulinkBlock();
     String blkType = blk.getType();
 
-    switch (blkType) {
+    switch (blkType.toLowerCase()) {
       case "subsystem":
         inLines = getSubSystemLinesForParsing(_node);
         break;
@@ -174,15 +254,22 @@ public class SimulinkBlockWrapper {
         inLines = getInportLinesForParsing(_node);
         break;
       case "mux":
+        // here make the adjustment for the node
         inLines = getMuxLinesForParsing(_node);
         break;
       case "demux":
+        // here make the adjustment for the node
         inLines = getDeMuxLinesForParsing(_node);
         break;
       case "from":
         inLines = getFromLinesForParsing(_node);
         break;
-
+      case "goto":
+        inLines = blk.getInLines();
+        break;
+      case "ratetransition":
+        inLines = blk.getInLines();
+        break;
       default:
         inLines = new ArrayList<>();
         break;
@@ -239,5 +326,59 @@ public class SimulinkBlockWrapper {
 
     // always return from the cache
     return predecessors;
+  }
+
+  public int getExecutionOrderNumber() {
+    return executionOrderNumber;
+  }
+
+  public void setExecutionOrderNumber(int executionOrderNumber) {
+    this.executionOrderNumber = executionOrderNumber;
+  }
+
+  private String getSampleTimeFromTrigger(Collection<SimulinkPortBase> triggeredPorts) {
+    String sTime = "";
+
+    for (SimulinkPortBase triggeredPort : triggeredPorts) {
+      sTime = SimulinkBlockParser.extractSampleTime(triggeredPort);
+    }
+
+    return sTime;
+  }
+
+  private String determineSampleTime() {
+    String sTime = getParameter("SampleTime");
+
+    if (sTime == null || sTime.equals("") || sTime.equals("-1")) {
+      Collection<SimulinkPortBase> triggeredPorts = getTriggeredPorts();
+      if (triggeredPorts.size() < 1) {
+        SimulinkBlockWrapper parent = getParent();
+        if (parent.exists()) {
+          sTime = parent.getSampleTime();
+        }
+      } else {
+        sTime = getSampleTimeFromTrigger(triggeredPorts);
+      }
+    }
+
+    return sTime;
+  }
+
+  public String getSampleTime() {
+    return determineSampleTime();
+  }
+
+  public SimulinkBlock getBaseBlock() {
+    return simulinkBlock;
+  }
+
+  public String getSignalName() {
+    return String.format("%s_%d_signal", getNameNoWhiteSpaces(), getExecutionOrderNumber());
+  }
+
+  public ArrayList<Neighbour> getPredecessorsAsList() {
+    ArrayList<Neighbour> _predecessors = new ArrayList<Neighbour>();
+    _predecessors.addAll(getPredecessors());
+    return _predecessors;
   }
 }

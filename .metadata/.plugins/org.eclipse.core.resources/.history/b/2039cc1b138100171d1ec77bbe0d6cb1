@@ -20,6 +20,7 @@ import org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineG
 import org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineGeneratorPluginManager;
 import org.fmaes.simppaal.simulinktotimedautomata.sorder.SortedOrderEntry;
 import org.fmaes.simppaal.simulinktotimedautomata.sorder.SortedOrderList;
+import org.fmaes.simppaal.simulinktotimedautomata.utils.SimulinkUtils;
 
 /**
  * @author Predrag Filipovikj (predrag.filipovikj@mdh.se)
@@ -71,7 +72,8 @@ public class SimulinkModelTransformer {
   }
 
   private BlockRoutineGeneratorInterface findBlockGenerator(String blockType) {
-    return plugins.get(blockType);
+    BlockRoutineGeneratorInterface bgi = plugins.get(blockType.toLowerCase());
+    return bgi;
   }
 
   private UppaalAutomatonInterface loadAutomatonTemplate(String sTime) {
@@ -87,7 +89,11 @@ public class SimulinkModelTransformer {
   }
 
   private String generateComments(SimulinkBlockWrapper sBlock) {
-    return null;
+    String predecessorIDs = "";
+    for (Neighbour nbh : sBlock.getPredecessors()) {
+      predecessorIDs += String.format("// %s \n", nbh.getSourceSimulinkBlock().getId());
+    }
+    return String.format("// BlockId: %s \n // Predecessors:\n %s", sBlock.getId(), predecessorIDs);
   }
 
   private String generateDefaultBlockRoutine(SimulinkBlockWrapper sBlock) {
@@ -97,7 +103,8 @@ public class SimulinkModelTransformer {
   private String generateBlockRoutine(SimulinkBlockWrapper sBlock,
       BlockRoutineGeneratorInterface generator) throws NullPointerException {
     String bRoutine = generator.generateBlockRoutine(sBlock);
-    return bRoutine != null ? bRoutine : generateDefaultBlockRoutine(sBlock);
+    return (bRoutine != null && bRoutine.equals("")) ? bRoutine
+        : generateDefaultBlockRoutine(sBlock);
   }
 
   private String generateDefaultInitialization(SimulinkBlockWrapper sBlock) {
@@ -107,7 +114,8 @@ public class SimulinkModelTransformer {
   private String generateBlockInitialization(SimulinkBlockWrapper sBlock,
       BlockRoutineGeneratorInterface generator) throws NullPointerException {
     String customInit = generator.generateInitRoutine(sBlock);
-    return customInit != null ? customInit : generateDefaultInitialization(sBlock);
+    return (customInit != null && !customInit.equals("")) ? customInit
+        : generateDefaultInitialization(sBlock);
   }
 
   private String generateDefaultDafnyProcedure(SimulinkBlockWrapper sBlock) {
@@ -117,11 +125,12 @@ public class SimulinkModelTransformer {
   private String generateDafnyProcedure(SimulinkBlockWrapper sBlock,
       BlockRoutineGeneratorInterface generator) throws NullPointerException {
     String dafnyProcedure = generator.generateDafnyVerificationRoutine(sBlock);
-    return dafnyProcedure != null ? dafnyProcedure : generateDefaultDafnyProcedure(sBlock);
+    return (dafnyProcedure != null && !dafnyProcedure.equals("")) ? dafnyProcedure
+        : generateDefaultDafnyProcedure(sBlock);
   }
 
   private String generateAutomatonName(SimulinkBlockWrapper sBlock) {
-    return String.format("%s_%d", sBlock.getName(), sBlock.getExecutionOrderNumber());
+    return String.format("%s_%d", sBlock.getNameNoWhiteSpaces(), sBlock.getExecutionOrderNumber());
   }
 
   private String generateDefaultDeclrationStatement(SimulinkBlockWrapper sBlock) {
@@ -131,17 +140,20 @@ public class SimulinkModelTransformer {
   private String generateDeclrationStatement(SimulinkBlockWrapper sBlock,
       BlockRoutineGeneratorInterface generator) throws NullPointerException {
     String declaration = generator.generateDeclaration(sBlock);
-    return declaration != null ? declaration : generateDefaultDeclrationStatement(sBlock);
+    return (declaration != null && !declaration.equals("")) ? declaration
+        : generateDefaultDeclrationStatement(sBlock);
   }
 
   private String generateDefaultSignalDeclaration(SimulinkBlockWrapper sBlock) {
-    return String.format("double %s_%d_signal", sBlock.getName(), sBlock.getExecutionOrderNumber());
+    return String.format("double %s", sBlock.getSignalName());
   }
 
   private String generateSignalDeclaration(SimulinkBlockWrapper sBlock,
       BlockRoutineGeneratorInterface generator) throws NullPointerException {
     String signalDeclaration = generator.generateSignalDeclaration(sBlock);
-    return signalDeclaration != null ? signalDeclaration : generateDefaultSignalDeclaration(sBlock);
+    signalDeclaration = (signalDeclaration != null && !signalDeclaration.equals(""))
+        ? signalDeclaration : generateDefaultSignalDeclaration(sBlock);
+    return signalDeclaration.replaceAll(";", "");
   }
 
   private String getOffset(SimulinkBlockWrapper sBlock) {
@@ -149,7 +161,7 @@ public class SimulinkModelTransformer {
     if (offset == null || offset.equals("")) {
       offset = sBlock.getParameter("offset");
     }
-    return offset != null ? offset : "";
+    return (offset != null && offset != "") ? offset : "0";
   }
 
   private AutomatonData populateAutomatonDataFromPlugin(SimulinkBlockWrapper sBlock,
@@ -196,6 +208,14 @@ public class SimulinkModelTransformer {
 
   private UppaalAutomatonInterface instantiateAutomaton(SimulinkBlockWrapper sBlock,
       AutomatonData aData) {
+    if (sBlock.getExecutionOrderNumber() == 29) {
+      for (Neighbour n : sBlock.getPredecessors()) {
+        System.out.println(String.format("%d %s", sBlock.getExecutionOrderNumber(),
+            n.getSourceSimulinkBlock().getSignalName()));
+      }
+
+
+    }
     String sampleTime = sBlock.getSampleTime();
     String executionOrderNumber = String.format("%d", sBlock.getExecutionOrderNumber());
     UppaalAutomaton blockAutomatonInstance = (UppaalAutomaton) loadAutomatonTemplate(sampleTime);
@@ -209,8 +229,8 @@ public class SimulinkModelTransformer {
         automatonDeclaration.replaceAll("#BLOCKROUTINE#", aData.getBlockRoutine());
     automatonDeclaration =
         automatonDeclaration.replaceAll("#CUSTOMINIT#", aData.getInitialization());
-
-
+    blockAutomatonInstance.setName(aData.getName());
+    blockAutomatonInstance.setDeclaration(automatonDeclaration);
     return blockAutomatonInstance;
   }
 
@@ -235,23 +255,55 @@ public class SimulinkModelTransformer {
     Collection<SimulinkBlockWrapper> blocksForTransformation = new ArrayList<>();
     for (SortedOrderEntry sEntry : sList) {
       SimulinkBlockWrapper blockForTransformation = sModel.getBlockById(sEntry.id);
-      if (blockForTransformation.exists()) {
+      if (blockForTransformation.exists() && blockForTransformation.isComputational()) {
         blockForTransformation.setExecutionOrderNumber(sEntry.getExecutionOrderIdAsInt());
         assignExecutionOrderOfPredecessors(blockForTransformation, sList);
+        System.out.println(blockForTransformation.getType());
+        blocksForTransformation.add(blockForTransformation);
       }
     }
-
 
     return blocksForTransformation;
   }
 
   public UppaalDocumentInterface generateUppaalModel(SimulinkModelWrapper sModel,
       SortedOrderList sList) {
+
     String emptyModelFile = appConfig.getProperty("emptyUppaalDocument", defaultEmptyModelFile);
     UppaalDocumentInterface uppaalModel = UppaalDocumentBuilder.buildUppaalDocument(emptyModelFile);
     String documentDeclaration = uppaalModel.getDeclaration();
     String systemDeclaration = uppaalModel.getSystem();
+    UppaalAutomaton automaton;
+    AutomatonData aData;
+    Collection<SimulinkBlockWrapper> blocksForTransformation =
+        generateBlocksForTransformation(sModel, sList);
+    for (SimulinkBlockWrapper sBlock : blocksForTransformation) {
+      ArrayList<Neighbour> dependencyChain = sBlock.generateDependencyChain();
+      if (SimulinkUtils.compareStringsIgnoreCase(sBlock.getType(), "constant")) {
+        documentDeclaration = documentDeclaration.replaceAll("//signalsDeclaration",
+            transformConstant(sBlock));
+        continue;
+      }
+      aData = generateAutomatonData(sBlock);
+      automaton = (UppaalAutomaton) instantiateAutomaton(sBlock, aData);
+      uppaalModel.addAutomaton(automaton);
+      documentDeclaration = documentDeclaration.replaceAll("//signalsDeclaration",
+          String.format("%s;\n//signalsDeclaration", aData.getSignalDeclaration()));
+      systemDeclaration = systemDeclaration.replaceAll("//declareHere",
+          String.format("%s_instance = %s();\n//declareHere", aData.getName(), aData.getName()));
+      systemDeclaration = systemDeclaration.replaceAll("//instantiateHere",
+          String.format("%s_instance,//instantiateHere ", aData.getName()));
+    }
+    systemDeclaration =
+        systemDeclaration.replaceAll("//declareHere", "").replaceAll(",//instantiateHere", ";");
+    uppaalModel.setDeclaration(documentDeclaration);
+    uppaalModel.setSystem(systemDeclaration);
 
     return uppaalModel;
+  }
+
+  private String transformConstant(SimulinkBlockWrapper constantBlock) {
+    String constValue = constantBlock.getParameter("Value");
+    return String.format("const double %s = %s;\n//signalsDeclaration", constantBlock.getSignalName(), constValue);
   }
 }

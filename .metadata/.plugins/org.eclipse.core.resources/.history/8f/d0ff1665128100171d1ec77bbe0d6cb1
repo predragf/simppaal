@@ -384,9 +384,7 @@ public class SimulinkBlockWrapper {
 
   public ArrayList<Neighbour> generateDependencyChain() {
     ArrayList<Neighbour> dependencyChain = new ArrayList<Neighbour>();
-    ArrayList<Neighbour> predecessors = new ArrayList<Neighbour>();
-
-    predecessors.addAll(this.getPredecessors());
+    Collection<Neighbour> predecessors = this.getPredecessors();
     dependencyChain = computeDependencyChain(dependencyChain, predecessors);
 
     return dependencyChain;

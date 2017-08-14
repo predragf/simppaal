@@ -17,7 +17,6 @@
 <fullyQualifiedTypeName name="org.conqat.lib.simulink.util.SimulinkIdProvider"/>
 <fullyQualifiedTypeName name="org.conqat.lib.simulink.model.SimulinkLine"/>
 <fullyQualifiedTypeName name="org.conqat.lib.simulink.model.SimulinkInPort"/>
-<fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.utils.SimulinkUtils"/>
 <fullyQualifiedTypeName name="org.conqat.lib.simulink.model.SimulinkPortBase"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkBlockParser"/>
 <fullyQualifiedTypeName name="org.conqat.lib.simulink.model.SimulinkAnnotation"/>
@@ -59,5 +58,6 @@
 <fullyQualifiedTypeName name="java.util.ArrayList"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.Neighbour"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineGeneratorInterface"/>
+<fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.utils.SimulinkUtils"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkBlockWrapper"/>
 </qualifiedTypeNameHistroy>

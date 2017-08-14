@@ -278,9 +278,11 @@ public class SimulinkModelTransformer {
     Collection<SimulinkBlockWrapper> blocksForTransformation =
         generateBlocksForTransformation(sModel, sList);
     for (SimulinkBlockWrapper sBlock : blocksForTransformation) {
+      ArrayList<Neighbour> dependencyChain = sBlock.generateDependencyChain();
+      System.out.println(String.format("%s:%d", sBlock.getId(), dependencyChain.size()));
       if (SimulinkUtils.compareStringsIgnoreCase(sBlock.getType(), "constant")) {
-        documentDeclaration = documentDeclaration.replaceAll("//signalsDeclaration",
-            transformConstant(sBlock));
+        documentDeclaration =
+            documentDeclaration.replaceAll("//signalsDeclaration", transformConstant(sBlock));
         continue;
       }
       aData = generateAutomatonData(sBlock);
@@ -303,6 +305,7 @@ public class SimulinkModelTransformer {
 
   private String transformConstant(SimulinkBlockWrapper constantBlock) {
     String constValue = constantBlock.getParameter("Value");
-    return String.format("const double %s = %s;\n//signalsDeclaration", constantBlock.getSignalName(), constValue);
+    return String.format("const double %s = %s;\n//signalsDeclaration",
+        constantBlock.getSignalName(), constValue);
   }
 }
