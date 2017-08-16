@@ -5,7 +5,6 @@ package org.fmaes.simppaal.simulinktotimedautomata.core.types;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 
 import org.conqat.lib.simulink.model.SimulinkBlock;
 import org.conqat.lib.simulink.model.SimulinkInPort;
@@ -384,30 +383,26 @@ public class SimulinkBlockWrapper {
   }
 
   public ArrayList<Neighbour> generateDependencyChain() {
-    HashMap<String, Neighbour> dependencyChainMap = new HashMap<String, Neighbour>();
+    ArrayList<Neighbour> dependencyChain = new ArrayList<Neighbour>();
     ArrayList<Neighbour> predecessors = new ArrayList<Neighbour>();
 
     predecessors.addAll(this.getPredecessors());
-    dependencyChainMap = computeDependencyChain(dependencyChainMap, predecessors);
-
-    ArrayList<Neighbour> dependencyChain = new ArrayList<>();
-    dependencyChain.addAll(dependencyChainMap.values());
+    dependencyChain = computeDependencyChain(dependencyChain, predecessors);
 
     return dependencyChain;
   }
 
-  private HashMap<String, Neighbour> computeDependencyChain(
-      HashMap<String, Neighbour> dependencyChain, ArrayList<Neighbour> blocksForProcessing) {
+  private ArrayList<Neighbour> computeDependencyChain(ArrayList<Neighbour> dependencyChain,
+      ArrayList<Neighbour> blocksForProcessing) {
     Neighbour neighbourForParsing;
     SimulinkBlockWrapper neighbourSimulinkBlockWrapper;
     while (!blocksForProcessing.isEmpty()) {
       neighbourForParsing = blocksForProcessing.remove(0);
-      neighbourSimulinkBlockWrapper = neighbourForParsing.getSourceSimulinkBlock();
-      if (dependencyChain.get(neighbourSimulinkBlockWrapper.getId()) != null) {
+      if (hasBeenProcessed(dependencyChain, neighbourForParsing)) {
         continue;
       }
-
-      dependencyChain.put(neighbourSimulinkBlockWrapper.getId(), neighbourForParsing);
+      neighbourSimulinkBlockWrapper = neighbourForParsing.getSourceSimulinkBlock();
+      dependencyChain.add(neighbourForParsing);
       blocksForProcessing.addAll(neighbourSimulinkBlockWrapper.getPredecessors());
     }
     return dependencyChain;

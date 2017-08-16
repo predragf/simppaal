@@ -55,9 +55,9 @@
 <fullyQualifiedTypeName name="java.util.Iterator"/>
 <fullyQualifiedTypeName name="java.net.URI"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
-<fullyQualifiedTypeName name="java.util.ArrayList"/>
-<fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.Neighbour"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.platformextender.BlockRoutineGeneratorInterface"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.utils.SimulinkUtils"/>
 <fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.SimulinkBlockWrapper"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="org.fmaes.simppaal.simulinktotimedautomata.core.types.Neighbour"/>
 </qualifiedTypeNameHistroy>
